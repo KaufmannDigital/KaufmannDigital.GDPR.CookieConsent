@@ -1,0 +1,26 @@
+{
+    "name": "kaufmanndigital/gdpr-cookieconsent",
+    "type": "neos-package",
+    "description": "",
+    "authors": [
+        {
+            "name": "Niklas Droste",
+            "email": "nd@kaufmann.digital",
+            "homepage": "http://kaufmann.digital",
+            "role": "developer"
+        }
+    ],
+    "require": {
+        "neos/neos": ">=5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "KaufmannDigital\\GDPR\\CookieConsent\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "KaufmannDigital.GDPR.CookieConsent"
+        }
+    }
+}

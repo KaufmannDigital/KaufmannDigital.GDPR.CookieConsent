@@ -1,0 +1,23 @@
+'KaufmannDigital.GDPR.CookieConsent:Content.Cookie.Attribute':
+  superTypes:
+    'Neos.Neos:Content': true
+  ui:
+    label: 'Cookie Attribut'
+    icon: 'icon-cookie'
+  properties:
+    label:
+      type: string
+      defaultValue: ''
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: 'Label eintragen...'
+    value:
+      type: string
+      defaultValue: ''
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: 'Wert eintragen...'

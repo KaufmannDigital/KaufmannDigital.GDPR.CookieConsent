@@ -1,0 +1,54 @@
+'KaufmannDigital.GDPR.CookieConsent:Content.Cookie':
+  superTypes:
+    'Neos.Neos:Content': true
+  childNodes:
+    attributes:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'KaufmannDigital.GDPR.CookieConsent:Content.Cookie.Attribute': true
+  ui:
+    label: 'Cookie'
+    icon: icon-cookie
+    inspector:
+      groups:
+        cookie:
+          label: 'Cookie'
+          icon: 'icon-cookie'
+  properties:
+    name:
+      type: string
+      defaultValue: ''
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: 'Cookie Name eintragen ...'
+    description:
+      type: string
+      defaultValue: ''
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: 'Cookie Beschreibung eintragen...'
+    identifier:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Identifier'
+        reloadIfChanged: true
+        inspector:
+          group: cookie
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': true
+    javaScriptCode:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'JavaScript-Include'
+        reloadIfChanged: true
+        inspector:
+          group: cookie
+          editor: Neos.Neos/Inspector/Editors/CodeEditor

@@ -1,0 +1,83 @@
+'KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings':
+  superTypes:
+    'Neos.Neos:Content': true
+  childNodes:
+    settingElements:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup': true
+  ui:
+    label: 'Cookie Settings'
+    icon: 'icon-cookie'
+    inlineEditable: true
+    inspector:
+      groups:
+        cookieSettings:
+          label: 'CookieSettings'
+          icon: 'icon-cookie'
+  properties:
+    headline:
+      type: string
+      defaultValue: ''
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: 'Überschrift eintragen...'
+    mainDescription:
+      type: string
+      defaultValue: ''
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: 'Beschreibung eintragen...'
+    individualSettingsDescription:
+      type: string
+      defaultValue: ''
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: 'Beschreibung eintragen...'
+    imprintLink:
+      type: string
+      ui:
+        label: 'Link zum Impressum'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
+          editor: 'Neos.Neos/Inspector/Editors/LinkEditor'
+    dataProtectionPolicyLink:
+      type: string
+      ui:
+        label: 'Link zur Datenschutzerklärung'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
+          editor: 'Neos.Neos/Inspector/Editors/LinkEditor'
+    acceptAllButtonLabel:
+      type: string
+      defaultValue: 'Alle akzeptieren'
+      ui:
+        label: 'Label "Alle akzeptieren"'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
+    saveButtonLabel:
+      type: string
+      defaultValue: 'Speichern'
+      ui:
+        label: 'Label "Speichern"'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
+    versionDate:
+      type: DateTime
+      defaultValue: 'now'
+      ui:
+        label: 'Versions-Datum'
+        inspector:
+          group: cookieSettings

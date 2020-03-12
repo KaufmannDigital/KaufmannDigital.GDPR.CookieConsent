@@ -1,0 +1,9 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prototype(Neos.Neos:Page) {
+
+    body >
+
+    //Neos Backend needs a realtive content element to place toolbar correctly on fixed-position-elements
+    fakeContentElement = Neos.Fusion:Tag {
+        attributes.style = 'height: 100vh; position: relative;'
+    }
+}

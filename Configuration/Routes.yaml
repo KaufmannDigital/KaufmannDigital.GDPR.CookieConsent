@@ -1,0 +1,52 @@
+-
+  name: 'GET CookieConsentHTML'
+  uriPattern: 'api/kd-gdpr-cc'
+  httpMethods: ['GET']
+  defaults:
+    '@package':    'KaufmannDigital.GDPR.CookieConsent'
+    '@controller': 'Api'
+    '@action': 'renderCookieSettings'
+  appendExceedingArguments: true
+
+-
+  name: 'OPTIONS CookieConsentHTML'
+  uriPattern: 'api/kd-gdpr-cc'
+  httpMethods: ['OPTIONS']
+  defaults:
+    '@package':    'KaufmannDigital.GDPR.CookieConsent'
+    '@controller': 'Api'
+    '@action':     'renderCookieSettingsOptions'
+  appendExceedingArguments: true
+
+-
+  name: 'POST CookieConsentHTML'
+  uriPattern: 'api/kd-gdpr-cc'
+  httpMethods: ['POST']
+  defaults:
+    '@package':    'KaufmannDigital.GDPR.CookieConsent'
+    '@controller': 'Api'
+    '@action':     'trackChoice'
+  appendExceedingArguments: true
+
+-
+  name: 'Render JS'
+  uriPattern: 'api/kd-gdpr-cc.{@format}'
+  httpMethods: ['GET']
+  defaults:
+    '@package':    'KaufmannDigital.GDPR.CookieConsent'
+    '@controller': 'JavaScript'
+    '@action': 'renderJavaScript'
+    '@format': 'js'
+  appendExceedingArguments: true
+
+-
+  name: 'GET JS'
+  uriPattern: 'api/kd-gdpr-cc/{hash}.{@format}'
+  httpMethods: ['GET']
+  defaults:
+    '@package':    'KaufmannDigital.GDPR.CookieConsent'
+    '@controller': 'JavaScript'
+    '@action': 'downloadGeneratedJavaScript'
+    '@format': 'js'
+  appendExceedingArguments: true
+

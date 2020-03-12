@@ -1,0 +1,21 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Neos.Neos:ContentComponent) {
+
+    editableHeadline = Neos.Neos:Editable {
+        property = 'headline'
+    }
+
+    editableDescription = Neos.Neos:Editable {
+        property = 'description'
+    }
+
+    cookieContentCollection = Neos.Neos:ContentCollection {
+        attributes.class = 'gdpr-cookieconsent-setting-group__cookies'
+        nodePath = 'cookies'
+    }
+
+    hasCookies = ${q(node).children('cookies').children().count() > 0}
+    identifier = ${q(node).property('identifier')}
+    inBackend = ${node.context.inBackend}
+
+    renderer = KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup.Renderer
+}

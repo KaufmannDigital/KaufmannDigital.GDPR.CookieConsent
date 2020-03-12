@@ -1,0 +1,63 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype(Neos.Neos:ContentComponent) {
+
+    editableHeadline = Neos.Neos:Editable {
+        property = 'headline'
+    }
+
+    editableMainDescription = Neos.Neos:Editable {
+        property = 'mainDescription'
+    }
+
+    editableIndividualSettingsDescription = Neos.Neos:Editable {
+        property = 'individualSettingsDescription'
+    }
+
+    individualSettings = Neos.Neos:ContentCollection {
+        nodePath = 'settingElements'
+        @cache.mode = 'embed'
+    }
+
+    imprintLink.@process.convertUris = Neos.Neos:ConvertUris {
+        absolute = true
+    }
+    dataProtectionPolicyLink.@process.convertUris = Neos.Neos:ConvertUris {
+        absolute = true
+    }
+
+    hasNecessaryGroup = ${q(node).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.NecessarySettingGroup]').count() > 0}
+
+    labels = Neos.Fusion:RawArray {
+        acceptAll = ${q(node).property('acceptAllButtonLabel')}
+        save = ${q(node).property('saveButtonLabel')}
+    }
+
+    @context.cookieValue = ${request.httpRequest.cookies.KD_GDPR_CC.value ? request.httpRequest.cookies.KD_GDPR_CC.value : ''}
+
+    @if.cookieNotSet = ${!cookieValue || q(node).property('versionDate').timestamp >= Date.create(Json.parse(cookieValue).consentDate).timestamp || documentNode.nodeType.name == 'KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage'}
+    @if.nodeIsSet = ${node && (node.context.inBackend == false || documentNode.nodeType.name == 'KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage')}
+
+    renderer = KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer
+
+    @cache {
+        mode = 'dynamic'
+
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'site'
+            4 = 'cookieValue'
+        }
+        entryIdentifier {
+            node = ${node}
+        }
+
+        entryDiscriminator = ${String.length(cookieValue) > 1 && q(node).property('versionDate').timestamp >= Date.create(Json.parse(cookieValue).consentDate).timestamp}
+
+        entryTags {
+            1 = ${Neos.Caching.descendantOfTag(node)}
+            2 = ${Neos.Caching.nodeTag(node)}
+        }
+
+    }
+
+}

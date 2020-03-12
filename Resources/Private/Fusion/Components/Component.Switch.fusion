@@ -1,0 +1,30 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Component.Switch) < prototype(Neos.Fusion:Component) {
+
+    checked = false
+    locked = false
+    value = ''
+
+    renderer = Neos.Fusion:Renderer {
+        renderer = Neos.Fusion:Tag {
+            tagName = 'label'
+            attributes.class = 'gdpr-cookieconsent-switch'
+            content = Neos.Fusion:Array {
+                input = Neos.Fusion:Tag {
+                    tagName = 'input'
+                    attributes.type = 'checkbox'
+                    attributes.value = ${props.value}
+                    attributes.checked = 'checked'
+                    attributes.checked.@if.condition = ${props.checked == true}
+                    attributes.disabled = 'disabled'
+                    attributes.disabled.@if.condition = ${props.locked}
+                    selfClosingTag = true
+                }
+
+                span = Neos.Fusion:Tag {
+                    tagName = 'span'
+                    attributes.class = 'gdpr-cookieconsent-switch__slider'
+                }
+            }
+        }
+    }
+}

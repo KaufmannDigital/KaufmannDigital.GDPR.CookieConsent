@@ -1,0 +1,134 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < prototype(Neos.Fusion:Renderer) {
+    renderer = Neos.Fusion:Array {
+
+        overlay = Neos.Fusion:Tag {
+            attributes.class = 'gdpr-cookieconsent-overlay'
+        }
+        cookieSettings = Neos.Fusion:Tag {
+            attributes.class = 'gdpr-cookieconsent-settings'
+            content = Neos.Fusion:Tag {
+                attributes.class = 'gdpr-cookieconsent-settings__content'
+                content = Neos.Fusion:Array {
+                    info = Neos.Fusion:Tag {
+                        attributes.class = 'gdpr-cookieconsent-settings__content__info'
+                        content = Neos.Fusion:Array {
+                            headline = Neos.Fusion:Tag {
+                                tagName = 'h2'
+                                content = ${props.editableHeadline}
+                            }
+
+                            mainDescription = Neos.Fusion:Tag {
+                                tagName = 'div'
+                                attributes.class = 'gdpr-cookieconsent-settings__content__info__main-description'
+                                content = ${props.editableMainDescription}
+                            }
+
+                            individualSettingsDescription = Neos.Fusion:Tag {
+                                tagName = 'div'
+                                attributes.class = 'gdpr-cookieconsent-settings__content__info__settings-description'
+                                content = ${props.editableIndividualSettingsDescription}
+                            }
+
+                        }
+                    }
+
+                    cta = Neos.Fusion:Tag {
+                        attributes.class = 'gdpr-cookieconsent-settings__content__cta'
+                        content = Neos.Fusion:Array {
+                            acceptAll = Neos.Fusion:Tag {
+                                tagName = 'button'
+                                attributes.id = 'gdpr-cc-btn-accept'
+                                attributes.class = 'button'
+                                content = ${props.labels.acceptAll}
+                            }
+
+                            save = Neos.Fusion:Tag {
+                                tagName = 'button'
+                                attributes.id = 'gdpr-cc-btn-save'
+                                attributes.class = 'button'
+                                content = ${props.labels.save}
+                            }
+
+                            necessaryCookies = Neos.Fusion:Tag {
+                                tagName = 'a'
+                                attributes.id = 'gdpr-cc-btn-accept-necessary'
+                                content = 'Notwendige Cookies akzeptieren'
+                                @if.condition = ${props.hasNecessaryGroup}
+                            }
+                        }
+                    }
+
+                    individualSettings = Neos.Fusion:Tag {
+                        attributes.class = 'gdpr-cookieconsent-settings__content__settings'
+                        content = ${props.individualSettings}
+                    }
+
+                    links = Neos.Fusion:Tag {
+                        attributes.class = 'gdpr-cookieconsent-settings__content__links'
+                        content = Neos.Fusion:Array {
+                            imprintLink = Neos.Fusion:Tag {
+                                tagName = 'a'
+                                attributes.href = ${props.imprintLink}
+                                content = 'Impressum'
+                            }
+
+                            pipe = Neos.Fusion:Tag {
+                                tagName = 'span'
+                                content = ' | '
+                            }
+
+
+                            dataProtectionPolicy = Neos.Fusion:Tag {
+                                tagName = 'a'
+                                attributes.href = ${props.dataProtectionPolicyLink}
+                                content = 'Datenschutzerklärung'
+                            }
+                        }
+                    }
+
+                    individualSettingsSwitch = Neos.Fusion:Tag {
+                        attributes.class = 'gdpr-cookieconsent-settings__content__individual-switch'
+                        content = Neos.Fusion:Array {
+                            enableSwitch = Neos.Fusion:Tag {
+                                tagName = 'a'
+                                attributes.id = 'gdpr-cc-btn-individual-settings-enable'
+                                content = 'Individuelle Einstellungen'
+                            }
+
+                            disableSwitch = Neos.Fusion:Tag {
+                                tagName = 'a'
+                                attributes.id = 'gdpr-cc-btn-individual-settings-disable'
+                                content = 'Einstellungen schließen'
+                            }
+                        }
+                    }
+
+                    css = Neos.Fusion:Tag {
+                        tagName = 'style'
+                        content = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/Styles/Main.css')}
+                    }
+
+                    jsVariables = Neos.Fusion:Tag {
+                        tagName = 'script'
+
+                        trackChoiceUrl = Neos.Fusion:UriBuilder {
+                            package = 'KaufmannDigital.GDPR.CookieConsent'
+                            controller = 'Api'
+                            action = 'trackChoice'
+                            absolute = true
+                        }
+                        content = ${'
+                            var trackChoiceUrl = "' + this.trackChoiceUrl + '";
+                        '}
+                    }
+
+                    js = Neos.Fusion:Tag {
+                        tagName = 'script'
+                        content = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/JavaScript/Main.js')}
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,41 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup.Renderer) < prototype(Neos.Fusion:Renderer) {
+
+    renderer = Neos.Fusion:Tag {
+        attributes.class = 'gdpr-cookieconsent-setting-group'
+        content = Neos.Fusion:Array {
+            headline = Neos.Fusion:Tag {
+                attributes.class = 'gdpr-cookieconsent-setting-group__headline'
+                content = ${props.editableHeadline}
+            }
+
+            switch = Neos.Fusion:Tag {
+                attributes.class = 'gdpr-cookieconsent-setting-group__switch'
+                content = KaufmannDigital.GDPR.CookieConsent:Component.Switch {
+                    value = ${props.identifier}
+                }
+
+             }
+
+            description = Neos.Fusion:Tag {
+                attributes.class = 'gdpr-cookieconsent-setting-group__description'
+                content = ${props.editableDescription}
+            }
+
+            cookies = ${props.cookieContentCollection}
+
+            detailLink = Neos.Fusion:Tag {
+                tagName = 'a'
+                attributes.class = 'gdpr-cookieconsent-setting-group__details-open'
+                content = 'Details&nbsp;>'
+                @if.hasCookies = ${props.hasCookies || props.inBackend}
+            }
+
+            closeDetailLink = Neos.Fusion:Tag {
+                tagName = 'a'
+                attributes.class = 'gdpr-cookieconsent-setting-group__details-close'
+                content = 'Details ausblenden'
+                @if.hasCookies = ${props.hasCookies || props.inBackend}
+            }
+        }
+    }
+}

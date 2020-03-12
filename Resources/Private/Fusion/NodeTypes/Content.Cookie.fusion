@@ -1,0 +1,16 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Content.Cookie) < prototype(Neos.Neos:ContentComponent) {
+
+    parentGroup = ${q(node).parents('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup]').get(0)}
+    identifier = ${q(node).property('identifier')}
+
+    editableName = Neos.Neos:Editable {
+        property = 'name'
+    }
+
+    attributesContentCollection = Neos.Neos:ContentCollection {
+        nodePath = 'attributes'
+        attributes.class = 'gdpr-cookieconsent-cookie__attributes'
+    }
+
+    renderer = KaufmannDigital.GDPR.CookieConsent:Content.Cookie.Renderer
+}

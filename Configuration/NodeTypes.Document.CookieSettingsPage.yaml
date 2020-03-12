@@ -1,0 +1,10 @@
+'KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage':
+  superTypes:
+    'Neos.Neos:Document': true
+  childNodes:
+    cookieSettings:
+      type: 'KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings'
+  ui:
+    label: 'Cookie-Settings Page'
+    icon: 'icon-cookie'
+

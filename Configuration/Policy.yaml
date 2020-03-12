@@ -1,0 +1,16 @@
+privilegeTargets:
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'KaufmannDigital.GDPR:ApiController':
+      matcher: 'method(KaufmannDigital\GDPR\CookieConsent\Controller\ApiController->(.*)Action())'
+    'KaufmannDigital.GDPR:JavaScriptController':
+      matcher: 'method(KaufmannDigital\GDPR\CookieConsent\Controller\JavaScriptController->(.*)Action())'
+
+roles:
+  'Neos.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'KaufmannDigital.GDPR:ApiController'
+        permission: GRANT
+      -
+        privilegeTarget: 'KaufmannDigital.GDPR:JavaScriptController'
+        permission: GRANT
