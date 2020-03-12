@@ -41,6 +41,11 @@ It's named `KD_GDPR_CC` and contains all identifiers of groups and cookies you d
 So just check *consents* and load the needed JavaScript.  
 *Pro-Tip: If you are using Google Tag Manager to add your JS-Tags, you can define a custom variable of type "First-Party-Cookie", which can be used as condition inside triggers then.*
 
+### Styling
+The banner comes with a few basic-styles for positioning. Just add a bit CSS to make it compatible with your CI. You can have a look [into our SCSS](Resources/Private/Styles/Main.scss) to get some inspiration.  
+
+*Hint: We are working on advanced styling options. Different style- and positioning presets will be available in future. If you have any wishes or created a cool design for this banner yourself, please contact us.*
+
 
 ## Roadmap / Planned Features
 

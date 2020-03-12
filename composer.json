@@ -2,16 +2,17 @@
     "name": "kaufmanndigital/gdpr-cookieconsent",
     "type": "neos-package",
     "description": "",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
-            "name": "Niklas Droste",
-            "email": "nd@kaufmann.digital",
-            "homepage": "http://kaufmann.digital",
-            "role": "developer"
+            "name": "Kaufmann Digital",
+            "email": "support@kaufmann.digital",
+            "homepage": "https://kaufmann.digital/",
+            "role": "Publisher"
         }
     ],
     "require": {
-        "neos/neos": ">=5.0"
+        "neos/neos": "*"
     },
     "autoload": {
         "psr-4": {
