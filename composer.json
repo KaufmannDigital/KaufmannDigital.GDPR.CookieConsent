@@ -1,13 +1,14 @@
 {
     "name": "kaufmanndigital/gdpr-cookieconsent",
     "type": "neos-package",
-    "description": "",
+    "description": "A ready-to-run package, that integrates an advanced cookie consent banner into your Neos CMS site.",
+    "homepage": "https://github.com/KaufmannDigital/KaufmannDigital.GDPR.CookieConsent",
     "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Kaufmann Digital",
             "email": "support@kaufmann.digital",
-            "homepage": "https://kaufmann.digital/",
+            "homepage": "https://www.kaufmann.digital/",
             "role": "Publisher"
         }
     ],

@@ -1,5 +1,5 @@
 
-# KaufmannDigital.CookieConsent
+# KaufmannDigital.GDPR.CookieConsent
 A ready-to-run package, that integrates an advanced cookie consent banner into your Neos CMS site.  
 This is a further development of our previous [cookie consent package](https://github.com/KaufmannDigital/KaufmannDigital.CookieConsent). Through the individual configuration per service (cookie), this package is a perfect basis for creating GDPR compliant websites.
 
@@ -71,11 +71,11 @@ Email: [support@kaufmann.digital](mailto:support@kaufmann.digital)
 
 ## Maintainer
 
-This package is maintained by [Kaufmann Digital](https://www.kaufmann.digital).  
+This package is maintained by the [Neos Agency Kaufmann Digital](https://www.kaufmann.digital).  
 Feel free to send us your questions or requests to [support@kaufmann.digital](mailto:support@kaufmann.digital)
 
 ### Issues and Pull-Requests are welcome!
-You are missing something? You found a bug? No problem, just create an issue or open a pull request directly.  
+You are missing something? You found a bug? No problem, just create an issue or open a pull request.  
 We'll have a look at it ASAP.
 
 ## License
