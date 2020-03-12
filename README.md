@@ -1,26 +1,29 @@
 
+# KaufmannDigital.CookieConsent
+A ready-to-run package, that integrates an advanced cookie consent banner into your Neos CMS site.  
+This is a further development of our previous [cookie consent package](https://github.com/KaufmannDigital/KaufmannDigital.CookieConsent). Through the individual configuration per service (cookie), this package is a perfect basis for creating GDPR compliant websites.
 
-# Installation
+## Installation
 It's easier than you probably think!  
 Just run `composer require kaufmanndigital/gdpr-cookieconsent`
 
-# Configuration
+## Configuration
 Since this package is ready-to-run, you can configure your cookie banner in just a few Steps.
 
 1. Create a new **Cookie-Settings Page** (shipped inside the Package) somewhere inside your Site-Tree.
 2. Switch to the newly created page and edit the cookie banner contents to your wishes.
 3. Add cookie-groups and cookies to the banner.  
 
-## React to the user's cookie decision
+### React to the user's cookie decision
 You can use one of these Methods to react on the user's decision on which Cookies are accepted:
 
-### Load JavaScript dynamically
+#### Load JavaScript dynamically
 You can paste your JavaScript-Code while adding Cookies to the banner. The package will evaluate the user's decision and merge the required JavaScript dynamically for each user on the fly.
 You don't have to take care of anything. JavaScript gets loaded completely automatic. Cool, isn't it? 😎  
 *Ah! And don't worry about performance. All JS gets minified and cached for every single visitor individually.*
 
 
-### Read cookie-identifiers from cookie
+#### Read cookie-identifiers from cookie
 If you are already using another way to include your JavaScript, you can depend on the value of the Choice-Cookie.  
 It's named `KD_GDPR_CC` and contains all identifiers of groups and cookies you defined in Backend while configuration. The payload of that cookie could look like this:
 ```json
@@ -39,7 +42,7 @@ So just check *consents* and load the needed JavaScript.
 *Pro-Tip: If you are using Google Tag Manager to add your JS-Tags, you can define a custom variable of type "First-Party-Cookie", which can be used as condition inside triggers then.*
 
 
-# Roadmap / Planned Features
+## Roadmap / Planned Features
 
 * Presets for popular cookies. For example:
   * Google Analytics
@@ -51,7 +54,7 @@ So just check *consents* and load the needed JavaScript.
 
 
 
-# Sponsors
+## Sponsors
 We would like to thank our sponsors, who supported us financially during the development:  
 
 [![Mittwald Logo](Documentation/Sponsors/Mittwald/logo-mittwald.png)](https://www.mittwald.de/?utm_source=github&utm_medium=banner&utm_campaign=cookie-consent-manager-package)
@@ -61,11 +64,15 @@ Are you missing a feature in our solution? You wan't to support the development 
 Email: [support@kaufmann.digital](mailto:support@kaufmann.digital)
 
 
-# Maintainer
+## Maintainer
 
 This package is maintained by [Kaufmann Digital](https://www.kaufmann.digital).  
 Feel free to send us your questions or requests to [support@kaufmann.digital](mailto:support@kaufmann.digital)
 
-# License
+### Issues and Pull-Requests are welcome!
+You are missing something? You found a bug? No problem, just create an issue or open a pull request directly.  
+We'll have a look at it ASAP.
+
+## License
 
 Licensed under GPL-3, see [LICENSE](LICENSE)
