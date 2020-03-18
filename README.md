@@ -27,22 +27,44 @@ You don't have to take care of anything. JavaScript gets loaded completely autom
 If you are already using another way to include your JavaScript, you can depend on the value of the Choice-Cookie.  
 It's named `KD_GDPR_CC` and contains all identifiers of groups and cookies you defined in Backend while configuration. The payload of that cookie could look like this:
 ```json
-{   "consents":[
+{
+   "consents": [
       "necessary",
       "analytics",
       "marketing"
-
-],
-   "consentDate":"Tue, 11 Feb 2020 11:35:23 GMT",
-   "expireDate":"Wed, 10 Feb 2021 23:00:00 GMT"
+   ],
+   "consentDate": "Tue, 11 Feb 2020 11:35:23 GMT",
+   "expireDate": "Wed, 10 Feb 2021 23:00:00 GMT"
 }
 ```
-
 So just check *consents* and load the needed JavaScript.  
 *Pro-Tip: If you are using Google Tag Manager to add your JS-Tags, you can define a custom variable of type "First-Party-Cookie", which can be used as condition inside triggers then.*
 
+
+#### Add a Re-open link
+To create a link for reopening the banner, you only have to place a link with `#GDPR-CC-open-settings` as target: 
+```html
+<a href="#GDPR-CC-open-settings">Cookie-Settings</a>
+``` 
+After clicking on such a link, the cookie-banner will be loaded via API. Old settings are used as presets.
+
+#### Versioning
+In some cases, it may be necessary to show the cookie-banner to people who have actually already accepted it. For example, if a new cookie has been added.  
+To do this, you only need to edit the version date. You can find it in the inspector of the cookie-settings NodeType:   
+![version-date setting](Documentation/Images/version-date.png)  
+
+After the date has been changed, the banner will be shown again to all visitors, who have submitted the cookie banner before this date. Old settings are used as presets.
+
+
 ### Styling
-The banner comes with a few basic-styles for positioning. Just add a bit CSS to make it compatible with your CI. You can have a look [into our SCSS](Resources/Private/Styles/Main.scss) to get some inspiration.  
+The banner comes with a few basic-styles for positioning, which are getting included inline. To add your custom styles, just put a CSS-Files somewhere in your Resources-Folder and include it using Settings.yaml:   
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      customCSSFilepath: 'resource://Vendor.Package/Private/Styles/cookie-consent.css' #You can also use the public-path, of course
+```
+To get an idea of the CSS-styling and class-names, you can have a look [into our SCSS](Resources/Private/Styles/Main.scss).  
 
 *Hint: We are working on advanced styling options. Different style- and positioning presets will be available in future. If you have any wishes or created a cool design for this banner yourself, please contact us.*
 
