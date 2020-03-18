@@ -105,7 +105,11 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
 
                     css = Neos.Fusion:Tag {
                         tagName = 'style'
-                        content = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/Styles/Main.css')}
+                        content = Neos.Fusion:Array {
+                            packageFile = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/Styles/Main.css')}
+                            customFile = ${File.readFile(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.customCSSFilepath'))}
+                            customFile.@if.condition = ${String.length(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.customCSSFilepath'))}
+                        }
                     }
 
                     jsVariables = Neos.Fusion:Tag {

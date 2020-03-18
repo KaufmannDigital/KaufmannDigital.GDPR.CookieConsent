@@ -8,3 +8,8 @@ Neos:
       routes:
         KaufmannDigital.GDPR.CookieConsent:
           position: 'before Neos.Neos'
+
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      customCSSFilepath: null
