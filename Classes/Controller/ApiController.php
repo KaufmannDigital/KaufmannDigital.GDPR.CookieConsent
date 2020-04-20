@@ -7,6 +7,7 @@ use KaufmannDigital\GDPR\CookieConsent\Domain\Repository\ConsentLogEntryReposito
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
+use Neos\Flow\Http\Component\SetHeaderComponent;
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Mvc\View\JsonView;
 use Neos\Neos\View\FusionView;
@@ -38,11 +39,11 @@ class ApiController extends RestController
     public function initializeAction()
     {
         parent::initializeAction();
-        $this->response->setHeader('Access-Control-Allow-Origin', $this->request->getHttpRequest()->getHeader('Origin'));
-        $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, credentials');
-        $this->response->setHeader('Access-Control-Allow-Credentials', 'true');
-        $this->response->setHeader('Vary', 'Origin');
 
+        //TODO: Make CORS configurable in settings
+        //$this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', $this->request->getHttpRequest()->getHeader('Referer'));
+        //$this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
+        $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');
     }
 
 

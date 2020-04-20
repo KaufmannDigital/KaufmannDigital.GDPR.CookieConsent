@@ -39,7 +39,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
     renderer = KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer
 
     @cache {
-        mode = 'dynamic'
+        mode = 'uncached'
 
         context {
             1 = 'node'
@@ -47,15 +47,6 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
             3 = 'site'
             4 = 'cookieValue'
         }
-        entryIdentifier {
-            node = ${node}
-        }
-        entryDiscriminator = ${(cookieValue) && (q(node).property('versionDate').timestamp >= Date.create(Json.parse(cookieValue).consentDate).timestamp)}
-        entryTags {
-            1 = ${Neos.Caching.descendantOfTag(node)}
-            2 = ${Neos.Caching.nodeTag(node)}
-        }
-
     }
 
 }
