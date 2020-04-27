@@ -71,7 +71,7 @@ function initializeCookieConsent() {
         //Remove CookieConsent from HTML
         cookieSettingsContainer.remove();
         darkOverlay.remove();
-        window.location.reload();
+        loadGeneratedJavaScript();
     });
 
     btnSaveSettings.addEventListener('click', function() {
@@ -86,20 +86,19 @@ function initializeCookieConsent() {
         //Remove CookieConsent from HTML
         cookieSettingsContainer.remove();
         darkOverlay.remove();
-        window.location.reload();
+        loadGeneratedJavaScript();
     });
 
 
     if (btnAcceptNecessaryCookies) {
-    btnAcceptNecessaryCookies.addEventListener('click', function() {
-
-        acceptNecessaryCookies();
-        //Remove CookieConsent from HTML
-        cookieSettingsContainer.remove();
-        darkOverlay.remove();
-        window.location.reload();
-    });
-}
+        btnAcceptNecessaryCookies.addEventListener('click', function() {
+            acceptNecessaryCookies();
+            //Remove CookieConsent from HTML
+            cookieSettingsContainer.remove();
+            darkOverlay.remove();
+            loadGeneratedJavaScript();
+        });
+    }
 
     [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details-open')).forEach(function(detailsLink) {
         detailsLink.addEventListener('click', function() {
@@ -170,11 +169,17 @@ function initializeCookieConsent() {
 
 
 function dispatchEventsForCookies(inputs) {
+    window.dataLayer = window.dataLayer || [];
     [].slice.call(inputs).forEach(function(input) {
         if (input.value) {
             var customEvent = document.createEvent("CustomEvent");
             customEvent.initCustomEvent('GDPR-CC-consent', false, false, input.value);
             document.dispatchEvent(customEvent);
+
+            window.dataLayer.push({
+                event: 'GDPR-CC-consent',
+                identifier: input.value
+            });
         }
     });
 }
@@ -219,4 +224,11 @@ function acceptNecessaryCookies() {
 
     //Save to cookie
     saveConsentToCookie([].slice.call(necessaryGroupInputs).concat([].slice.call(necessaryInputs)));
+}
+
+
+function loadGeneratedJavaScript() {
+    var tag = document.createElement('script');
+    tag.src = generatedJsUrl;
+    document.getElementsByTagName('head')[0].appendChild(tag);
 }

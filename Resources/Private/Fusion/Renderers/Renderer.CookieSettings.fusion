@@ -121,8 +121,16 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
                             action = 'trackChoice'
                             absolute = true
                         }
+
+                        generatedJsUrl = Neos.Fusion:UriBuilder {
+                            package = 'KaufmannDigital.GDPR.CookieConsent'
+                            controller = 'JavaScript'
+                            action = 'renderJavaScript'
+                            absolute = true
+                        }
                         content = ${'
                             var trackChoiceUrl = "' + this.trackChoiceUrl + '";
+                            var generatedJsUrl = "' + this.generatedJsUrl + '";
                         '}
                     }
 
