@@ -169,17 +169,11 @@ function initializeCookieConsent() {
 
 
 function dispatchEventsForCookies(inputs) {
-    window.dataLayer = window.dataLayer || [];
     [].slice.call(inputs).forEach(function(input) {
         if (input.value) {
             var customEvent = document.createEvent("CustomEvent");
             customEvent.initCustomEvent('GDPR-CC-consent', false, false, input.value);
             document.dispatchEvent(customEvent);
-
-            window.dataLayer.push({
-                event: 'GDPR-CC-consent',
-                identifier: input.value
-            });
         }
     });
 }
@@ -205,6 +199,14 @@ function saveConsentToCookie(inputs) {
         cookieDomain = "." + cookieDomain;
     }
     document.cookie = "KD_GDPR_CC=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + ";domain=" + cookieDomain + ";path=/;";
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        event: 'KD_GDPR_CC_saved',
+        KD_GDPR_CC: {
+            consents: cookieData.consents
+        }
+    });
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', trackChoiceUrl);
