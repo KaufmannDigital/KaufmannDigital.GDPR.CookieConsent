@@ -10,6 +10,7 @@ use Neos\Flow\Http\ContentStream;
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Mvc\View\SimpleTemplateView;
 use Neos\Flow\Annotations as Flow;
+use Neos\FluidAdaptor\View\TemplateView;
 use Neos\Neos\Fusion\Helper\CachingHelper;
 
 class JavaScriptController extends RestController
@@ -50,7 +51,7 @@ class JavaScriptController extends RestController
     {
         try {
             $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()['KD_GDPR_CC']);
-            $cacheIdentifier = 'KD_GDPR_CC_' . sha1(json_encode($cookie->consents));
+            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($cookie->consents));
 
             if ($this->cache->has($cacheIdentifier)) {
                 $this->redirect('downloadGeneratedJavaScript', null, null, ['hash' => $cacheIdentifier]);
@@ -62,14 +63,14 @@ class JavaScriptController extends RestController
 
             $javaScript = '';
             foreach ($cookieNodes as $cookieNode) {
+                $cookieJs = '';
                 if (strlen($cookieNode->getProperty('identifier')) > 0 && in_array($cookieNode->getProperty('identifier'), $cookie->consents)) {
-                    $javaScript .= $cookieNode->getProperty('javaScriptCode');
+                    $cookieJs = preg_replace('/<script.*src=.*><\/script>/', 'document.head.appendChild(document.createRange().createContextualFragment(\'$0\'));', $cookieNode->getProperty('javaScriptCode'));
+                    $cookieJs = preg_replace('/<script>((.*\s.*)*)<\/script>/', '$1', $cookieJs);
                 }
+                $javaScript .= $cookieJs;
             }
-
             $javaScript = $this->minifyJs($javaScript);
-
-            //TODO: Add minifiy/uglify for JS here. I haven't found a good composer-lib while initial development.
 
             $this->cache->set(
                 $cacheIdentifier,
@@ -98,12 +99,11 @@ class JavaScriptController extends RestController
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Content-Type', 'text/javascript;charset=UTF-8');
 
         if ($this->cache->has($hash)) {
-            die($this->cache->get($hash));
-            $this->response->setContent($this->cache->get($hash));
+            $this->view->setOption('templateSource', $this->cache->get($hash));
             return;
         }
 
-        $this->response->setContent('');
+        $this->view->setOption('templateSource', '');
     }
 
     protected function minifyJs($input) {
@@ -119,14 +119,17 @@ class JavaScriptController extends RestController
                 // Minify object attribute(s) except JSON attribute(s). From `{'foo':'bar'}` to `{foo:'bar'}`
                 '#([\{,])([\'])(\d+|[a-z_][a-z0-9_]*)\2(?=\:)#i',
                 // --ibid. From `foo['bar']` to `foo.bar`
-                '#([a-z0-9_\)\]])\[([\'"])([a-z_][a-z0-9_]*)\2\]#i'
+                '#([a-z0-9_\)\]])\[([\'"])([a-z_][a-z0-9_]*)\2\]#i',
+                //Remove comments
+                '#<!--.*-->#'
             ),
             array(
                 '$1',
                 '$1$2',
                 '}',
                 '$1$3',
-                '$1.$3'
+                '$1.$3',
+                ''
             ),
             $input);
     }
