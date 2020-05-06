@@ -29,6 +29,12 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
     labels = Neos.Fusion:RawArray {
         acceptAll = ${q(node).property('acceptAllButtonLabel')}
         save = ${q(node).property('saveButtonLabel')}
+        saveButtonLabel = ${q(node).property('saveButtonLabel')}
+        acceptNecessaryCookiesLabel = ${q(node).property('acceptNecessaryCookiesLabel')}
+        imprintLabel= ${q(node).property('imprintLabel')}
+        dataProtectionPolicyLabel = ${q(node).property('dataProtectionPolicyLabel')}
+        openIndividualSettingsLabel = ${q(node).property('openIndividualSettingsLabel')}
+        closeIndividualSettingsLabel = ${q(node).property('closeIndividualSettingsLabel')}
     }
 
 

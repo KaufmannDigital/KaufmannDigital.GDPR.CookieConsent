@@ -74,6 +74,46 @@
         reloadIfChanged: true
         inspector:
           group: cookieSettings
+    acceptNecessaryCookiesLabel:
+      type: string
+      defaultValue: 'Notwendige Cookies akzeptieren'
+      ui:
+        label: 'Label "Notwendige Cookies akzeptieren"'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
+    imprintLabel:
+      type: string
+      defaultValue: 'Impressum'
+      ui:
+        label: 'Label "Impressum"'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
+    dataProtectionPolicyLabel:
+      type: string
+      defaultValue: 'Datenschutzerklärung'
+      ui:
+        label: 'Label "Datenschutzerklärung"'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
+    openIndividualSettingsLabel:
+      type: string
+      defaultValue: 'Individuelle Einstellungen'
+      ui:
+        label: 'Label "Individuelle Einstellungen"'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
+    closeIndividualSettingsLabel:
+      type: string
+      defaultValue: 'Einstellungen schließen'
+      ui:
+        label: 'Label "Einstellungen schließen"'
+        reloadIfChanged: true
+        inspector:
+          group: cookieSettings
     versionDate:
       type: DateTime
       defaultValue: 'now'

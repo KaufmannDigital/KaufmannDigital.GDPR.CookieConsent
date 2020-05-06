@@ -52,7 +52,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
                             necessaryCookies = Neos.Fusion:Tag {
                                 tagName = 'a'
                                 attributes.id = 'gdpr-cc-btn-accept-necessary'
-                                content = 'Notwendige Cookies akzeptieren'
+                                content = ${props.labels.acceptNecessaryCookiesLabel}
                                 @if.condition = ${props.hasNecessaryGroup}
                             }
                         }
@@ -69,7 +69,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
                             imprintLink = Neos.Fusion:Tag {
                                 tagName = 'a'
                                 attributes.href = ${props.imprintLink}
-                                content = 'Impressum'
+                                content = ${props.labels.imprintLabel}
                             }
 
                             pipe = Neos.Fusion:Tag {
@@ -81,7 +81,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
                             dataProtectionPolicy = Neos.Fusion:Tag {
                                 tagName = 'a'
                                 attributes.href = ${props.dataProtectionPolicyLink}
-                                content = 'Datenschutzerklärung'
+                                content = ${props.labels.dataProtectionPolicyLabel}
                             }
                         }
                     }
@@ -92,13 +92,13 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
                             enableSwitch = Neos.Fusion:Tag {
                                 tagName = 'a'
                                 attributes.id = 'gdpr-cc-btn-individual-settings-enable'
-                                content = 'Individuelle Einstellungen'
+                                content = ${props.labels.openIndividualSettingsLabel}
                             }
 
                             disableSwitch = Neos.Fusion:Tag {
                                 tagName = 'a'
                                 attributes.id = 'gdpr-cc-btn-individual-settings-disable'
-                                content = 'Einstellungen schließen'
+                                content = ${props.labels.closeIndividualSettingsLabel}
                             }
                         }
                     }
