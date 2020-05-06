@@ -59,7 +59,7 @@ class JavaScriptController extends RestController
             }
 
             $q = new FlowQuery([$this->contextFactory->create()->getCurrentSiteNode()]);
-            $cookieNodes = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.Cookie][javaScriptCode != ""]')->get();
+            $cookieNodes = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.Cookie][javaScriptCode != ""]')->sort('priority', 'DESC')->get();
 
             $javaScript = '';
             foreach ($cookieNodes as $cookieNode) {

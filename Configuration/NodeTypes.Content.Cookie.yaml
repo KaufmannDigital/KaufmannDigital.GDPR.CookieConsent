@@ -52,3 +52,12 @@
         inspector:
           group: cookie
           editor: Neos.Neos/Inspector/Editors/CodeEditor
+    priority:
+      type: string
+      defaultValue: 0
+      ui:
+        label: 'Priorität'
+        help:
+          message: 'Die Priorität bestimmt die Ladereihenfolge der unterschiedlichen Cookies. Höhere Zahlen garantieren frühere Ladezeiten.'
+        inspector:
+          group: cookie
