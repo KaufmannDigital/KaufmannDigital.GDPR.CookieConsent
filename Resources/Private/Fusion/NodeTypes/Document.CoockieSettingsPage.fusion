@@ -1,5 +1,17 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prototype(Neos.Neos:Page) {
 
+    head.stylesheets.siteCssFile = Neos.Fusion:Tag {
+        @context.siteCSSFilepath = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.siteCSSFilepath')}
+        tagName = 'link'
+        attributes.rel = 'stylesheet'
+        attributes.type = 'text/css'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = ${siteCSSFilepath}
+        }
+
+
+    }
+
     body >
 
     //Neos Backend needs a realtive content element to place toolbar correctly on fixed-position-elements

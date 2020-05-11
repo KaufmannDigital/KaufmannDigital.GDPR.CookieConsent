@@ -60,6 +60,7 @@ After the date has been changed, the banner will be shown again to all visitors,
 
 
 ### Styling
+#### Custom Banner-Styles
 The banner comes with a few basic-styles for positioning, which are getting included inline. To add your custom styles, just put a CSS-Files somewhere in your Resources-Folder and include it using Settings.yaml:   
 ```yaml
 KaufmannDigital:
@@ -68,6 +69,15 @@ KaufmannDigital:
       customCSSFilepath: 'resource://Vendor.Package/Private/Styles/cookie-consent.css' #You can also use the public-path, of course
 ```
 To get an idea of the CSS-styling and class-names, you can have a look [into our SCSS](Resources/Private/Styles/Main.scss).  
+
+#### Site-Styles on Cookie-Page
+If you rely on your Site-Package Styles inside of the banner, you can just include them into the (otherwise unstyled) Cookie-Page for configuring the banner inside the Backend. To do so, just add it to your Settings:
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      siteCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/Site.css'
+```
 
 *Hint: We are working on advanced styling options. Different style- and positioning presets will be available in future. If you have any wishes or created a cool design for this banner yourself, please contact us.*
 
@@ -100,8 +110,8 @@ This package is maintained by the [Neos Agency Kaufmann Digital](https://www.kau
 Feel free to send us your questions or requests to [support@kaufmann.digital](mailto:support@kaufmann.digital)
 
 ### Issues and Pull-Requests are welcome!
-You are missing something? You found a bug? No problem, just create an issue or open a pull request.  
-We'll have a look at it ASAP.
+You got stuck while installing or configuring? You are missing something? You found a bug?  
+No problem, just create an issue or open a pull request. We'll have a look at it ASAP.
 
 ## License
 

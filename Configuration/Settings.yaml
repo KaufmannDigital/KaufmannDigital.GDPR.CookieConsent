@@ -12,4 +12,5 @@ Neos:
 KaufmannDigital:
   GDPR:
     CookieConsent:
+      siteCSSFilepath: null
       customCSSFilepath: null
