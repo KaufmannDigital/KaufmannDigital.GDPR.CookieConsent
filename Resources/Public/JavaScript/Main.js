@@ -202,7 +202,7 @@ function saveConsentToCookie(inputs) {
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
-        event: 'KD_GDPR_CC_saved',
+        event: 'KD_GDPR_CC_consent',
         KD_GDPR_CC: {
             consents: cookieData.consents
         }

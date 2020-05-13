@@ -18,7 +18,7 @@ prototype(Neos.Neos:Page) {
             window.dataLayer = window.dataLayer || [];
             var cookieObject = JSON.parse(decodeURIComponent(document.cookie.substr(document.cookie.indexOf('KD_GDPR_CC=') + 'KD_GDPR_CC'.length + 1).split('; ')[0]));
             window.dataLayer.push({
-                event: 'KD_GDPR_CC_pageload',
+                event: 'KD_GDPR_CC_consent',
                 KD_GDPR_CC: {
                     consents: cookieObject.consents
                 }
