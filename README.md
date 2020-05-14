@@ -41,14 +41,14 @@ So just check *consents* and load the needed JavaScript.
 *Pro-Tip: If you are using Google Tag Manager to add your JS-Tags, you can define a custom datalayer-variable of type "First-Party-Cookie", which can be used as condition inside triggers then.*
 
 #### React to datalayer event in Google Tag Manager
-In order to react to the user's decision in the Google Tag Manager, not much is needed. This package pushes information into the dataLayer variable, which can be easily used in Google Tag Manager. All you have to do is create a user defined variable. As path you can use 'KD_GDPR_CC.consents'. Now this variable can be queried in the trigger. It contains all identifiers of the cookies/groups defined in the backend, which are accepted by the user.
+In order to react to the user's decision in the Google Tag Manager, not much is needed. You can easily listen to an custom event. [We provided a full Guide here.](Documentation/GoogleTagManager.md)
 
 
 #### Add a Re-open link
-To create a link for reopening the banner, you only have to place a link with `#GDPR-CC-open-settings` as target: 
+To create a link for reopening the banner, you only have to place a link with `#GDPR-CC-open-settings` as target:
 ```html
 <a href="#GDPR-CC-open-settings">Cookie-Settings</a>
-``` 
+```
 After clicking on such a link, the cookie-banner will be loaded via API. Old settings are used as presets.
 
 #### Versioning
