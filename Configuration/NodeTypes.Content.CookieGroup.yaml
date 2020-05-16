@@ -11,6 +11,7 @@
   ui:
     label: 'Cookie Gruppe'
     icon: 'icon-cookie'
+    group: 'cookies'
     inspector:
       groups:
         cookie:

@@ -3,3 +3,4 @@
     'KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup': true
   ui:
     label: 'Notwendige Cookies Gruppe'
+    group: 'cookies'
