@@ -17,9 +17,11 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         @cache.mode = 'embed'
     }
 
+    imprintLink = ${q(node).property('imprintLink')}
     imprintLink.@process.convertUris = Neos.Neos:ConvertUris {
         absolute = true
     }
+    dataProtectionPolicyLink = ${q(node).property('dataProtectionPolicyLink')}
     dataProtectionPolicyLink.@process.convertUris = Neos.Neos:ConvertUris {
         absolute = true
     }
