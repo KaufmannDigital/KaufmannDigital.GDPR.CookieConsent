@@ -7,4 +7,5 @@
   ui:
     label: 'Cookie-Settings Page'
     icon: 'icon-cookie'
+    group: 'cookies'
 

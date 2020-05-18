@@ -1,5 +1,11 @@
 Neos:
   Neos:
+    nodeTypes:
+      groups:
+        cookies:
+          position: 300
+          label: 'Cookies'
+          collapsed: true
     fusion:
       autoInclude:
         KaufmannDigital.GDPR.CookieConsent: true

@@ -4,6 +4,7 @@
   ui:
     label: 'Cookie Attribut'
     icon: 'icon-cookie'
+    group: 'cookies'
   properties:
     label:
       type: string

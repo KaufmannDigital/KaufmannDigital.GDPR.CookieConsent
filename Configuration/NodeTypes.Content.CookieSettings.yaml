@@ -11,6 +11,7 @@
   ui:
     label: 'Cookie Settings'
     icon: 'icon-cookie'
+    group: 'cookies'
     inlineEditable: true
     inspector:
       groups:
