@@ -41,7 +41,7 @@ prototype(Neos.Neos:Page) {
                     initializeCookieConsent();
                 });
 
-                xhr.open('GET', 'api/kd-gdpr-cc');
+                xhr.open('GET', '/api/kd-gdpr-cc');
                 xhr.send();
             })
         })
