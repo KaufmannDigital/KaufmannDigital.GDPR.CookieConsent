@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function initializeCookieConsent() {
 
+    var kd_gdpr_cc_userid;
     var cookieSettingsContainer = document.querySelector('.gdpr-cookieconsent-settings');
     var darkOverlay = document.querySelector('.gdpr-cookieconsent-overlay');
     var txtMainDescription = document.querySelector('.gdpr-cookieconsent-settings__content__info__main-description');
@@ -35,6 +36,17 @@ function initializeCookieConsent() {
     var btnAcceptAll = document.querySelector('#gdpr-cc-btn-accept');
     var btnSaveSettings = document.querySelector('#gdpr-cc-btn-save');
     var btnAcceptNecessaryCookies = document.querySelector('#gdpr-cc-btn-accept-necessary');
+
+    //Create log in BE and store userID
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', trackChoiceUrl);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function() {
+      if(xhr.readyState === 4) {
+          kd_gdpr_cc_userid = JSON.parse(xhr.response).userId;
+      }
+    };
+    xhr.send();
 
 
     btnIndividualSettingsEnable.addEventListener('click', function() {
@@ -66,7 +78,7 @@ function initializeCookieConsent() {
         dispatchEventsForCookies(selectedInputs);
 
         //Save to cookie
-        saveConsentToCookie(selectedInputs);
+        saveConsentToCookie(selectedInputs, kd_gdpr_cc_userid);
 
         //Remove CookieConsent from HTML
         cookieSettingsContainer.remove();
@@ -81,7 +93,7 @@ function initializeCookieConsent() {
         dispatchEventsForCookies(selectedInputs);
 
         //Save to cookie
-        saveConsentToCookie(selectedInputs);
+        saveConsentToCookie(selectedInputs, kd_gdpr_cc_userid);
 
         //Remove CookieConsent from HTML
         cookieSettingsContainer.remove();
@@ -91,14 +103,15 @@ function initializeCookieConsent() {
 
 
     if (btnAcceptNecessaryCookies) {
-        btnAcceptNecessaryCookies.addEventListener('click', function() {
-            acceptNecessaryCookies();
-            //Remove CookieConsent from HTML
-            cookieSettingsContainer.remove();
-            darkOverlay.remove();
-            loadGeneratedJavaScript();
-        });
-    }
+    btnAcceptNecessaryCookies.addEventListener('click', function() {
+
+        acceptNecessaryCookies(kd_gdpr_cc_userid);
+        //Remove CookieConsent from HTML
+        cookieSettingsContainer.remove();
+        darkOverlay.remove();
+        loadGeneratedJavaScript();
+    });
+}
 
     [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details-open')).forEach(function(detailsLink) {
         detailsLink.addEventListener('click', function() {
@@ -144,7 +157,7 @@ function initializeCookieConsent() {
 
     [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-settings__content__links a')).forEach(function(link) {
         link.addEventListener('click', function(event) {
-            acceptNecessaryCookies();
+            acceptNecessaryCookies(kd_gdpr_cc_userid);
             return true;
         });
     });
@@ -179,7 +192,7 @@ function dispatchEventsForCookies(inputs) {
 }
 
 
-function saveConsentToCookie(inputs) {
+function saveConsentToCookie(inputs, userId) {
     var consents = [];
     [].slice.call(inputs).forEach(function(input) {
         consents.push(input.value);
@@ -189,6 +202,7 @@ function saveConsentToCookie(inputs) {
     var expireDate = new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), currentDate.getDate());
 
     var cookieData = {
+        userId: userId,
         consents: consents,
         consentDate: currentDate.toUTCString(),
         expireDate: expireDate.toUTCString()
@@ -209,25 +223,24 @@ function saveConsentToCookie(inputs) {
     });
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', trackChoiceUrl);
+    xhr.open('POST', trackChoiceUrl, false);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify({'choice': cookieData}));
 }
 
 
 
-function acceptNecessaryCookies() {
+function acceptNecessaryCookies(userId) {
     var necessaryGroupInputs = document.querySelectorAll('.gdpr-cookieconsent-setting-group--necessary .gdpr-cookieconsent-setting-group__switch input');
     var necessaryInputs = document.querySelectorAll('.gdpr-cookieconsent-setting-group--necessary .gdpr-cookieconsent-cookie input');
 
 
     //Dispatch events
-    dispatchEventsForCookies([].slice.call(necessaryGroupInputs).concat([].slice.call(necessaryInputs)));
+    dispatchEventsForCookies([].slice.call(necessaryGroupInputs).concat([].slice.call(necessaryInputs)), userId);
 
     //Save to cookie
-    saveConsentToCookie([].slice.call(necessaryGroupInputs).concat([].slice.call(necessaryInputs)));
+    saveConsentToCookie([].slice.call(necessaryGroupInputs).concat([].slice.call(necessaryInputs)), userId);
 }
-
 
 function loadGeneratedJavaScript() {
     var tag = document.createElement('script');

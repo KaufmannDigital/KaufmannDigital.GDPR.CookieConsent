@@ -86,12 +86,28 @@ class ApiController extends RestController
      * @param array $choice
      * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
      */
-    public function trackChoiceAction(array $choice)
+    public function trackChoiceAction(array $choice = [])
     {
-        $userId = uniqid();
-        foreach ($choice['consents'] as $consentIdentifier) {
-            $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $consentIdentifier);
+        $userId = $choice['userId'] ?? '';
+        $userAgent = current($this->request->getHttpRequest()->getHeader('User-Agent'));
+        if (empty($userId)) {
+            $userId = uniqid();
+            $consentLogEntry = new ConsentLogEntry($userId, new \DateTime(), '#init#', $userAgent);
             $this->consentLogRepository->add($consentLogEntry);
+        } else {
+            /** @var ConsentLogEntry $logEntry */
+            $logEntry = $this->consentLogRepository->findOneByUserId($userId);
+            if ($logEntry instanceof ConsentLogEntry) {
+                $this->consentLogRepository->remove($logEntry);
+            }
+            foreach ($choice['consents'] as $consentIdentifier) {
+                $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $consentIdentifier, $userAgent);
+                $this->consentLogRepository->add($consentLogEntry);
+            }
         }
+
+        $this->view->assign('success', true);
+        $this->view->assign('userId', $userId);
+        $this->view->setVariablesToRender(['success', 'userId']);
     }
 }

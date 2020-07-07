@@ -10,7 +10,6 @@ use Neos\Flow\Http\ContentStream;
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Mvc\View\SimpleTemplateView;
 use Neos\Flow\Annotations as Flow;
-use Neos\FluidAdaptor\View\TemplateView;
 use Neos\Neos\Fusion\Helper\CachingHelper;
 
 class JavaScriptController extends RestController
@@ -98,7 +97,7 @@ class JavaScriptController extends RestController
     {
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Content-Type', 'text/javascript;charset=UTF-8');
 
-        if ($this->cache->has($hash)) {
+        if ($this->cache->has($hash) !== false) {
             $this->view->setOption('templateSource', $this->cache->get($hash));
             return;
         }
