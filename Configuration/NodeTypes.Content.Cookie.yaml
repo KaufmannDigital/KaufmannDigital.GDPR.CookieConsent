@@ -54,7 +54,7 @@
           group: cookie
           editor: Neos.Neos/Inspector/Editors/CodeEditor
     priority:
-      type: string
+      type: integer
       defaultValue: 0
       ui:
         label: 'Priorität'
