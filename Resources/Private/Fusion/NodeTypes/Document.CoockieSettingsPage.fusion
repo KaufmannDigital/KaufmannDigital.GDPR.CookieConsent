@@ -8,11 +8,14 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prot
         attributes.href = Neos.Fusion:ResourceUri {
             path = ${siteCSSFilepath}
         }
-
-
     }
 
     body >
+
+    body = KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings {
+        @context.node = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage]').find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').get(0)}
+        @position = 'before closingBodyTag'
+    }
 
     //Neos Backend needs a realtive content element to place toolbar correctly on fixed-position-elements
     fakeContentElement = Neos.Fusion:Tag {
