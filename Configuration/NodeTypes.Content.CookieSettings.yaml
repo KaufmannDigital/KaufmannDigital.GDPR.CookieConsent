@@ -9,14 +9,14 @@
           '*': false
           'KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup': true
   ui:
-    label: 'Cookie Settings'
+    label: i18n
     icon: 'icon-cookie'
     group: 'cookies'
     inlineEditable: true
     inspector:
       groups:
         cookieSettings:
-          label: 'CookieSettings'
+          label: i18n
           icon: 'icon-cookie'
   properties:
     headline:
@@ -26,7 +26,7 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Überschrift eintragen...'
+            placeholder: i18n
     mainDescription:
       type: string
       defaultValue: ''
@@ -34,7 +34,7 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Beschreibung eintragen...'
+            placeholder: i18n
     individualSettingsDescription:
       type: string
       defaultValue: ''
@@ -42,11 +42,11 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Beschreibung eintragen...'
+            placeholder: i18n
     imprintLink:
       type: string
       ui:
-        label: 'Link zum Impressum'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
@@ -54,64 +54,64 @@
     dataProtectionPolicyLink:
       type: string
       ui:
-        label: 'Link zur Datenschutzerklärung'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
           editor: 'Neos.Neos/Inspector/Editors/LinkEditor'
     acceptAllButtonLabel:
       type: string
-      defaultValue: 'Alle akzeptieren'
+      defaultValue: "Accept all"
       ui:
-        label: 'Label "Alle akzeptieren"'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
     saveButtonLabel:
       type: string
-      defaultValue: 'Speichern'
+      defaultValue: "Save"
       ui:
-        label: 'Label "Speichern"'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
     acceptNecessaryCookiesLabel:
       type: string
-      defaultValue: 'Notwendige Cookies akzeptieren'
+      defaultValue: "Accept necessary cookies"
       ui:
-        label: 'Label "Notwendige Cookies akzeptieren"'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
     imprintLabel:
       type: string
-      defaultValue: 'Impressum'
+      defaultValue: "Imprint"
       ui:
-        label: 'Label "Impressum"'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
     dataProtectionPolicyLabel:
       type: string
-      defaultValue: 'Datenschutzerklärung'
+      defaultValue: "Privacy"
       ui:
-        label: 'Label "Datenschutzerklärung"'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
     openIndividualSettingsLabel:
       type: string
-      defaultValue: 'Individuelle Einstellungen'
+      defaultValue: "Individual settings"
       ui:
-        label: 'Label "Individuelle Einstellungen"'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
     closeIndividualSettingsLabel:
       type: string
-      defaultValue: 'Einstellungen schließen'
+      defaultValue: "Close settings"
       ui:
-        label: 'Label "Einstellungen schließen"'
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: cookieSettings
@@ -119,6 +119,6 @@
       type: DateTime
       defaultValue: 'now'
       ui:
-        label: 'Versions-Datum'
+        label: i18n
         inspector:
           group: cookieSettings

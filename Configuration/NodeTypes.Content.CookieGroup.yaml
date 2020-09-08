@@ -9,13 +9,13 @@
           '*': false
           'KaufmannDigital.GDPR.CookieConsent:Content.Cookie': true
   ui:
-    label: 'Cookie Gruppe'
+    label: i18n
     icon: 'icon-cookie'
     group: 'cookies'
     inspector:
       groups:
         cookie:
-          label: 'Cookie Gruppe'
+          label: i18n
           icon: icon-cookie
   properties:
     headline:
@@ -25,7 +25,7 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Gruppenüberschrift eintragen...'
+            placeholder: i18n
     description:
       type: string
       defaultValue: ''
@@ -33,7 +33,7 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Gruppenbeschreibung eintragen...'
+            placeholder: i18n
     identifier:
       type: string
       defaultValue: ''

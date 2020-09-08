@@ -33,7 +33,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup.Renderer) < pro
             closeDetailLink = Neos.Fusion:Tag {
                 tagName = 'a'
                 attributes.class = 'gdpr-cookieconsent-setting-group__details-close'
-                content = 'Details ausblenden'
+                content = ${I18n.translate('KaufmannDigital.GDPR.CookieConsent:NodeTypes.Content.CookieGroup:hideDetails')}
                 @if.hasCookies = ${props.hasCookies || props.inBackend}
             }
         }

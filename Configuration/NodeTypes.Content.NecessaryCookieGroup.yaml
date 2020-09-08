@@ -2,5 +2,5 @@
   superTypes:
     'KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup': true
   ui:
-    label: 'Notwendige Cookies Gruppe'
+    label: i18n
     group: 'cookies'

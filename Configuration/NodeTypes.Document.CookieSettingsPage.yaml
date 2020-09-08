@@ -5,7 +5,7 @@
     cookieSettings:
       type: 'KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings'
   ui:
-    label: 'Cookie-Settings Page'
+    label: i18n
     icon: 'icon-cookie'
     group: 'cookies'
 
