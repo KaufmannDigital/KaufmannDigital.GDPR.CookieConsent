@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext">
+	<file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext" target-language="de">
 		<body>
 			<trans-unit id="ui.label" xml:space="preserve">
 				<source>Necessary Cookies Group</source>
+				<target state="final">Notwendige Cookies-Gruppe</target>
 			</trans-unit>
 		</body>
 	</file>
