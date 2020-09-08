@@ -2,7 +2,7 @@
   superTypes:
     'Neos.Neos:Content': true
   ui:
-    label: 'Cookie Attribut'
+    label: i18n
     icon: 'icon-cookie'
     group: 'cookies'
   properties:
@@ -13,7 +13,7 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Label eintragen...'
+            placeholder: i18n
     value:
       type: string
       defaultValue: ''
@@ -21,4 +21,4 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Wert eintragen...'
+            placeholder: i18n

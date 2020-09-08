@@ -9,6 +9,11 @@ Neos:
     fusion:
       autoInclude:
         KaufmannDigital.GDPR.CookieConsent: true
+    userInterface:
+      translation:
+        autoInclude:
+          'KaufmannDigital.GDPR.CookieConsent':
+            - 'NodeTypes/*'
   Flow:
     mvc:
       routes:

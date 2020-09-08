@@ -25,7 +25,7 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Cookie Name eintragen ...'
+            placeholder: i18n
     description:
       type: string
       defaultValue: ''
@@ -33,7 +33,7 @@
         inlineEditable: true
         inline:
           editorOptions:
-            placeholder: 'Cookie Beschreibung eintragen...'
+            placeholder: i18n
     identifier:
       type: string
       defaultValue: ''
@@ -48,7 +48,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'JavaScript-Include'
+        label: 'JavaScript Include'
         reloadIfChanged: true
         inspector:
           group: cookie
@@ -57,8 +57,8 @@
       type: integer
       defaultValue: 0
       ui:
-        label: 'Priorität'
+        label: i18n
         help:
-          message: 'Die Priorität bestimmt die Ladereihenfolge der unterschiedlichen Cookies. Höhere Zahlen garantieren frühere Ladezeiten.'
+          message: i18n
         inspector:
           group: cookie
