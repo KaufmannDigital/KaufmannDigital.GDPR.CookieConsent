@@ -2,13 +2,12 @@
 
 namespace KaufmannDigital\GDPR\CookieConsent\Controller;
 
+use KaufmannDigital\GDPR\CookieConsent\Mvc\View\CustomTemplateView;
 use Neos\Cache\Frontend\StringFrontend;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Http\Component\SetHeaderComponent;
-use Neos\Flow\Http\ContentStream;
 use Neos\Flow\Mvc\Controller\RestController;
-use Neos\Flow\Mvc\View\SimpleTemplateView;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Fusion\Helper\CachingHelper;
 
@@ -16,11 +15,11 @@ class JavaScriptController extends RestController
 {
 
     /**
-     * @var SimpleTemplateView
+     * @var CustomTemplateView
      */
     protected $view;
 
-    protected $defaultViewObjectName = SimpleTemplateView::class;
+    protected $defaultViewObjectName = CustomTemplateView::class;
 
     /**
      * @Flow\Inject
