@@ -27,8 +27,8 @@ KaufmannDigital:
       customCSSFilepath: null
       siteStyles: []
 #        "rootNode name 1":
-#          siteCSSFilepath: <link to site css>
+#          siteCSSFilepath: <link to css>
 #          customCSSFilepath: <link to custom css>
 #        "rootNode name 1":
-#          siteCSSFilepath: <link to site css>
+#          siteCSSFilepath: <link to css>
 #          customCSSFilepath: <link to custom css>
