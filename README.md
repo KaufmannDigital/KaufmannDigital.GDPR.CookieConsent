@@ -7,6 +7,8 @@ This is a further development of our previous [cookie consent package](https://g
 It's easier than you probably think!  
 Just run `composer require kaufmanndigital/gdpr-cookieconsent`
 
+After the installation it's necessary to run doctrine migrations: `./flow doctrine:migrate`
+
 ## Configuration
 Since this package is ready-to-run, you can configure your cookie banner in just a few Steps.
 
