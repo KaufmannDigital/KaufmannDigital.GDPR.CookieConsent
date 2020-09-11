@@ -25,3 +25,10 @@ KaufmannDigital:
     CookieConsent:
       siteCSSFilepath: null
       customCSSFilepath: null
+      siteStyles: []
+#        "rootNode name 1":
+#          siteCSSFilepath: <link to css>
+#          customCSSFilepath: <link to custom css>
+#        "rootNode name 2":
+#          siteCSSFilepath: <link to css>
+#          customCSSFilepath: <link to custom css>

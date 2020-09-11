@@ -79,6 +79,19 @@ KaufmannDigital:
       siteCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/Site.css'
 ```
 
+#### Site specific Styling
+If you manage multiple sites in your Neos installation, you can specify cookie banner styles for each site.
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      siteCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/Site.css'
+      customCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/CookieBanner.css'
+      siteStyles:
+        "siteNameOne": # the sites rootNode name
+          siteCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/SiteSpecific.css' # overwrites siteCSSFilepath for this site
+          customCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/SiteCookieBanner.css' # overwrites customCSSFilepath for this site
+```
 *Hint: We are working on advanced styling options. Different style- and positioning presets will be available in future. If you have any wishes or created a cool design for this banner yourself, please contact us.*
 
 
