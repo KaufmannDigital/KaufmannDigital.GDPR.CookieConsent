@@ -1,6 +1,7 @@
 'KaufmannDigital.GDPR.CookieConsent:Content.Cookie':
   superTypes:
     'Neos.Neos:Content': true
+    'KaufmannDigital.GDPR.CookieConsent:Mixin.Cookie': true
   childNodes:
     attributes:
       type: 'Neos.Neos:ContentCollection'

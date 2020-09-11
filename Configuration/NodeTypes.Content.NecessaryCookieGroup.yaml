@@ -1,6 +1,7 @@
 'KaufmannDigital.GDPR.CookieConsent:Content.NecessarySettingGroup':
   superTypes:
     'KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup': true
+    'KaufmannDigital.GDPR.CookieConsent:Mixin.Cookie': true
   ui:
     label: i18n
     group: 'cookies'
