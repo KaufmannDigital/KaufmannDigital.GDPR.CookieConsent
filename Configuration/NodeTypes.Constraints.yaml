@@ -1,0 +1,4 @@
+Neos.Neos:ContentCollection:
+  constraints:
+    nodeTypes:
+      'KaufmannDigital.GDPR.CookieConsent:Mixin.Cookie': false
