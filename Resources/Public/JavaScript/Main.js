@@ -38,16 +38,17 @@ function initializeCookieConsent() {
     var btnAcceptNecessaryCookies = document.querySelector('#gdpr-cc-btn-accept-necessary');
 
     //Create log in BE and store userID
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', trackChoiceUrl);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.onreadystatechange = function() {
-      if(xhr.readyState === 4) {
-          kd_gdpr_cc_userid = JSON.parse(xhr.response).userId;
-      }
-    };
-    xhr.send();
-
+    if (consentLogEnabled) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', trackChoiceUrl);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState === 4) {
+                kd_gdpr_cc_userid = JSON.parse(xhr.response).userId;
+            }
+        };
+        xhr.send();
+    }
 
     btnIndividualSettingsEnable.addEventListener('click', function() {
         individualSettingsContainer.style.display = 'block';
@@ -222,10 +223,12 @@ function saveConsentToCookie(inputs, userId) {
         }
     });
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', trackChoiceUrl, false);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify({'choice': cookieData}));
+    if (consentLogEnabled) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', trackChoiceUrl, false);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify({'choice': cookieData}));
+    }
 }
 
 

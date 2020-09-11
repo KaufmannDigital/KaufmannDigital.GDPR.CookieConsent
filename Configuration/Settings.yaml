@@ -25,6 +25,7 @@ KaufmannDigital:
     CookieConsent:
       siteCSSFilepath: null
       customCSSFilepath: null
+      consentLogEnabled: false
       siteStyles: []
 #        "rootNode name 1":
 #          siteCSSFilepath: <link to css>
