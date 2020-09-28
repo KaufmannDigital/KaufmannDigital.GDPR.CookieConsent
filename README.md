@@ -3,9 +3,17 @@
 A ready-to-run package, that integrates an advanced cookie consent banner into your Neos CMS site.  
 This is a further development of our previous [cookie consent package](https://github.com/KaufmannDigital/KaufmannDigital.CookieConsent). Through the individual configuration per service (cookie), this package is a perfect basis for creating GDPR compliant websites.
 
+## Versions
+This package is available in multiple Version. Here you can check compatibility and maintenance-state.
+Composer-Version | Neos-Compatibility | Maintenance 
+-----------------| -------------------|-------------|
+`^1.0` | < 5.0  | ⛔
+`^2.0` | >= 5.0 | 🐛
+`^3.0` | >= 5.0 | 🐛 ✨
+
 ## Installation
 It's easier than you probably think!  
-Just run `composer require kaufmanndigital/gdpr-cookieconsent`
+Just run `composer require kaufmanndigital/gdpr-cookieconsent` (or require one of the versions from above)
 
 After the installation it's necessary to run doctrine migrations: `./flow doctrine:migrate`
 
