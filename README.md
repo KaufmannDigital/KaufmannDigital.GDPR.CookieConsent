@@ -104,6 +104,14 @@ KaufmannDigital:
 ```
 *Hint: We are working on advanced styling options. Different style- and positioning presets will be available in future. If you have any wishes or created a cool design for this banner yourself, please contact us.*
 
+### Consent Logging
+The package provides the ability to track the users decisions by storing the chosen consent identifiers along with a random user id and the user agent in your database. This feature is disabled by default, you can enable it in your Settings.yaml:
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      consentLogEnabled: true
+```
 
 ## Roadmap / Planned Features
 

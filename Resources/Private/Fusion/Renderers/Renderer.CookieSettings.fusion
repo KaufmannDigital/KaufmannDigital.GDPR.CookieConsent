@@ -120,6 +120,8 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
                     jsVariables = Neos.Fusion:Tag {
                         tagName = 'script'
 
+                        consentLogEnabled = ${Configuration.Setting('KaufmannDigital.GDPR.CookieConsent.consentLogEnabled') ? 'true' : 'false'}
+
                         trackChoiceUrl = Neos.Fusion:UriBuilder {
                             package = 'KaufmannDigital.GDPR.CookieConsent'
                             controller = 'Api'
@@ -136,6 +138,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
                         content = ${'
                             var trackChoiceUrl = "' + this.trackChoiceUrl + '";
                             var generatedJsUrl = "' + this.generatedJsUrl + '";
+                            var consentLogEnabled = ' + this.consentLogEnabled + ';
                         '}
                     }
 
