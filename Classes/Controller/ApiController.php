@@ -47,10 +47,19 @@ class ApiController extends RestController
     }
 
 
-    public function renderCookieSettingsAction()
+    public function renderCookieSettingsAction(array $dimensions)
     {
-        $q = new FlowQuery([$this->contextFactory->create()->getRootNode()]);
+        $this->view->setVariablesToRender(['html', 'needsRenew']);
+
+        $q = new FlowQuery([$this->contextFactory->create(['dimensions' => $dimensions])->getRootNode()]);
         $node = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
+
+        //Reply with empty string, if there is no configured CookieConsent
+        if (!$node instanceof NodeInterface || !$node->getParent() instanceof NodeInterface) {
+            $this->view->assign('html', '');
+            $this->view->assign('needsRenew', false);
+            return;
+        }
 
         $view = new FusionView();
         $view->setControllerContext($this->controllerContext);
