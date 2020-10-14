@@ -5,6 +5,13 @@ include: NodeTypes/*
 prototype(Neos.Neos:Page) {
 
     @context.versionDate = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').first().property("versionDate")}
+    @context.apiUrl = Neos.Fusion:UriBuilder {
+        package = 'KaufmannDigital.GDPR.CookieConsent'
+        controller = 'Api'
+        action = 'renderCookieSettings'
+        arguments.dimensions = ${site.dimensions}
+        absolute = true
+    }
 
     cookieConsentReopenJS = Neos.Fusion:Tag {
         tagName = 'script'
@@ -22,7 +29,7 @@ prototype(Neos.Neos:Page) {
                 initializeCookieConsent();
             });
 
-            xhr.open('GET', '/api/kd-gdpr-cc');
+            xhr.open('GET', '" + apiUrl + "');
             xhr.send();
         }
 
