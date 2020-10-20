@@ -47,7 +47,7 @@ class ApiController extends RestController
     }
 
 
-    public function renderCookieSettingsAction(array $dimensions)
+    public function renderCookieSettingsAction(array $dimensions = [])
     {
         $this->view->setVariablesToRender(['html', 'needsRenew']);
 
