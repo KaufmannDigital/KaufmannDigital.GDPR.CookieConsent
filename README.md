@@ -33,7 +33,7 @@ KaufmannDigital:
       consentDimensions:
         - country
 ```
-This examples would save different consents per country for each user. This will means, that the user will see the CookieConsent again the first time, he switches to another country.  
+This examples would save different consents per country for each user. This means, that the user will see the CookieConsent again the first time, he switches to another country.  
 It also influences the [way the content is stored in the cookie](#react-to-the-users-cookie-decision). Instead of a key `"default" there are now multiple entries within `"consents"` for each dimension(-combination). A short example: 
 ```json
 {
@@ -83,7 +83,7 @@ It's named `KD_GDPR_CC` and contains all identifiers of groups and cookies you d
 *If you configured [Consent per Dimensions](#consent-per-dimension), there are entries per dimension in `"consents"`, instead of default. [See example](#consent-per-dimension).*
 
 So just check *consents* and load the needed JavaScript.  
-*Pro-Tip: If you are using Google Tag Manager to add your JS-Tags, you can define a custom datalayer-variable of type "First-Party-Cookie", which can be used as condition inside triggers then.*
+*Pro-Tip: If you are using Google Tag Manager to add your JS-Tags, you can define a custom datalayer-variable of type `First-Party-Cookie`, which can be used as condition inside triggers then.*
 
 #### React to datalayer event in Google Tag Manager
 In order to react to the user's decision in the Google Tag Manager, not much is needed. You can easily listen to an custom event. [We provided a full Guide here.](Documentation/GoogleTagManager.md)
