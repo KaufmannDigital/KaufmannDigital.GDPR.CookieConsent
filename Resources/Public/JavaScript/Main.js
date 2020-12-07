@@ -164,21 +164,20 @@ function initializeCookieConsent() {
     });
 
 
-    var consents = [];
-    var cookieName = 'KD_GDPR_CC';
-    var value = "; " + document.cookie;
-    var parts = value.split("; " + cookieName + "=");
-    if (parts.length === 2) {
-        var cookieValue = parts.pop().split(";").shift();
-        consents = JSON.parse(decodeURI(cookieValue)).consents;
+    var cookie = decodeCookie();
+    var consents = cookie && cookie.consents ? cookie.consents : [];
+
+    if (dimensionsIdentifier !== '' && !Array.isArray(consents)) {
+        consents = consents[dimensionsIdentifier];
     }
 
-    [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-settings__content input')).forEach(function(input) {
-        if (consents.indexOf(input.value) >= 0) {
-            input.checked = true;
-        }
-    });
-
+    if (consents) {
+        consents.forEach(function (consentIdentifier) {
+            if (consentIdentifier.length != '') {
+                document.querySelector('.gdpr-cookieconsent-settings__content input[value=' + consentIdentifier + ']').checked = true;
+            }
+        });
+    }
 }
 
 
@@ -194,9 +193,11 @@ function dispatchEventsForCookies(inputs) {
 
 
 function saveConsentToCookie(inputs, userId) {
-    var consents = [];
+    var cookie = decodeCookie();
+    var consents = cookie && cookie.consents ? cookie.consents : {};
+    consents[dimensionsIdentifier] = [];
     [].slice.call(inputs).forEach(function(input) {
-        consents.push(input.value);
+        consents[dimensionsIdentifier].push(input.value);
     });
 
     var currentDate = new Date();
@@ -208,6 +209,7 @@ function saveConsentToCookie(inputs, userId) {
         consentDate: currentDate.toUTCString(),
         expireDate: expireDate.toUTCString()
     };
+
 
     var cookieDomain = document.domain.replace('www', '');
     if (cookieDomain.indexOf(".") !== 0) {
@@ -249,4 +251,14 @@ function loadGeneratedJavaScript() {
     var tag = document.createElement('script');
     tag.src = generatedJsUrl;
     document.getElementsByTagName('head')[0].appendChild(tag);
+}
+
+function decodeCookie() {
+    var cookieName = 'KD_GDPR_CC';
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + cookieName + "=");
+    if (parts.length === 2) {
+        var cookieValue = parts.pop().split(";").shift();
+        return JSON.parse(decodeURI(cookieValue));
+    }
 }

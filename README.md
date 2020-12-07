@@ -5,7 +5,7 @@ This is a further development of our previous [cookie consent package](https://g
 
 ## Versions
 This package is available in multiple Version. Here you can check compatibility and maintenance-state.
-Composer-Version | Neos-Compatibility | Maintenance 
+Composer-Version | Neos-Compatibility | Maintenance
 -----------------| -------------------|-------------|
 `^1.0` | < 5.0  | ⛔
 `^2.0` | >= 5.0 | 🐛
@@ -24,6 +24,37 @@ Since this package is ready-to-run, you can configure your cookie banner in just
 2. Switch to the newly created page and edit the cookie banner contents to your wishes.
 3. Add cookie-groups and cookies to the banner.  
 
+### Consent per dimension
+If you've configured one or multiple dimensions in Neos and you need to save different consents per dimension(-combination), you can just configure it using Settings.yaml: 
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      consentDimensions:
+        - country
+```
+This examples would save different consents per country for each user. This will means, that the user will see the CookieConsent again the first time, he switches to another country.  
+It also influences the [way the content is stored in the cookie](#react-to-the-users-cookie-decision). Instead of a key `"default" there are now multiple entries within `"consents"` for each dimension(-combination). A short example: 
+```json
+{
+  "consents": {
+    "deu": [
+      "necessary",
+      "analytics",
+      "marketing"
+    ],
+    "dnk": [
+      "necessary",
+      "analytics",
+      "marketing"
+    ]
+  },
+  "consentDate": "Tue, 11 Feb 2020 11:35:23 GMT",
+  "expireDate": "Wed, 10 Feb 2021 23:00:00 GMT"
+}
+```
+If you configured multiple dimensions in `consentDimensions`, they get connected here using underscores. Example: `deu_de`
+
 ### React to the user's cookie decision
 You can use one of these Methods to react on the user's decision on which Cookies are accepted:
 
@@ -38,15 +69,19 @@ If you are already using another way to include your JavaScript, you can depend 
 It's named `KD_GDPR_CC` and contains all identifiers of groups and cookies you defined in Backend while configuration. The payload of that cookie could look like this:
 ```json
 {
-   "consents": [
+  "consents": {
+    "default": [
       "necessary",
       "analytics",
       "marketing"
-   ],
-   "consentDate": "Tue, 11 Feb 2020 11:35:23 GMT",
-   "expireDate": "Wed, 10 Feb 2021 23:00:00 GMT"
+    ]
+  },
+  "consentDate": "Tue, 11 Feb 2020 11:35:23 GMT",
+  "expireDate": "Wed, 10 Feb 2021 23:00:00 GMT"
 }
 ```
+*If you configured [Consent per Dimensions](#consent-per-dimension), there are entries per dimension in `"consents"`, instead of default. [See example](#consent-per-dimension).*
+
 So just check *consents* and load the needed JavaScript.  
 *Pro-Tip: If you are using Google Tag Manager to add your JS-Tags, you can define a custom datalayer-variable of type "First-Party-Cookie", which can be used as condition inside triggers then.*
 

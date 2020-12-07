@@ -26,6 +26,10 @@ KaufmannDigital:
       siteCSSFilepath: null
       customCSSFilepath: null
       consentLogEnabled: false
+      consentDimensions: []
+# See README.md
+#        - language
+#        - country
       siteStyles: []
 #        "rootNode name 1":
 #          siteCSSFilepath: <link to css>
