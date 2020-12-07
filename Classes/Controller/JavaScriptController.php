@@ -11,7 +11,6 @@ use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Fusion\Helper\CachingHelper;
 
-use function Clue\StreamFilter\fun;
 
 class JavaScriptController extends RestController
 {
