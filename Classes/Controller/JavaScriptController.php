@@ -11,6 +11,8 @@ use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Fusion\Helper\CachingHelper;
 
+use function Clue\StreamFilter\fun;
+
 class JavaScriptController extends RestController
 {
 
@@ -39,30 +41,49 @@ class JavaScriptController extends RestController
      */
     protected $cachingHelper;
 
+    /**
+     * @Flow\InjectConfiguration(path="consentDimensions")
+     * @var string[]
+     */
+    protected $consentDimensions;
+
 
     public function initializeRenderJavaScriptAction() {
 
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Cache-Control', 'max-age=0, private, must-revalidate');
     }
 
-    public function renderJavaScriptAction()
+    public function renderJavaScriptAction(array $dimensions = [])
     {
-        try {
-            $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()['KD_GDPR_CC']);
-            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($cookie->consents));
 
-            if ($this->cache->has($cacheIdentifier)) {
+        try {
+            $filteredDimensions =
+                array_filter($dimensions, function($key) {
+                    return in_array($key, $this->consentDimensions);
+                },
+                             ARRAY_FILTER_USE_KEY);
+
+            $dimensionIdentifier = implode(
+                '_',
+                array_map(function ($dimension) { return current($dimension);}, $filteredDimensions)
+            );
+
+            $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()['KD_GDPR_CC'], true);
+            $consents = isset($cookie['consents'][$dimensionIdentifier]) ? $cookie['consents'][$dimensionIdentifier] : 'default';
+            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents));
+
+            if (false && $this->cache->has($cacheIdentifier)) {
                 $this->redirect('downloadGeneratedJavaScript', null, null, ['hash' => $cacheIdentifier]);
                 return;
             }
 
-            $q = new FlowQuery([$this->contextFactory->create()->getCurrentSiteNode()]);
+            $q = new FlowQuery([$this->contextFactory->create(['dimensions' => $dimensions])->getCurrentSiteNode()]);
             $cookieNodes = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.Cookie][javaScriptCode != ""]')->sort('priority', 'DESC')->get();
 
             $javaScript = '';
             foreach ($cookieNodes as $cookieNode) {
                 $cookieJs = '';
-                if (strlen($cookieNode->getProperty('identifier')) > 0 && in_array($cookieNode->getProperty('identifier'), $cookie->consents)) {
+                if (strlen($cookieNode->getProperty('identifier')) > 0 && in_array($cookieNode->getProperty('identifier'), $consents)) {
                     $cookieJs = preg_replace('/<script.*src=.*><\/script>/', 'document.head.appendChild(document.createRange().createContextualFragment(\'$0\'));', $cookieNode->getProperty('javaScriptCode'));
                     $cookieJs = preg_replace('/<script>((.*\s.*)*)<\/script>/', '$1', $cookieJs);
                 }
@@ -84,6 +105,7 @@ class JavaScriptController extends RestController
 
 
         } catch (\Exception $e) {
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Content-Type', 'text/javascript;charset=UTF-8');
             $this->response->setContent('');
         }
     }

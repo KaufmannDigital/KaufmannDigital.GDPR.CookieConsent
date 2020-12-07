@@ -47,6 +47,7 @@ prototype(Neos.Neos:Page) {
             controller = 'JavaScript'
             action = 'renderJavaScript'
             format = 'js'
+            arguments.dimensions = ${site.context.dimensions}
         }
 
         @position = 'before closingBodyTag'

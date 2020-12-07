@@ -133,6 +133,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings.Renderer) < 
                             package = 'KaufmannDigital.GDPR.CookieConsent'
                             controller = 'JavaScript'
                             action = 'renderJavaScript'
+                            arguments.dimensions = ${site.context.dimensions}
                             absolute = true
                         }
                         content = ${'
