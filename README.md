@@ -34,7 +34,7 @@ KaufmannDigital:
         - country
 ```
 This examples would save different consents per country for each user. This means, that the user will see the CookieConsent again the first time, he switches to another country.  
-It also influences the [way the content is stored in the cookie](#react-to-the-users-cookie-decision). Instead of a key `"default" there are now multiple entries within `"consents"` for each dimension(-combination). A short example: 
+It also influences the [way the content is stored in the cookie](#read-cookie-identifiers-from-cookie). Instead of a key `"default" there are now multiple entries within `"consents"` for each dimension(-combination). A short example: 
 ```json
 {
   "consents": {
