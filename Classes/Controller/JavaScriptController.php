@@ -68,10 +68,10 @@ class JavaScriptController extends RestController
             );
 
             $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()['KD_GDPR_CC'], true);
-            $consents = isset($cookie['consents'][$dimensionIdentifier]) ? $cookie['consents'][$dimensionIdentifier] : 'default';
+            $consents = isset($cookie['consents'][$dimensionIdentifier]) ? $cookie['consents'][$dimensionIdentifier] : $cookie['consents']['default'] ?? $cookie['consents'];
             $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents));
 
-            if (false && $this->cache->has($cacheIdentifier)) {
+            if ($this->cache->has($cacheIdentifier)) {
                 $this->redirect('downloadGeneratedJavaScript', null, null, ['hash' => $cacheIdentifier]);
                 return;
             }
