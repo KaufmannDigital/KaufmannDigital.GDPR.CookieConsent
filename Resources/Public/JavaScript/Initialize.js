@@ -8,7 +8,9 @@ function loadCookiebannerHtml() {
         for (var n = 0; n < scriptTags.length; n++) {
             eval(scriptTags[n].innerHTML);
         }
-        initializeCookieConsent();
+        if (typeof initializeCookieConsent === 'function') {
+            initializeCookieConsent();
+        }
     });
 
     xhr.open('GET', apiUrl);
