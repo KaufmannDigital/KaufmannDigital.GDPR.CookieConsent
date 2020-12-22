@@ -27,13 +27,15 @@ prototype(Neos.Neos:Page) {
             var versionTimestamp = " + versionDate.timestamp * 1000 + ";
             var dimensionsIdentifier = '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "';
         "}
+        @if.condition = ${node.context.inBackend == false}
         @position = 'before closingBodyTag'
     }
 
-    cookieConsentReopenJS = Neos.Fusion:Tag {
+    initializeJs = Neos.Fusion:Tag {
         tagName = 'script'
         content = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/JavaScript/Initialize.js')}
 
+        @if.condition = ${node.context.inBackend == false}
         @position = 'before closingBodyTag'
     }
 
@@ -50,6 +52,7 @@ prototype(Neos.Neos:Page) {
             arguments.dimensions = ${site.context.dimensions}
         }
 
+        @if.condition = ${node.context.inBackend == false || Configuration.setting('KaufmannDigital.GDPR.CookieConsent.backend.includeGeneratedJs') == true}
         @position = 'before closingBodyTag'
     }
 }
