@@ -210,12 +210,7 @@ function saveConsentToCookie(inputs, userId) {
         expireDate: expireDate.toUTCString()
     };
 
-
-    var cookieDomain = document.domain.replace('www', '');
-    if (cookieDomain.indexOf(".") !== 0) {
-        cookieDomain = "." + cookieDomain;
-    }
-    document.cookie = "KD_GDPR_CC=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + ";domain=" + cookieDomain + ";path=/;";
+    document.cookie = "KD_GDPR_CC=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + "; path=/; Secure;";
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
