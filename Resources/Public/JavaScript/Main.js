@@ -195,11 +195,7 @@ function saveConsentToCookie(inputs) {
         expireDate: expireDate.toUTCString()
     };
 
-    var cookieDomain = document.domain.replace('www', '');
-    if (cookieDomain.indexOf(".") !== 0) {
-        cookieDomain = "." + cookieDomain;
-    }
-    document.cookie = "KD_GDPR_CC=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + ";domain=" + cookieDomain + ";path=/;";
+    document.cookie = "KD_GDPR_CC=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + "; path=/; Secure;";
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', trackChoiceUrl);
