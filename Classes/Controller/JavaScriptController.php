@@ -72,7 +72,7 @@ class JavaScriptController extends RestController
             //TODO: Add minifiy/uglify for JS here. I haven't found a good composer-lib while initial development.
 
             $this->cache->set(
-                $cacheIdentifier,
+                strtoupper($cacheIdentifier),
                 $javaScript,
                 array_merge(
                     $this->cachingHelper->nodeTag($cookieNodes),
@@ -96,6 +96,8 @@ class JavaScriptController extends RestController
     public function downloadGeneratedJavaScriptAction(string $hash)
     {
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Content-Type', 'text/javascript;charset=UTF-8');
+
+        $hash = strtoupper($hash);
 
         if ($this->cache->has($hash)) {
             die($this->cache->get($hash));
