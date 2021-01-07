@@ -96,6 +96,15 @@ To create a link for reopening the banner, you only have to place a link with `#
 ```
 After clicking on such a link, the cookie-banner will be loaded via API. Old settings are used as presets.
 
+#### Custom cookie name
+In some usecases it's needed to change the name of the Configuration-Cookie. That can easily be archived by using the following Setting: 
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      cookieName: 'CUSTOM_COOKIENAME'
+```
+
 #### Versioning
 In some cases, it may be necessary to show the cookie-banner to people who have actually already accepted it. For example, if a new cookie has been added.  
 To do this, you only need to edit the version date. You can find it in the inspector of the cookie-settings NodeType:   

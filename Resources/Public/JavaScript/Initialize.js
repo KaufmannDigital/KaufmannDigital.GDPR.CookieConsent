@@ -13,31 +13,31 @@ function loadCookiebannerHtml() {
         }
     });
 
-    xhr.open('GET', apiUrl);
+    xhr.open('GET', KD_GDPR_CC.apiUrl);
     xhr.send();
 }
 
-if (document.cookie.indexOf('KD_GDPR_CC') >= 0) {
+if (document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
     /*Cookie set*/
     window.dataLayer = window.dataLayer || [];
     var cookieObject = JSON.parse(
         decodeURIComponent(
             document.cookie
                 .substr(
-                    document.cookie.indexOf('KD_GDPR_CC=') + 'KD_GDPR_CC'.length + 1
+                    document.cookie.indexOf(KD_GDPR_CC.cookieName) + KD_GDPR_CC.cookieName.length + 1
                 )
                 .split('; ')[0]
         )
     );
 
-    var versionDate = new Date(versionTimestamp);
+    var versionDate = new Date(KD_GDPR_CC.versionTimestamp);
     var cookieConsentDate = new Date(cookieObject.consentDate);
 
     if (versionDate > cookieConsentDate && window.neos === undefined) {
         loadCookiebannerHtml();
     }
 
-    if (!cookieObject.consents[dimensionsIdentifier]) {
+    if (!cookieObject.consents[KD_GDPR_CC.dimensionsIdentifier]) {
         loadCookiebannerHtml();
     }
 

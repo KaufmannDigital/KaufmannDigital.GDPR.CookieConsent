@@ -35,6 +35,12 @@ class ApiController extends RestController
      */
     protected $consentLogRepository;
 
+    /**
+     * @Flow\InjectConfiguration(path="cookieName")
+     * @var string
+     */
+    protected $cookieName;
+
 
     public function initializeAction()
     {
@@ -70,8 +76,8 @@ class ApiController extends RestController
 
 
         $needsRenew = true;
-        if (isset($this->request->getHttpRequest()->getCookieParams()['KD_GDPR_CC'])) {
-            $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()['KD_GDPR_CC']);
+        if (isset($this->request->getHttpRequest()->getCookieParams()[$this->cookieName])) {
+            $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName]);
             $consentDate = new \DateTime($cookie->consentDate);
             $expireDate = new \DateTime($cookie->expireDate);
 

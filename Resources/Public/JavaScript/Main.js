@@ -167,8 +167,8 @@ function initializeCookieConsent() {
     var cookie = decodeCookie();
     var consents = cookie && cookie.consents ? cookie.consents : [];
 
-    if (dimensionsIdentifier !== '' && !Array.isArray(consents)) {
-        consents = consents[dimensionsIdentifier];
+    if (KD_GDPR_CC.dimensionsIdentifier !== '' && !Array.isArray(consents)) {
+        consents = consents[KD_GDPR_CC.dimensionsIdentifier];
     }
 
     if (consents) {
@@ -195,9 +195,9 @@ function dispatchEventsForCookies(inputs) {
 function saveConsentToCookie(inputs, userId) {
     var cookie = decodeCookie();
     var consents = cookie && cookie.consents ? cookie.consents : {};
-    consents[dimensionsIdentifier] = [];
+    consents[KD_GDPR_CC.dimensionsIdentifier] = [];
     [].slice.call(inputs).forEach(function(input) {
-        consents[dimensionsIdentifier].push(input.value);
+        consents[KD_GDPR_CC.dimensionsIdentifier].push(input.value);
     });
 
     var currentDate = new Date();
@@ -210,7 +210,7 @@ function saveConsentToCookie(inputs, userId) {
         expireDate: expireDate.toUTCString()
     };
 
-    document.cookie = "KD_GDPR_CC=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + "; path=/; Secure;";
+    document.cookie = KD_GDPR_CC.cookieName + "=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + "; path=/; Secure;";
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
@@ -249,9 +249,8 @@ function loadGeneratedJavaScript() {
 }
 
 function decodeCookie() {
-    var cookieName = 'KD_GDPR_CC';
     var value = "; " + document.cookie;
-    var parts = value.split("; " + cookieName + "=");
+    var parts = value.split("; " + KD_GDPR_CC.cookieName + "=");
     if (parts.length === 2) {
         var cookieValue = parts.pop().split(";").shift();
         return JSON.parse(decodeURI(cookieValue));

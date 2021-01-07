@@ -46,6 +46,11 @@ class JavaScriptController extends RestController
      */
     protected $consentDimensions;
 
+    /**
+     * @Flow\InjectConfiguration(path="cookieName")
+     * @var string
+     */
+    protected $cookieName;
 
     public function initializeRenderJavaScriptAction() {
 
@@ -67,7 +72,7 @@ class JavaScriptController extends RestController
                 array_map(function ($dimension) { return current($dimension);}, $filteredDimensions)
             );
 
-            $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()['KD_GDPR_CC'], true);
+            $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true);
             $consents = isset($cookie['consents'][$dimensionIdentifier]) ? $cookie['consents'][$dimensionIdentifier] : $cookie['consents']['default'] ?? $cookie['consents'];
             $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents));
 

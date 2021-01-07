@@ -17,15 +17,19 @@ prototype(Neos.Neos:Page) {
         dimensionValues = ${Array.filter(site.context.targetDimensions, (value,key) => Array.indexOf(this.consentDimensions, key) >= 0)}
         value = ${Array.join(this.dimensionValues, '_')}
     }
+    @context.cookieName = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieName')}
 
 
 
     jsVariablesTag = Neos.Fusion:Tag {
         tagName = 'script'
         content = ${"
-            var apiUrl = '" + apiUrl + "';
-            var versionTimestamp = " + versionDate.timestamp * 1000 + ";
-            var dimensionsIdentifier = '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "';
+            var KD_GDPR_CC = {
+                apiUrl: '" + apiUrl + "',
+                cookieName: '" + cookieName +"',
+                versionTimestamp: " + versionDate.timestamp * 1000 + ",
+                dimensionsIdentifier: '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "'
+            };
         "}
         @if.condition = ${node.context.inBackend == false}
         @position = 'before closingBodyTag'

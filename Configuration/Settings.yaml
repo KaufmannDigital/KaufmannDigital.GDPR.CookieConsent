@@ -27,6 +27,7 @@ KaufmannDigital:
       customCSSFilepath: null
       consentLogEnabled: false
       consentDimensions: []
+      cookieName: 'KD_GDPR_CC'
 # See README.md
 #        - language
 #        - country
