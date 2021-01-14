@@ -52,8 +52,8 @@ class JavaScriptController extends RestController
      */
     protected $cookieName;
 
-    public function initializeRenderJavaScriptAction() {
-
+    public function initializeRenderJavaScriptAction()
+    {
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Cache-Control', 'max-age=0, private, must-revalidate');
     }
 
@@ -73,8 +73,9 @@ class JavaScriptController extends RestController
             );
 
             $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true);
+
             $consents = isset($cookie['consents'][$dimensionIdentifier]) ? $cookie['consents'][$dimensionIdentifier] : $cookie['consents']['default'] ?? $cookie['consents'];
-            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents));
+            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents) . $dimensionIdentifier);
 
             if ($this->cache->has($cacheIdentifier)) {
                 $this->redirect('downloadGeneratedJavaScript', null, null, ['hash' => $cacheIdentifier]);
