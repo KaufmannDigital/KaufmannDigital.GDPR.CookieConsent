@@ -1,4 +1,7 @@
+include: Components/*
 include: **/*.fusion
+include: Renderers/*
+include: NodeTypes/*
 
 prototype(Neos.Neos:Page) {
 

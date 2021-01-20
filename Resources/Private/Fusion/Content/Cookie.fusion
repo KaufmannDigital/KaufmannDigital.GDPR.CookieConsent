@@ -12,5 +12,15 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.Cookie) < prototype(Neos.Ne
         attributes.class = 'gdpr-cookieconsent-cookie__attributes'
     }
 
-    renderer = KaufmannDigital.GDPR.CookieConsent:Content.Cookie.Renderer
+    renderer = afx`
+        <div class="gdpr-cookieconsent-cookie" data-identifier={props.identifier}>
+            <div class="gdpr-cookieconsent-cookie__headline">
+                {props.editableName}
+            </div>
+            <div class="gdpr-cookieconsent-cookie__switch">
+                <KaufmannDigital.GDPR.CookieConsent:Component.Switch value={props.identifier} />
+            </div>
+            {props.attributesContentCollection}
+        </div>
+    `
 }

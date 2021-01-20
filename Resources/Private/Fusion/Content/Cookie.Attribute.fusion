@@ -1,0 +1,21 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Content.Cookie.Attribute) < prototype(Neos.Neos:ContentComponent) {
+
+    editableLabel = Neos.Neos:Editable {
+        property = 'label'
+    }
+
+    editableValue = Neos.Neos:Editable {
+        property = 'value'
+    }
+
+    renderer = afx`
+    <div class="gdpr-cookieconsent-cookie-attribute">
+        <div class="gdpr-cookieconsent-cookie-attribute__label">
+            {props.editableLabel}
+        </div>
+        <div class="gdpr-cookieconsent-cookie-attribute__value">
+            {props.editableValue}
+        </div>
+    </div>
+    `
+}

@@ -1,5 +1,4 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Component.Switch) < prototype(Neos.Fusion:Component) {
-
     checked = false
     locked = false
     value = ''

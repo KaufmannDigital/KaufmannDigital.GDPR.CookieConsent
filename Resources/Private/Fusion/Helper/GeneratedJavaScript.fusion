@@ -18,6 +18,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript) < proto
     }
 
     content = Neos.Fusion:Join {
+        object = 'var KD_GDPR_CC = KD_GDPR_CC || {};'
         consentLog = ${'KD_GDPR_CC.consentLogEnabled = ' + consentLogEnabled + ';'}
         trackChoiceUrl = ${"KD_GDPR_CC.trackChoiceUrl = '" + trackChoiceUrl + "';"}
         generatedJsUrl = ${"KD_GDPR_CC.generatedJsUrl = '" + generatedJsUrl + "';"}

@@ -1,0 +1,39 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Neos.Neos:ContentComponent) {
+
+    editableHeadline = Neos.Neos:Editable {
+        property = 'headline'
+    }
+
+    editableDescription = Neos.Neos:Editable {
+        property = 'description'
+    }
+
+    cookieContentCollection = Neos.Neos:ContentCollection {
+        attributes.class = 'gdpr-cookieconsent-setting-group__cookies'
+        nodePath = 'cookies'
+    }
+
+    identifier = ${q(node).property('identifier')}
+    detailsAvailable = ${q(node).children('cookies').children().count() > 0 || node.context.inBackend}
+
+    labels = Neos.Fusion:DataStructure {
+        hideDetails = ${I18n.translate('KaufmannDigital.GDPR.CookieConsent:NodeTypes.Content.CookieGroup:hideDetails')}
+    }
+
+    renderer = afx`
+        <div class="gdpr-cookieconsent-setting-group">
+            <div class="gdpr-cookieconsent-setting-group__headline">
+                {props.editableHeadline}
+            </div>
+            <div class="gdpr-cookieconsent-setting-group__switch">
+                <KaufmannDigital.GDPR.CookieConsent:Component.Switch value={props.identifier} />
+            </div>
+            <div class="gdpr-cookieconsent-setting-group__description">
+                {props.editableDescription}
+            </div>
+            {props.cookieContentCollection}
+            <a class="gdpr-cookieconsent-setting-group__details-open" @if.available={props.detailsAvailable} >Details&nbsp;></a>
+            <a class="gdpr-cookieconsent-setting-group__details-close" @if.available={props.detailsAvailable} >{props.labels.hideDetails}</a>
+        </div>
+    `
+}

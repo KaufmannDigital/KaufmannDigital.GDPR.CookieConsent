@@ -72,10 +72,12 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                         <a id="gdpr-cc-btn-individual-settings-disable">{props.labels.closeIndividualSettingsLabel}</a>
                     </div>
                 </div>
-
-                <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedStyles />
-                <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript />
+                <div class="gdpr-cookieconsent-settings__close">
+                    <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseButton/>
+                </div>
             </div>
+            <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedStyles/>
+            <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript/>
         </div>
     `
 
