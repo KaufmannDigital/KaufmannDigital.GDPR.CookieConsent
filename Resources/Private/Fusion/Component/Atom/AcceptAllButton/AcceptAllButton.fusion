@@ -1,0 +1,7 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton) < prototype(Neos.Fusion:Component) {
+    label = 'Accept all'
+
+    renderer = afx`
+        <button id="gdpr-cc-btn-accept" class="button">{props.label}</button>
+    `
+}

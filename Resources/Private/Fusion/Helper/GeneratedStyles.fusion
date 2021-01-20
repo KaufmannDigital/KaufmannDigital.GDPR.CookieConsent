@@ -1,0 +1,13 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedStyles) < prototype(Neos.Fusion:Tag) {
+    tagName = 'style'
+    content = Neos.Fusion:Join {
+        packageFile = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/Styles/Main.css')}
+        customFile = ${File.readFile(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.customCSSFilepath'))}
+
+        siteFile = ${File.readFile(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.siteStyles.' + site.context.currentSite.nodeName + '.customCSSFilepath'))}
+        siteFile.@if.isSet = ${String.length(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.siteStyles.' + site.context.currentSite.nodeName + '.customCSSFilepath'))}
+
+        customFile.@if.noSiteFile = ${!this.siteFile}
+        customFile.@if.isSet = ${String.length(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.customCSSFilepath'))}
+    }
+}

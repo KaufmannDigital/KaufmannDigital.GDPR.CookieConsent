@@ -1,0 +1,93 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype(Neos.Neos:ContentComponent) {
+    editableHeadline = Neos.Neos:Editable {
+        property = 'headline'
+    }
+
+    editableMainDescription = Neos.Neos:Editable {
+        property = 'mainDescription'
+    }
+
+    editableIndividualSettingsDescription = Neos.Neos:Editable {
+        property = 'individualSettingsDescription'
+    }
+
+    individualSettings = Neos.Neos:ContentCollection {
+        nodePath = 'settingElements'
+        @cache.mode = 'embed'
+    }
+
+    imprintLink = ${q(node).property('imprintLink')}
+    imprintLink.@process.convertUris = Neos.Neos:ConvertUris {
+        absolute = true
+    }
+    dataProtectionPolicyLink = ${q(node).property('dataProtectionPolicyLink')}
+    dataProtectionPolicyLink.@process.convertUris = Neos.Neos:ConvertUris {
+        absolute = true
+    }
+
+    hasNecessaryGroup = ${q(node).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.NecessarySettingGroup]').count() > 0}
+
+    labels = Neos.Fusion:RawArray {
+        acceptAll = ${q(node).property('acceptAllButtonLabel')}
+        save = ${q(node).property('saveButtonLabel')}
+        saveButtonLabel = ${q(node).property('saveButtonLabel')}
+        acceptNecessaryCookiesLabel = ${q(node).property('acceptNecessaryCookiesLabel')}
+        imprintLabel= ${q(node).property('imprintLabel')}
+        dataProtectionPolicyLabel = ${q(node).property('dataProtectionPolicyLabel')}
+        openIndividualSettingsLabel = ${q(node).property('openIndividualSettingsLabel')}
+        closeIndividualSettingsLabel = ${q(node).property('closeIndividualSettingsLabel')}
+    }
+
+    renderer = afx`
+        <div>
+            <div class="gdpr-cookieconsent-overlay"></div>
+            <div class="gdpr-cookieconsent-settings">
+                <div class="gdpr-cookieconsent-settings__content">
+                    <div class="gdpr-cookieconsent-settings__content__info">
+                        <h2>{props.editableHeadline}</h2>
+                        <div class="gdpr-cookieconsent-settings__content__info__main-description">
+                            {props.editableMainDescription}
+                        </div>
+                        <div class="gdpr-cookieconsent-settings__content__info__settings-description">
+                            {props.editableIndividualSettingsDescription}
+                        </div>
+                    </div>
+                    <div class="gdpr-cookieconsent-settings__content__cta">
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton label={props.labels.acceptAll} />
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton label={props.labels.save} />
+                        <a id="gdpr-cc-btn-accept-necessary" @if.necessaryGroup={props.hasNecessaryGroup}>{props.labels.acceptNecessaryCookiesLabel}</a>
+                    </div>
+                    <div class="gdpr-cookieconsent-settings__content__settings">
+                        {props.individualSettings}
+                    </div>
+
+                    <div class="gdpr-cookieconsent-settings__content__links">
+                        <a href={props.imprintLink}>{props.labels.imprintLabel}</a>
+                        <span> | </span>
+                        <a href={props.dataProtectionPolicyLink}>{props.labels.dataProtectionPolicyLabel}</a>
+                    </div>
+
+                    <div class="gdpr-cookieconsent-settings__content__individual-switch">
+                        <a id="gdpr-cc-btn-individual-settings-enable">{props.labels.openIndividualSettingsLabel}</a>
+                        <a id="gdpr-cc-btn-individual-settings-disable">{props.labels.closeIndividualSettingsLabel}</a>
+                    </div>
+                </div>
+
+                <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedStyles />
+                <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript />
+            </div>
+        </div>
+    `
+
+    @cache {
+        #TODO: Check, if needed. Since we are doing the individual settings in JS now, we could cache it.
+        mode = 'uncached'
+
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'site'
+            4 = 'cookieValue'
+        }
+    }
+}
