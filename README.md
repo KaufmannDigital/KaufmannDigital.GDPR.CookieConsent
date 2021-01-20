@@ -10,6 +10,7 @@ Composer-Version | Neos-Compatibility | Maintenance
 `^1.0` | < 5.0  | ⛔
 `^2.0` | >= 5.0 | 🐛
 `^3.0` | >= 5.0 | 🐛 ✨
+`^4.0` | >= 5.0 | 🐛 ✨
 
 ## Installation
 It's easier than you probably think!  
