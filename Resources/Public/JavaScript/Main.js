@@ -162,14 +162,6 @@ function initializeCookieConsent() {
         })
     });
 
-    [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-settings__content__links a')).forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            acceptNecessaryCookies(kd_gdpr_cc_userid);
-            return true;
-        });
-    });
-
-
     var cookie = decodeCookie();
     var consents = cookie && cookie.consents ? cookie.consents : [];
 
