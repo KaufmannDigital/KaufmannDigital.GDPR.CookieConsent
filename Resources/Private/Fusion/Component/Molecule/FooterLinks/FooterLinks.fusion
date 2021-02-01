@@ -1,0 +1,28 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Component.Molecule.FooterLinks) < prototype(Neos.Fusion:Component) {
+    settingsNode = null
+
+    imprintLink = ${q(this.settingsNode).property('imprintLink')}
+    imprintLink.@process.convertUris = Neos.Neos:ConvertUris {
+        absolute = true
+    }
+
+    dataProtectionPolicyLink = ${q(this.settingsNode).property('dataProtectionPolicyLink')}
+    dataProtectionPolicyLink.@process.convertUris = Neos.Neos:ConvertUris {
+        absolute = true
+    }
+
+    imprintLabel= ${q(this.settingsNode).property('imprintLabel')}
+    dataProtectionPolicyLabel = ${q(this.settingsNode).property('dataProtectionPolicyLabel')}
+
+    showImprint = ${this.imprintLink && this.imprintLabel}
+    showDataProtectionPolicy= ${this.dataProtectionPolicyLink && this.dataProtectionPolicyLabel}
+    showPipe = ${this.showImprint && this.showDataProtectionPolicy}
+
+    renderer = afx`
+        <div class="gdpr-cookieconsent-settings__content__links">
+            <a href={props.imprintLink} @if.condition={props.showImprint}>{props.imprintLabel}</a>
+            <span @if.condition={props.showPipe}> | </span>
+            <a href={props.dataProtectionPolicyLink} @if.condition={props.showDataProtectionPolicy}>{props.dataProtectionPolicyLabel}</a>
+        </div>
+    `
+}

@@ -16,15 +16,6 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         @cache.mode = 'embed'
     }
 
-    imprintLink = ${q(node).property('imprintLink')}
-    imprintLink.@process.convertUris = Neos.Neos:ConvertUris {
-        absolute = true
-    }
-    dataProtectionPolicyLink = ${q(node).property('dataProtectionPolicyLink')}
-    dataProtectionPolicyLink.@process.convertUris = Neos.Neos:ConvertUris {
-        absolute = true
-    }
-
     hasNecessaryGroup = ${q(node).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.NecessarySettingGroup]').count() > 0}
 
     labels = Neos.Fusion:RawArray {
@@ -32,8 +23,6 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         save = ${q(node).property('saveButtonLabel')}
         saveButtonLabel = ${q(node).property('saveButtonLabel')}
         acceptNecessaryCookiesLabel = ${q(node).property('acceptNecessaryCookiesLabel')}
-        imprintLabel= ${q(node).property('imprintLabel')}
-        dataProtectionPolicyLabel = ${q(node).property('dataProtectionPolicyLabel')}
         openIndividualSettingsLabel = ${q(node).property('openIndividualSettingsLabel')}
         closeIndividualSettingsLabel = ${q(node).property('closeIndividualSettingsLabel')}
     }
@@ -60,13 +49,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                     <div class="gdpr-cookieconsent-settings__content__settings">
                         {props.individualSettings}
                     </div>
-
-                    <div class="gdpr-cookieconsent-settings__content__links">
-                        <a href={props.imprintLink}>{props.labels.imprintLabel}</a>
-                        <span> | </span>
-                        <a href={props.dataProtectionPolicyLink}>{props.labels.dataProtectionPolicyLabel}</a>
-                    </div>
-
+                    <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.FooterLinks settingsNode={node} />
                     <div class="gdpr-cookieconsent-settings__content__individual-switch">
                         <a id="gdpr-cc-btn-individual-settings-enable">{props.labels.openIndividualSettingsLabel}</a>
                         <a id="gdpr-cc-btn-individual-settings-disable">{props.labels.closeIndividualSettingsLabel}</a>
