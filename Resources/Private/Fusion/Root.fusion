@@ -9,7 +9,7 @@ prototype(Neos.Neos:Page) {
         package = 'KaufmannDigital.GDPR.CookieConsent'
         controller = 'Api'
         action = 'renderCookieSettings'
-        arguments.dimensions = ${site.context.dimensions}
+        arguments.siteNode = ${site.contextPath}
         absolute = true
     }
     @context.dimensionsIdentifier = Neos.Fusion:Value {

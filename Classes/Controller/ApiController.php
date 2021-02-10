@@ -52,12 +52,16 @@ class ApiController extends RestController
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');
     }
 
-
-    public function renderCookieSettingsAction(array $dimensions = [])
+    /**
+     * @param NodeInterface $siteNode
+     * @throws \Neos\ContentRepository\Exception\NodeException
+     * @throws \Neos\Eel\Exception
+     */
+    public function renderCookieSettingsAction(NodeInterface $siteNode)
     {
         $this->view->setVariablesToRender(['html', 'needsRenew']);
 
-        $q = new FlowQuery([$this->contextFactory->create(['dimensions' => $dimensions])->getRootNode()]);
+        $q = new FlowQuery([$siteNode]);
         $node = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
 
         //Reply with empty string, if there is no configured CookieConsent
