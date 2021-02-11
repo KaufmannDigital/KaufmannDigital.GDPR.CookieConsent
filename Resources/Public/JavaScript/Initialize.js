@@ -31,7 +31,9 @@ if (document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
     );
 
     var versionDate = new Date(KD_GDPR_CC.versionTimestamp);
-    var cookieConsentDate = new Date(cookieObject.consentDate);
+    var cookieConsentDate = cookieObject.consentDates[KD_GDPR_CC.dimensionsIdentifier]
+        ? new Date(cookieObject.consentDates[KD_GDPR_CC.dimensionsIdentifier])
+        : new Date(cookieObject.consentDate);
 
     if (versionDate > cookieConsentDate && window.neos === undefined) {
         loadCookiebannerHtml();

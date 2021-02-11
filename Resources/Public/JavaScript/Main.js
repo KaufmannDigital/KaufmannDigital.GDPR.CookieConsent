@@ -192,18 +192,22 @@ function dispatchEventsForCookies(inputs) {
 
 function saveConsentToCookie(inputs, userId) {
     var cookie = decodeCookie();
+    var currentDate = new Date();
+    var expireDate = new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), currentDate.getDate());
+
     var consents = cookie && cookie.consents ? cookie.consents : {};
     consents[KD_GDPR_CC.dimensionsIdentifier] = [];
     [].slice.call(inputs).forEach(function(input) {
         consents[KD_GDPR_CC.dimensionsIdentifier].push(input.value);
     });
 
-    var currentDate = new Date();
-    var expireDate = new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), currentDate.getDate());
+    var consentDates = cookie && cookie.consentDates ? cookie.consentDates : {};
+    consentDates[KD_GDPR_CC.dimensionsIdentifier] = currentDate.toUTCString();
 
     var cookieData = {
         userId: userId,
         consents: consents,
+        consentDates: consentDates,
         consentDate: currentDate.toUTCString(),
         expireDate: expireDate.toUTCString()
     };

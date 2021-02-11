@@ -11,6 +11,7 @@ prototype(Neos.Neos:Page) {
         arguments.siteNode = ${site.contextPath}
         absolute = true
     }
+
     @context.dimensionsIdentifier = Neos.Fusion:Value {
         consentDimensions = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.consentDimensions')}
         dimensionValues = ${Array.filter(site.context.targetDimensions, (value,key) => Array.indexOf(this.consentDimensions, key) >= 0)}
