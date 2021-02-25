@@ -114,11 +114,13 @@ function initializeCookieConsent() {
         });
     }
 
-    btnCloseCookieSettings.addEventListener('click', function(e) {
-       e.preventDefault();
-       cookieSettingsContainer.remove();
-       darkOverlay.remove();
-    });
+    if (btnCloseCookieSettings) {
+        btnCloseCookieSettings.addEventListener('click', function (e) {
+            e.preventDefault();
+            cookieSettingsContainer.remove();
+            darkOverlay.remove();
+        });
+    }
 
     [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details-open')).forEach(function(detailsLink) {
         detailsLink.addEventListener('click', function() {

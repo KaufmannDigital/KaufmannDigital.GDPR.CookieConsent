@@ -39,7 +39,7 @@ if (document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
         loadCookiebannerHtml();
     }
 
-    if (!cookieObject.consents[KD_GDPR_CC.dimensionsIdentifier]) {
+    if (!Array.isArray(cookieObject.consents) && !cookieObject.consents[KD_GDPR_CC.dimensionsIdentifier]) {
         loadCookiebannerHtml();
     }
 
