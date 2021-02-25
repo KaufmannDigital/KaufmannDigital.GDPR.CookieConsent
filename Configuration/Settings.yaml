@@ -28,6 +28,7 @@ KaufmannDigital:
       consentLogEnabled: false
       consentDimensions: []
       cookieName: 'KD_GDPR_CC'
+      cookieDomainName: null
 # See README.md
 #        - language
 #        - country

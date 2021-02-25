@@ -18,6 +18,7 @@ prototype(Neos.Neos:Page) {
         value = ${Array.join(this.dimensionValues, '_')}
     }
     @context.cookieName = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieName')}
+    @context.cookieDomainName = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieDomainName')}
 
 
 
@@ -27,6 +28,7 @@ prototype(Neos.Neos:Page) {
             var KD_GDPR_CC = {
                 apiUrl: '" + apiUrl + "',
                 cookieName: '" + cookieName +"',
+                cookieDomainName: '" + cookieDomainName +"',
                 versionTimestamp: " + versionDate.timestamp * 1000 + ",
                 dimensionsIdentifier: '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "'
             };
