@@ -18,11 +18,6 @@
     });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
-document.addEventListener("DOMContentLoaded", function() {
-    initializeCookieConsent();
-});
-
-
 function initializeCookieConsent() {
 
     var kd_gdpr_cc_userid;
@@ -261,3 +256,7 @@ function decodeCookie() {
         return JSON.parse(decodeURI(cookieValue));
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    initializeCookieConsent();
+});
