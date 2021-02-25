@@ -18,9 +18,9 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript) < proto
     }
 
     content = Neos.Fusion:Join {
-        consentLog = ${'consentLogEnabled = ' + consentLogEnabled + ';'}
-        trackChoiceUrl = ${"trackChoiceUrl = '" + trackChoiceUrl + "';"}
-        generatedJsUrl = ${"generatedJsUrl = '" + generatedJsUrl + "';"}
+        consentLog = ${"var consentLogEnabled =" + consentLogEnabled + ";"}
+        trackChoiceUrl = ${"var trackChoiceUrl = '" + trackChoiceUrl + "';"}
+        generatedJsUrl = ${"var generatedJsUrl = '" + generatedJsUrl + "';"}
         mainScript = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/JavaScript/Main.js')}
     }
 }

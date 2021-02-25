@@ -29,6 +29,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
 
     renderer = afx`
         <div>
+            <KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings />
             <div class="gdpr-cookieconsent-overlay"></div>
             <div class="gdpr-cookieconsent-settings">
                 <div class="gdpr-cookieconsent-settings__content">

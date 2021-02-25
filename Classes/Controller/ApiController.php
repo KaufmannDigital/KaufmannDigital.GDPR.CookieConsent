@@ -45,10 +45,10 @@ class ApiController extends RestController
     public function initializeAction()
     {
         parent::initializeAction();
-
-        //TODO: Make CORS configurable in settings
-        //$this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', $this->request->getHttpRequest()->getHeader('Referer'));
-        //$this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
+        #TODO: Make configurable
+        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
+        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
+        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');
     }
 
@@ -76,6 +76,7 @@ class ApiController extends RestController
         $view->setFusionPath('cookieConsentSettings');
         $view->assign('value', $node);
         $view->assign('node', $node);
+        $view->assign('site', $siteNode);
         $this->view->assign('html', $view->render());
 
 
