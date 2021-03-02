@@ -120,9 +120,16 @@ class ApiController extends RestController
             if ($logEntry instanceof ConsentLogEntry) {
                 $this->consentLogRepository->remove($logEntry);
             }
-            foreach ($choice['consents'] as $consentIdentifier) {
-                $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $consentIdentifier, $userAgent);
-                $this->consentLogRepository->add($consentLogEntry);
+            foreach ($choice['consents'] as $dimension => $consentIdentifier) {
+                if (is_array($consentIdentifier)) {
+                    foreach ($consentIdentifier as $singleConsentIdentifier) {
+                        $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $dimension . '#'  .$singleConsentIdentifier, $userAgent);
+                        $this->consentLogRepository->add($consentLogEntry);
+                    }
+                } else {
+                    $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $consentIdentifier, $userAgent);
+                    $this->consentLogRepository->add($consentLogEntry);
+                }
             }
         }
 
