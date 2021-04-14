@@ -1,4 +1,5 @@
 function loadCookiebannerHtml() {
+    if (document.body.classList.contains('neos-backend')) return;
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('load', function() {
         var cookieBar = document.createElement('div');

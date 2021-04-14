@@ -12,7 +12,6 @@ prototype(Neos.Neos:Page) {
         tagName = 'script'
         content = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/JavaScript/Initialize.js')}
 
-        @if.condition = ${node.context.inBackend == false}
         @position = 'before closingBodyTag'
     }
 
