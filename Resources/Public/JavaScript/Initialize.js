@@ -38,9 +38,7 @@ if (document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
 
     if (versionDate > cookieConsentDate && window.neos === undefined) {
         loadCookiebannerHtml();
-    }
-
-    if (!Array.isArray(cookieObject.consents) && !cookieObject.consents[KD_GDPR_CC.dimensionsIdentifier]) {
+    } else if (!Array.isArray(cookieObject.consents) && !cookieObject.consents[KD_GDPR_CC.dimensionsIdentifier]) {
         loadCookiebannerHtml();
     }
 
