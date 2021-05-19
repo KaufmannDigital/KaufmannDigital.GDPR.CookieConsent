@@ -110,7 +110,7 @@ class JavaScriptController extends RestController
 
 
         } catch (\Exception $e) {
-            $this->response->setComponentParameter(SetHeaderComponent::class, 'Content-Type', 'text/javascript;charset=UTF-8');
+            $this->response->setContentType('text/javascript');
             $this->response->setContent('');
         }
     }
@@ -121,7 +121,8 @@ class JavaScriptController extends RestController
      */
     public function downloadGeneratedJavaScriptAction(string $hash)
     {
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Content-Type', 'text/javascript;charset=UTF-8');
+        $this->response->setContentType('text/javascript');
+
 
         if ($this->cache->has($hash) !== false) {
             $this->view->setOption('templateSource', $this->cache->get($hash));
