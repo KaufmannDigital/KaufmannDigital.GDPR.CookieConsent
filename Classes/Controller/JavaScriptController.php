@@ -73,16 +73,17 @@ class JavaScriptController extends RestController
             );
 
             $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true);
-
             $consents = isset($cookie['consents'][$dimensionIdentifier]) ? $cookie['consents'][$dimensionIdentifier] : $cookie['consents']['default'] ?? $cookie['consents'];
-            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents) . $dimensionIdentifier);
+            $siteNode = $this->contextFactory->create(['dimensions' => $dimensions])->getCurrentSiteNode();
+
+            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents) . $dimensionIdentifier . $siteNode->getIdentifier());
 
             if ($this->cache->has($cacheIdentifier)) {
                 $this->redirect('downloadGeneratedJavaScript', null, null, ['hash' => $cacheIdentifier]);
                 return;
             }
 
-            $q = new FlowQuery([$this->contextFactory->create(['dimensions' => $dimensions])->getCurrentSiteNode()]);
+            $q = new FlowQuery([$siteNode]);
             $cookieNodes = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.Cookie][javaScriptCode != ""]')->sort('priority', 'DESC')->get();
 
             $javaScript = '';
