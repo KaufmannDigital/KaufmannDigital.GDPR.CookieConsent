@@ -123,3 +123,22 @@
         label: i18n
         inspector:
           group: cookieSettings
+    cookieTtl:
+      type: integer
+      defaultValue: 31536000
+      ui:
+        label: i18n
+        help:
+          message: i18n
+        inspector:
+          group: cookieSettings
+    closeButtonEnabled:
+      type: boolean
+      defaultValue: false
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        help:
+          message: i18n
+        inspector:
+          group: cookieSettings

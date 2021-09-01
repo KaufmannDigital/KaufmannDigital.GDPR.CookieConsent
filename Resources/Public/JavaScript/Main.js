@@ -190,7 +190,11 @@ function dispatchEventsForCookies(inputs) {
 function saveConsentToCookie(inputs, userId) {
     var cookie = decodeCookie();
     var currentDate = new Date();
-    var expireDate = new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), currentDate.getDate());
+    if (KD_GDPR_CC.cookieTtl && KD_GDPR_CC.cookieTtl > 0) {
+        expireDate = new Date(currentDate.getTime() + KD_GDPR_CC.cookieTtl);
+    } else {
+        var expireDate = new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), currentDate.getDate());
+    }
 
     var consents = cookie && cookie.consents ? cookie.consents : {};
     consents[KD_GDPR_CC.dimensionsIdentifier] = [];
@@ -201,15 +205,19 @@ function saveConsentToCookie(inputs, userId) {
     var consentDates = cookie && cookie.consentDates ? cookie.consentDates : {};
     consentDates[KD_GDPR_CC.dimensionsIdentifier] = currentDate.toUTCString();
 
+    var expireDates = cookie && cookie.expireDates ? cookie.expireDates : {};
+    expireDates[KD_GDPR_CC.dimensionsIdentifier] = expireDate.toUTCString();
+
     var cookieData = {
         userId: userId,
         consents: consents,
         consentDates: consentDates,
+        expireDates: expireDates,
         consentDate: currentDate.toUTCString(),
         expireDate: expireDate.toUTCString()
     };
 
-    var cookieParams = encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + "; path=/; " + (KD_GDPR_CC.cookieDomainName ? ('domain=' + KD_GDPR_CC.cookieDomainName + ';') : '') +" Secure;";
+    var cookieParams = encodeURI(JSON.stringify(cookieData)) + "; expires=" + new Date(currentDate.getTime() + 315360000000).toUTCString() + "; path=/; " + (KD_GDPR_CC.cookieDomainName ? ('domain=' + KD_GDPR_CC.cookieDomainName + ';') : '') +" Secure;";
     document.cookie = KD_GDPR_CC.cookieName + "=" + cookieParams;
 
     window.dataLayer = window.dataLayer || [];

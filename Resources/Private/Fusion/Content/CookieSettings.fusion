@@ -17,6 +17,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
     }
 
     hasNecessaryGroup = ${q(node).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.NecessarySettingGroup]').count() > 0}
+    closeButtonEnabled = ${q(node).property('closeButtonEnabled')}
 
     labels = Neos.Fusion:RawArray {
         acceptAll = ${q(node).property('acceptAllButtonLabel')}
@@ -57,7 +58,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                     </div>
                 </div>
                 <div class="gdpr-cookieconsent-settings__close">
-                    <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseButton/>
+                    <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseButton @if.condition={props.closeButtonEnabled} />
                 </div>
             </div>
             <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedStyles/>

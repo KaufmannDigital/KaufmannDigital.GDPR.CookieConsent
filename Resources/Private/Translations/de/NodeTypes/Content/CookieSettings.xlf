@@ -69,6 +69,25 @@
 				<source>Version date</source>
 				<target state="final">Versions-Datum</target>
 			</trans-unit>
+
+            <trans-unit id="properties.cookieTtl" xml:space="preserve">
+				<source>TTL (Decision time in seconds)</source>
+                <target state="final">TTL (Speicherdauer der Entscheidung in Sekunden)</target>
+			</trans-unit>
+
+            <trans-unit id="properties.cookieTtl.ui.help.message" xml:space="preserve">
+				<source>Number of seconds until cookie settings are displayed and confirmed again. Example values are: 86400 (1 day), 604800 (1 week), 2592000 (30 days), 31536000 (1 year)</source>
+                <target state="final">Anzahl der Sekunden, bis die Cookie-Einstellungen erneut angezeigt und bestätigt werden. Beispielwerte sind: 86400 (1 Tag), 604800 (1 Woche), 2592000 (30 Tage), 31536000 (1 Jahr)</target>
+			</trans-unit>
+
+            <trans-unit id="properties.closeButtonEnabled" xml:space="preserve">
+				<source>Show close-button</source>
+                <target state="final">Zeige X (zum schließen)</target>
+			</trans-unit>
+
+            <trans-unit id="properties.closeButtonEnabled.ui.help.message" xml:space="preserve">
+				<source>Zeigt ein "X" in der oberen rechten Ecke, falls aktiviert. Ein klick auf dieses X schließt den Banner ohne Entscheidung. Er erscheint beim nächsten Seitenaufruf erneut.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

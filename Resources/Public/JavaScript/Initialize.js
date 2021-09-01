@@ -18,7 +18,7 @@ function loadCookiebannerHtml() {
     xhr.send();
 }
 
-if (document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
+if (KD_GDPR_CC.nodeTypeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
     /*Cookie set*/
     window.dataLayer = window.dataLayer || [];
     var cookieObject = JSON.parse(
@@ -42,13 +42,19 @@ if (document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
         loadCookiebannerHtml();
     }
 
+    if (!cookieObject.expireDates || !cookieObject.expireDates[KD_GDPR_CC.dimensionsIdentifier]) {
+        loadCookiebannerHtml();
+    } else if (new Date(cookieObject.expireDates[KD_GDPR_CC.dimensionsIdentifier]) < new Date()) {
+        loadCookiebannerHtml();
+    }
+
     window.dataLayer.push({
         event: 'KD_GDPR_CC_consent',
         KD_GDPR_CC: {
             consents: cookieObject.consents,
         },
     });
-} else if (document.getElementsByClassName('gdpr-cookieconsent-settings').length === 0 && window.neos === undefined) {
+} else if (KD_GDPR_CC.nodeTypeDisabled === false && document.getElementsByClassName('gdpr-cookieconsent-settings').length === 0 && window.neos === undefined) {
     /*No Cookie set, not in backend & not on cookie page*/
     loadCookiebannerHtml();
 }
