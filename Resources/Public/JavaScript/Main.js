@@ -71,11 +71,11 @@ function initializeCookieConsent() {
     btnAcceptAll.addEventListener('click', function() {
         var selectedInputs = document.querySelectorAll('.gdpr-cookieconsent-switch input'); //Select all inputs
 
-        //Dispatch events
-        dispatchEventsForCookies(selectedInputs);
-
         //Save to cookie
         saveConsentToCookie(selectedInputs, kd_gdpr_cc_userid);
+
+        //Dispatch events
+        dispatchEventsForCookies(selectedInputs);
 
         //Remove CookieConsent from HTML
         cookieSettingsContainer.remove();
@@ -86,11 +86,11 @@ function initializeCookieConsent() {
     btnSaveSettings.addEventListener('click', function() {
         var selectedInputs = document.querySelectorAll('.gdpr-cookieconsent-switch input:checked');
 
-        //Dispatch events
-        dispatchEventsForCookies(selectedInputs);
-
         //Save to cookie
         saveConsentToCookie(selectedInputs, kd_gdpr_cc_userid);
+
+        //Dispatch events
+        dispatchEventsForCookies(selectedInputs);
 
         //Remove CookieConsent from HTML
         cookieSettingsContainer.remove();
@@ -234,12 +234,11 @@ function acceptNecessaryCookies(userId) {
     var necessaryGroupInputs = document.querySelectorAll('.gdpr-cookieconsent-setting-group--necessary .gdpr-cookieconsent-setting-group__switch input');
     var necessaryInputs = document.querySelectorAll('.gdpr-cookieconsent-setting-group--necessary .gdpr-cookieconsent-cookie input');
 
+    //Save to cookie
+    saveConsentToCookie([].slice.call(necessaryGroupInputs).concat([].slice.call(necessaryInputs)), userId);
 
     //Dispatch events
     dispatchEventsForCookies([].slice.call(necessaryGroupInputs).concat([].slice.call(necessaryInputs)), userId);
-
-    //Save to cookie
-    saveConsentToCookie([].slice.call(necessaryGroupInputs).concat([].slice.call(necessaryInputs)), userId);
 }
 
 function loadGeneratedJavaScript() {
