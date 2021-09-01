@@ -1,5 +1,5 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Content.NecessarySettingGroup) < prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) {
-    renderer.renderer.attributes.class = 'gdpr-cookieconsent-setting-group gdpr-cookieconsent-setting-group--necessary'
+    groupClasses.necessary = 'gdpr-cookieconsent-setting-group--necessary'
 
     prototype(KaufmannDigital.GDPR.CookieConsent:Component.Switch) {
         checked = true
