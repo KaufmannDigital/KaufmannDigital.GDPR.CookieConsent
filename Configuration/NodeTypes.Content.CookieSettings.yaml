@@ -125,7 +125,7 @@
           group: cookieSettings
     decisionTtl:
       type: integer
-      defaultValue: 31536000
+      defaultValue: 0
       ui:
         label: i18n
         help:
