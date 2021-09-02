@@ -3,7 +3,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
 
     cookieSettingsNode = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').get(0)}
     @context.versionDate = ${q(this.cookieSettingsNode).property('versionDate')}
-    @context.cookieTtl = ${q(this.cookieSettingsNode).property('cookieTtl')}
+    @context.decisionTtl = ${q(this.cookieSettingsNode).property('decisionTtl')}
 
     @context.apiUrl = Neos.Fusion:UriBuilder {
         package = 'KaufmannDigital.GDPR.CookieConsent'
@@ -29,7 +29,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
                 cookieName: '" + cookieName +"',
                 cookieDomainName: '" + cookieDomainName +"',
                 versionTimestamp: " + versionDate.timestamp * 1000 + ",
-                cookieTtl: " + (cookieTtl ? (cookieTtl * 1000) : 0) + ",
+                decisionTtl: " + (decisionTtl ? (decisionTtl * 1000) : 0) + ",
                 dimensionsIdentifier: '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "',
                 nodeTypeDisabled: " + (nodeTypeDisabled ? 'true' : 'false') +"
             };

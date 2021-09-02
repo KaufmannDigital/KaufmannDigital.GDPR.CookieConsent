@@ -123,7 +123,7 @@
         label: i18n
         inspector:
           group: cookieSettings
-    cookieTtl:
+    decisionTtl:
       type: integer
       defaultValue: 31536000
       ui:

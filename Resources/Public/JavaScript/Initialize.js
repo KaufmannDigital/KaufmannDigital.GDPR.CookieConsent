@@ -1,4 +1,4 @@
-function loadCookiebannerHtml() {
+function loadCookiebannerHtml(openSettings = false) {
     if (document.body.classList.contains('neos-backend')) return;
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('load', function() {
@@ -10,7 +10,7 @@ function loadCookiebannerHtml() {
             eval(scriptTags[n].innerHTML);
         }
         if (typeof initializeCookieConsent === 'function') {
-            initializeCookieConsent();
+            initializeCookieConsent(openSettings);
         }
     });
 
@@ -42,11 +42,12 @@ if (KD_GDPR_CC.nodeTypeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.
         loadCookiebannerHtml();
     }
 
-    if (!cookieObject.expireDates || !cookieObject.expireDates[KD_GDPR_CC.dimensionsIdentifier]) {
-        loadCookiebannerHtml();
-    } else if (new Date(cookieObject.expireDates[KD_GDPR_CC.dimensionsIdentifier]) < new Date()) {
-        loadCookiebannerHtml();
+    //Re-Open Cookie-Consent, if TTL is expired
+    var decisionExpiry = cookieConsentDate.getTime() + KD_GDPR_CC.decisionTtl;
+    if (KD_GDPR_CC.decisionTtl > 0 && decisionExpiry < new Date()) {
+        loadCookiebannerHtml(true);
     }
+
 
     window.dataLayer.push({
         event: 'KD_GDPR_CC_consent',

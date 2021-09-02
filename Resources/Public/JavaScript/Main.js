@@ -18,7 +18,7 @@
     });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
-function initializeCookieConsent() {
+function initializeCookieConsent(openSettings = false) {
 
     var kd_gdpr_cc_userid;
     var cookieSettingsContainer = document.querySelector('.gdpr-cookieconsent-settings');
@@ -56,6 +56,10 @@ function initializeCookieConsent() {
         btnAcceptAll.style.display = 'none';
         btnSaveSettings.style.display = 'block';
     });
+    if (openSettings) {
+        let clickEvent = new MouseEvent('click');
+        btnIndividualSettingsEnable.dispatchEvent(clickEvent);
+    }
 
     btnIndividualSettingsDisable.addEventListener('click', function() {
         individualSettingsContainer.style.display = 'none';
@@ -190,8 +194,8 @@ function dispatchEventsForCookies(inputs) {
 function saveConsentToCookie(inputs, userId) {
     var cookie = decodeCookie();
     var currentDate = new Date();
-    if (KD_GDPR_CC.cookieTtl && KD_GDPR_CC.cookieTtl > 0) {
-        expireDate = new Date(currentDate.getTime() + KD_GDPR_CC.cookieTtl);
+    if (KD_GDPR_CC.decisionTtl && KD_GDPR_CC.decisionTtl > 0) {
+        expireDate = new Date(currentDate.getTime() + KD_GDPR_CC.decisionTtl);
     } else {
         var expireDate = new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), currentDate.getDate());
     }
@@ -205,14 +209,11 @@ function saveConsentToCookie(inputs, userId) {
     var consentDates = cookie && cookie.consentDates ? cookie.consentDates : {};
     consentDates[KD_GDPR_CC.dimensionsIdentifier] = currentDate.toUTCString();
 
-    var expireDates = cookie && cookie.expireDates ? cookie.expireDates : {};
-    expireDates[KD_GDPR_CC.dimensionsIdentifier] = expireDate.toUTCString();
 
     var cookieData = {
         userId: userId,
         consents: consents,
         consentDates: consentDates,
-        expireDates: expireDates,
         consentDate: currentDate.toUTCString(),
         expireDate: expireDate.toUTCString()
     };
