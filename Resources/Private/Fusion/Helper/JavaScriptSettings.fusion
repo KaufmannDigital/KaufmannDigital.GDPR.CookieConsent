@@ -1,7 +1,10 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < prototype(Neos.Fusion:Tag) {
     tagName = 'script'
 
-    @context.versionDate = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').first().property("versionDate")}
+    cookieSettingsNode = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').get(0)}
+    @context.versionDate = ${q(this.cookieSettingsNode).property('versionDate')}
+    @context.decisionTtl = ${q(this.cookieSettingsNode).property('decisionTtl')}
+
     @context.apiUrl = Neos.Fusion:UriBuilder {
         package = 'KaufmannDigital.GDPR.CookieConsent'
         controller = 'Api'
@@ -18,13 +21,17 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
     @context.cookieName = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieName')}
     @context.cookieDomainName = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieDomainName')}
 
+    @context.nodeTypeDisabled = ${Array.indexOf(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.excludeDocumentNodeTypes'), documentNode.nodeType.name) >= 0}
+
     content = ${"
             var KD_GDPR_CC = {
                 apiUrl: '" + apiUrl + "',
                 cookieName: '" + cookieName +"',
                 cookieDomainName: '" + cookieDomainName +"',
                 versionTimestamp: " + versionDate.timestamp * 1000 + ",
-                dimensionsIdentifier: '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "'
+                decisionTtl: " + (decisionTtl ? (decisionTtl * 1000) : 0) + ",
+                dimensionsIdentifier: '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "',
+                nodeTypeDisabled: " + (nodeTypeDisabled ? 'true' : 'false') +"
             };
         "}
     @if.condition = ${node.context.inBackend == false}

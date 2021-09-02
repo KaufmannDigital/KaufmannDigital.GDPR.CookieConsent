@@ -57,15 +57,18 @@ class JavaScriptController extends RestController
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Cache-Control', 'max-age=0, private, must-revalidate');
     }
 
+
     public function renderJavaScriptAction(array $dimensions = [])
     {
-
         try {
             $filteredDimensions =
-                array_filter($dimensions, function($key) {
-                    return in_array($key, $this->consentDimensions);
-                },
-                             ARRAY_FILTER_USE_KEY);
+                array_filter(
+                    $dimensions,
+                    function ($key) {
+                        return in_array($key, $this->consentDimensions);
+                    },
+                    ARRAY_FILTER_USE_KEY
+                );
 
             $dimensionIdentifier = implode(
                 '_',
@@ -78,12 +81,24 @@ class JavaScriptController extends RestController
 
             $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents) . $dimensionIdentifier . $siteNode->getIdentifier());
 
+            $q = new FlowQuery([$siteNode]);
+
+            $consentDate = new \DateTime(isset($cookie['consentDates'][$dimensionIdentifier]) ? $cookie['consentDates'][$dimensionIdentifier] : $cookie['consentDate']);
+            $cookieSettings = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
+            $decisionTtl = $cookieSettings->getProperty('decisionTtl') ?? 0;
+            $expireDate = clone $consentDate;
+            $expireDate->add(\DateInterval::createFromDateString($decisionTtl . ' seconds'));
+            if ($expireDate < new \DateTime('now')) {
+                $this->response->setContentType('text/javascript');
+                $this->response->setContent('');
+                return;
+            }
+
             if ($this->cache->has($cacheIdentifier)) {
                 $this->redirect('downloadGeneratedJavaScript', null, null, ['hash' => $cacheIdentifier]);
                 return;
             }
 
-            $q = new FlowQuery([$siteNode]);
             $cookieNodes = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.Cookie][javaScriptCode != ""]')->sort('priority', 'DESC')->get();
 
             $javaScript = '';

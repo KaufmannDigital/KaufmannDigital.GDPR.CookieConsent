@@ -1,0 +1,21 @@
+Neos:
+  Neos:
+    nodeTypes:
+      groups:
+        cookies:
+          position: 300
+          label: 'Cookies'
+          collapsed: true
+    fusion:
+      autoInclude:
+        KaufmannDigital.GDPR.CookieConsent: true
+    userInterface:
+      translation:
+        autoInclude:
+          'KaufmannDigital.GDPR.CookieConsent':
+            - 'NodeTypes/*'
+  Flow:
+    mvc:
+      routes:
+        KaufmannDigital.GDPR.CookieConsent:
+          position: 'before Neos.Neos'

@@ -114,6 +114,11 @@ To do this, you only need to edit the version date. You can find it in the inspe
 After the date has been changed, the banner will be shown again to all visitors, who have submitted the cookie banner before this date. Old settings are used as presets.
 
 
+#### Invalidating user-decisions after time
+Sometimes it is necessary or advantageous to remind the user of his decision and ask him to confirm it again. For this purpose, a TTL for the decision can be set in the backend:  
+![decision-time setting](Documentation/Images/Decision_TTL.png)  
+The unit is seconds. After the set time has expired, the banner appears again with the default settings of the last decision, so the user can easily accept the old decision with just one click.  
+The value `0` (default) disables the repeated display of the banner.
 ### Styling
 #### Custom Banner-Styles
 The banner comes with a few basic-styles for positioning, which are getting included inline. To add your custom styles, just put a CSS-Files somewhere in your Resources-Folder and include it using Settings.yaml:   
