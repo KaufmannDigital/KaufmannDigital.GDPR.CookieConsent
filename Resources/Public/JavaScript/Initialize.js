@@ -18,7 +18,7 @@ function loadCookiebannerHtml(openSettings = false) {
     xhr.send();
 }
 
-if (KD_GDPR_CC.nodeTypeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
+if (KD_GDPR_CC && KD_GDPR_CC.nodeTypeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
     /*Cookie set*/
     window.dataLayer = window.dataLayer || [];
     var cookieObject = JSON.parse(
