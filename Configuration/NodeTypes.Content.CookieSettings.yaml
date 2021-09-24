@@ -142,3 +142,13 @@
           message: i18n
         inspector:
           group: cookieSettings
+    excludedDocuments:
+      type: references
+      ui:
+        inspector:
+          editorOptions:
+            nodeTypes:
+              - 'Neos.Neos:Document'
+          group: cookieSettings
+        label: i18n
+        reloadIfChanged: true
