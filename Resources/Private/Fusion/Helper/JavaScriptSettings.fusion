@@ -31,9 +31,11 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
                 versionTimestamp: " + versionDate.timestamp * 1000 + ",
                 decisionTtl: " + (decisionTtl ? (decisionTtl * 1000) : 0) + ",
                 dimensionsIdentifier: '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "',
-                nodeTypeDisabled: " + (nodeTypeDisabled ? 'true' : 'false') +"
+                nodeTypeDisabled: " + (nodeTypeDisabled ? 'true' : 'false') +",
+                hideBeforeInteraction: " + (hideBeforeInteraction ? 'true' : 'false') +"
             };
         "}
+
     @if.condition = ${node.context.inBackend == false}
 
 }
