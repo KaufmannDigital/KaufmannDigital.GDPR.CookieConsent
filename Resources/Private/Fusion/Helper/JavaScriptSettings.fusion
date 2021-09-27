@@ -22,6 +22,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
     @context.cookieDomainName = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieDomainName')}
 
     @context.nodeTypeDisabled = ${Array.indexOf(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.excludeDocumentNodeTypes'), documentNode.nodeType.name) >= 0}
+    @context.hideBeforeInteraction = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.hideBeforeInteraction')}
 
     content = ${"
             var KD_GDPR_CC = {
