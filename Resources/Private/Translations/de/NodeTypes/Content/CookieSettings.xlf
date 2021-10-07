@@ -88,6 +88,10 @@
             <trans-unit id="properties.closeButtonEnabled.ui.help.message" xml:space="preserve">
 				<source>Zeigt ein "X" in der oberen rechten Ecke, falls aktiviert. Ein klick auf dieses X schließt den Banner ohne Entscheidung. Er erscheint beim nächsten Seitenaufruf erneut.</source>
 			</trans-unit>
+
+			<trans-unit id="properties.excludedDocuments" xml:space="preserve">
+				<source>Exkludierte Dokumente</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
