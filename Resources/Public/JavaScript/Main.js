@@ -214,7 +214,8 @@ function saveConsentToCookie(inputs, userId) {
         expireDate: expireDate.toUTCString()
     };
 
-    document.cookie = KD_GDPR_CC.cookieName + "=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + "; path=/; Secure;";
+    var cookieParams = encodeURI(JSON.stringify(cookieData)) + "; expires=" + new Date(currentDate.getTime() + 315360000000).toUTCString() + "; path=/; " + (KD_GDPR_CC.cookieDomainName ? ('domain=' + KD_GDPR_CC.cookieDomainName + ';') : '') + (location.protocol.substring(0,5) === 'https' ? " Secure;" : '');
+    document.cookie = KD_GDPR_CC.cookieName + "=" + cookieParams;
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
