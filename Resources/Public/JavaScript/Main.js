@@ -208,7 +208,7 @@ function saveConsentToCookie(inputs, userId) {
         expireDate: expireDate.toUTCString()
     };
 
-    document.cookie = "KD_GDPR_CC=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + "; path=/; Secure;";
+    document.cookie = "KD_GDPR_CC=" + encodeURI(JSON.stringify(cookieData)) + "; expires=" + expireDate.toUTCString() + "; path=/;" + (location.protocol.substring(0,5) === 'https' ? " Secure;" : '');
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
