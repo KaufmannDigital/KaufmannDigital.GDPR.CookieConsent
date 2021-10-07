@@ -1,9 +1,31 @@
-function loadCookiebannerHtml(openSettings = false) {
+function loadCookiebannerHtml(openSettings = false, showImmidiatly = false) {
     if (document.body.classList.contains('neos-backend')) return;
+
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('load', function() {
         var cookieBar = document.createElement('div');
         cookieBar.innerHTML = JSON.parse(xhr.responseText).html;
+
+        if (showImmidiatly === false && KD_GDPR_CC.hideBeforeInteraction) {
+            window.addEventListener(
+                'scroll',
+                function () {
+                    appendHtmlAndInitialize(cookieBar);
+                    },
+                {
+                    passive: true,
+                    once: true
+                }
+            );
+        } else {
+            appendHtmlAndInitialize(cookieBar);
+        }
+    });
+
+    xhr.open('GET', KD_GDPR_CC.apiUrl);
+    xhr.send();
+
+    function appendHtmlAndInitialize(cookieBar) {
         document.body.appendChild(cookieBar);
         var scriptTags = cookieBar.getElementsByTagName('script');
         for (var n = 0; n < scriptTags.length; n++) {
@@ -12,10 +34,7 @@ function loadCookiebannerHtml(openSettings = false) {
         if (typeof initializeCookieConsent === 'function') {
             initializeCookieConsent(openSettings);
         }
-    });
-
-    xhr.open('GET', KD_GDPR_CC.apiUrl);
-    xhr.send();
+    }
 }
 
 if (KD_GDPR_CC && KD_GDPR_CC.documentNodeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
@@ -64,6 +83,6 @@ var links = document.querySelectorAll('a[href*=\"#GDPR-CC-open-settings\"]');
 [].slice.call(links).forEach(function(link) {
     link.addEventListener('click', function(event) {
         event.preventDefault();
-        loadCookiebannerHtml();
+        loadCookiebannerHtml(false, true);
     });
 });
