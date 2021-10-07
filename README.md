@@ -70,6 +70,15 @@ Alternatively, you can choose all kind of Document-Nodes in the Backend:
 ![excluded documents](Documentation/Images/exclude_documents.png)
 
 
+### Show banner after first interaction
+For example in SEO-aspects it makes sense to show the banner after users first interaction. You can easily configure the Package to behave like this: 
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      hideBeforeInteraction: true
+```
+
 
 ### React to the user's cookie decision
 You can use one of these Methods to react on the user's decision on which Cookies are accepted:
