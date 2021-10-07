@@ -56,6 +56,21 @@ It also influences the [way the content is stored in the cookie](#read-cookie-id
 ```
 If you configured multiple dimensions in `consentDimensions`, they get connected here using underscores. Example: `deu_de`
 
+### Exclude special pages (like imprint)
+You have 2 options to exclude special pages from displaying the Cookie-Settings. If you have a special NodeType, you want to exclude, you can set it as general rule by Settings.yaml: 
+```yaml
+
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      excludeDocumentNodeTypes:
+        - 'Vendor.Package:Document.Imprint'
+```
+Alternatively, you can choose all kind of Document-Nodes in the Backend:  
+![excluded documents](Documentation/Images/exclude_documents.png)
+
+
+
 ### React to the user's cookie decision
 You can use one of these Methods to react on the user's decision on which Cookies are accepted:
 
