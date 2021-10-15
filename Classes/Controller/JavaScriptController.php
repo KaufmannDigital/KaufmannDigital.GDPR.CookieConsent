@@ -88,7 +88,7 @@ class JavaScriptController extends RestController
             $decisionTtl = $cookieSettings->getProperty('decisionTtl') ?? 0;
             $expireDate = clone $consentDate;
             $expireDate->add(\DateInterval::createFromDateString($decisionTtl . ' seconds'));
-            if ($expireDate < new \DateTime('now')) {
+            if ($decisionTtl > 0 && $expireDate < new \DateTime('now')) {
                 $this->response->setContentType('text/javascript');
                 $this->response->setContent('');
                 return;
