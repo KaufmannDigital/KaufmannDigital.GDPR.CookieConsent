@@ -4,6 +4,7 @@ namespace KaufmannDigital\GDPR\CookieConsent\Controller;
 
 use KaufmannDigital\GDPR\CookieConsent\Mvc\View\CustomTemplateView;
 use Neos\Cache\Frontend\StringFrontend;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Http\Component\SetHeaderComponent;
@@ -85,6 +86,11 @@ class JavaScriptController extends RestController
 
             $consentDate = new \DateTime(isset($cookie['consentDates'][$dimensionIdentifier]) ? $cookie['consentDates'][$dimensionIdentifier] : $cookie['consentDate']);
             $cookieSettings = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
+
+            if (!$cookieSettings instanceof NodeInterface) {
+                throw new \Exception('No cookie settings could be found', 1634843525);
+            }
+
             $decisionTtl = $cookieSettings->getProperty('decisionTtl') ?? 0;
             $expireDate = clone $consentDate;
             $expireDate->add(\DateInterval::createFromDateString($decisionTtl . ' seconds'));
