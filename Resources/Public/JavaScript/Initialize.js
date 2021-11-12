@@ -1,4 +1,5 @@
-function loadCookiebannerHtml(openSettings = false, showImmidiatly = false) {
+function loadCookiebannerHtml(openSettings, showImmediately)
+{
     if (document.body.classList.contains('neos-backend')) return;
 
     var xhr = new XMLHttpRequest();
@@ -6,7 +7,7 @@ function loadCookiebannerHtml(openSettings = false, showImmidiatly = false) {
         var cookieBar = document.createElement('div');
         cookieBar.innerHTML = JSON.parse(xhr.responseText).html;
 
-        if (showImmidiatly === false && KD_GDPR_CC.hideBeforeInteraction) {
+        if (showImmediately === false && KD_GDPR_CC.hideBeforeInteraction) {
             window.addEventListener(
                 'scroll',
                 function () {
