@@ -79,6 +79,12 @@ KaufmannDigital:
       hideBeforeInteraction: true
 ```
 
+### Auto-Accept necessary cookies
+In some cases, you may need to accept necessary cookies without an user-interaction.  For such a case you can easily add the following to your HTML: 
+```html
+<script>var KD_GDPR_CC_ACCEPT_NECESSARY = true;</script>
+```
+This makes the Package to auto-accept necessary cookies without showing the consent-window. The user of course can open the window by hand anyways to adjust the decision.   
 
 ### React to the user's cookie decision
 You can use one of these Methods to react on the user's decision on which Cookies are accepted:
