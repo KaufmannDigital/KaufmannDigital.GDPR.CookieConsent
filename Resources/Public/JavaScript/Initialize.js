@@ -1,4 +1,4 @@
-function loadCookiebannerHtml(openSettings, showImmediately)
+function loadCookiebannerHtml(openSettings, showImmediately, openedManually)
 {
     if (document.body.classList.contains('neos-backend')) return;
 
@@ -33,7 +33,7 @@ function loadCookiebannerHtml(openSettings, showImmediately)
             eval(scriptTags[n].innerHTML);
         }
         if (typeof initializeCookieConsent === 'function') {
-            initializeCookieConsent(openSettings);
+            initializeCookieConsent(openSettings, openedManually);
         }
     }
 }
@@ -84,6 +84,6 @@ var links = document.querySelectorAll('a[href*=\"#GDPR-CC-open-settings\"]');
 [].slice.call(links).forEach(function(link) {
     link.addEventListener('click', function(event) {
         event.preventDefault();
-        loadCookiebannerHtml(false, true);
+        loadCookiebannerHtml(true, true, true);
     });
 });

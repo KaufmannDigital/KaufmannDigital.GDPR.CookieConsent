@@ -18,7 +18,7 @@
     });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
-function initializeCookieConsent(openSettings) {
+function initializeCookieConsent(openSettings, openedManually) {
 
     var kd_gdpr_cc_userid;
     var cookieSettingsContainer = document.querySelector('.gdpr-cookieconsent-settings');
@@ -56,16 +56,6 @@ function initializeCookieConsent(openSettings) {
         btnAcceptAll.style.display = 'none';
         btnSaveSettings.style.display = 'block';
     });
-    if (openSettings === true) {
-        var clickEvent;
-        if (typeof (Event) === 'function') {
-            clickEvent = new Event('submit');
-        } else {
-            clickEvent = document.createEvent('Event');
-            clickEvent.initEvent('click', true, true);
-        }
-        btnIndividualSettingsEnable.dispatchEvent(clickEvent);
-    }
 
     btnIndividualSettingsDisable.addEventListener('click', function() {
         individualSettingsContainer.style.display = 'none';
@@ -182,6 +172,25 @@ function initializeCookieConsent(openSettings) {
                 document.querySelector('.gdpr-cookieconsent-settings__content input[value=' + consentIdentifier + ']').checked = true;
             }
         });
+    }
+    var clickEvent;
+    if (typeof (Event) === 'function') {
+        clickEvent = new Event('click');
+    } else {
+        clickEvent = document.createEvent('Event');
+        clickEvent.initEvent('click', true, true);
+    }
+
+    if (openSettings === true) {
+        btnIndividualSettingsEnable.dispatchEvent(clickEvent);
+    }
+
+    if (
+        openedManually !== true
+        && typeof KD_GDPR_CC_ACCEPT_NECESSARY !== 'undefined'
+        && KD_GDPR_CC_ACCEPT_NECESSARY === true
+    ) {
+        btnAcceptNecessaryCookies.dispatchEvent(clickEvent);
     }
 }
 
