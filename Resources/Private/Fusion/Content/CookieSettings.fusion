@@ -46,15 +46,15 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                     <div class="gdpr-cookieconsent-settings__content__cta">
                         <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton label={props.labels.acceptAll} />
                         <KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton label={props.labels.save} />
-                        <a id="gdpr-cc-btn-accept-necessary" @if.necessaryGroup={props.hasNecessaryGroup}>{props.labels.acceptNecessaryCookiesLabel}</a>
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptNecessaryButton label={props.labels.acceptNecessaryCookiesLabel} @if.necessaryGroup={props.hasNecessaryGroup} />
                     </div>
                     <div class="gdpr-cookieconsent-settings__content__settings">
                         {props.individualSettings}
                     </div>
                     <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.FooterLinks settingsNode={node} />
                     <div class="gdpr-cookieconsent-settings__content__individual-switch">
-                        <a id="gdpr-cc-btn-individual-settings-enable">{props.labels.openIndividualSettingsLabel}</a>
-                        <a id="gdpr-cc-btn-individual-settings-disable">{props.labels.closeIndividualSettingsLabel}</a>
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.OpenIndividualSettingsButton label={props.labels.openIndividualSettingsLabel} />
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseIndividualSettingsButton label={props.labels.closeIndividualSettingsLabel} />
                     </div>
                 </div>
                 <div class="gdpr-cookieconsent-settings__close">
