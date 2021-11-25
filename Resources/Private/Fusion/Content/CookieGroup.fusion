@@ -9,7 +9,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Ne
     }
 
     cookieContentCollection = Neos.Neos:ContentCollection {
-        attributes.class = 'gdpr-cookieconsent-setting-group__cookies'
+        attributes.class = 'gdpr-cookieconsent-setting-group__cookies hidden'
         nodePath = 'cookies'
     }
 
@@ -37,7 +37,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Ne
             </div>
             {props.cookieContentCollection}
             <a class="gdpr-cookieconsent-setting-group__details-open" @if.available={props.detailsAvailable} >Details&nbsp;></a>
-            <a class="gdpr-cookieconsent-setting-group__details-close" @if.available={props.detailsAvailable} >{props.labels.hideDetails}</a>
+            <a class="gdpr-cookieconsent-setting-group__details-close hidden" @if.available={props.detailsAvailable} >{props.labels.hideDetails}</a>
         </div>
     `
 }

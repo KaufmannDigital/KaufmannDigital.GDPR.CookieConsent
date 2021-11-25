@@ -2,6 +2,6 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseIndividualSetti
     label = ''
 
     renderer = afx`
-        <a id="gdpr-cc-btn-individual-settings-disable">{props.label}</a>
+        <a id="gdpr-cc-btn-individual-settings-disable" class="hidden">{props.label}</a>
     `
 }

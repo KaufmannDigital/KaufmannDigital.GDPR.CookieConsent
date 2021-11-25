@@ -39,7 +39,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                         <div class="gdpr-cookieconsent-settings__content__info__main-description">
                             {props.editableMainDescription}
                         </div>
-                        <div class="gdpr-cookieconsent-settings__content__info__settings-description">
+                        <div class="gdpr-cookieconsent-settings__content__info__settings-description hidden">
                             {props.editableIndividualSettingsDescription}
                         </div>
                     </div>
@@ -48,7 +48,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                         <KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton label={props.labels.save} />
                         <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptNecessaryButton label={props.labels.acceptNecessaryCookiesLabel} @if.necessaryGroup={props.hasNecessaryGroup} />
                     </div>
-                    <div class="gdpr-cookieconsent-settings__content__settings">
+                    <div class="gdpr-cookieconsent-settings__content__settings hidden">
                         {props.individualSettings}
                     </div>
                     <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.FooterLinks settingsNode={node} />

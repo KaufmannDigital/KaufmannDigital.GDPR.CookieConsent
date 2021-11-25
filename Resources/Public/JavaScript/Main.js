@@ -47,25 +47,25 @@ function initializeCookieConsent(openSettings, openedManually) {
     }
 
     btnIndividualSettingsEnable.addEventListener('click', function() {
-        individualSettingsContainer.style.display = 'block';
-        txtMainDescription.style.display = 'none';
-        txtIndividualSettingsDescription.style.display = 'block';
-        btnIndividualSettingsEnable.style.display = 'none';
-        btnIndividualSettingsDisable.style.display = 'block';
-        if(btnAcceptNecessaryCookies) btnAcceptNecessaryCookies.style.display = 'none';
-        btnAcceptAll.style.display = 'none';
-        btnSaveSettings.style.display = 'block';
+        individualSettingsContainer.classList.remove('hidden');
+        txtMainDescription.classList.add('hidden');
+        txtIndividualSettingsDescription.classList.remove('hidden');
+        btnIndividualSettingsEnable.classList.add('hidden');
+        btnIndividualSettingsDisable.classList.remove('hidden');
+        if(btnAcceptNecessaryCookies) btnAcceptNecessaryCookies.classList.add('hidden');
+        btnAcceptAll.classList.add('hidden');
+        btnSaveSettings.classList.remove('hidden');
     });
 
     btnIndividualSettingsDisable.addEventListener('click', function() {
-        individualSettingsContainer.style.display = 'none';
-        txtMainDescription.style.display = 'block';
-        txtIndividualSettingsDescription.style.display = 'none';
-        btnIndividualSettingsEnable.style.display = 'block';
-        btnIndividualSettingsDisable.style.display = 'none';
-        if(btnAcceptNecessaryCookies) btnAcceptNecessaryCookies.style.display = 'block';
-        btnAcceptAll.style.display = 'block';
-        btnSaveSettings.style.display = 'none';
+        individualSettingsContainer.classList.add('hidden');
+        txtMainDescription.classList.remove('hidden');
+        txtIndividualSettingsDescription.classList.add('hidden');
+        btnIndividualSettingsEnable.classList.remove('hidden');
+        btnIndividualSettingsDisable.classList.add('hidden');
+        if(btnAcceptNecessaryCookies) btnAcceptNecessaryCookies.classList.remove('hidden');
+        btnAcceptAll.classList.remove('hidden');
+        btnSaveSettings.classList.add('hidden');
     });
 
     btnAcceptAll.addEventListener('click', function() {
@@ -119,17 +119,17 @@ function initializeCookieConsent(openSettings, openedManually) {
 
     [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details-open')).forEach(function(detailsLink) {
         detailsLink.addEventListener('click', function() {
-            detailsLink.style.display = 'none';
-            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__cookies').style.display = 'block';
-            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__details-close').style.display = 'block';
+            detailsLink.classList.add('hidden');
+            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__cookies').classList.remove('hidden');
+            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__details-close').classList.remove('hidden');
         });
     });
 
     [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details-close')).forEach(function(detailsLink) {
         detailsLink.addEventListener('click', function() {
-            detailsLink.style.display = 'none';
-            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__cookies').style.display = 'none';
-            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__details-open').style.display = 'block';
+            detailsLink.classList.add('hidden');
+            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__cookies').classList.add('hidden');
+            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__details-open').classList.remove('hidden');
         });
     });
 

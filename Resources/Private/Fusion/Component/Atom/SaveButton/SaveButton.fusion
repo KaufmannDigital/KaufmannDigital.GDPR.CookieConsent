@@ -2,6 +2,6 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton) < protot
     label = 'Save'
 
     renderer = afx`
-        <button id="gdpr-cc-btn-save" class="button">{props.label}</button>
+        <button id="gdpr-cc-btn-save" class="button hidden">{props.label}</button>
     `
 }
