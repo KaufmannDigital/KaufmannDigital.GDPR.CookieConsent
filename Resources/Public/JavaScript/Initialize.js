@@ -55,16 +55,14 @@ if (KD_GDPR_CC && KD_GDPR_CC.documentNodeDisabled === false && document.cookie.i
     var cookieConsentDate = cookieObject.consentDates && cookieObject.consentDates[KD_GDPR_CC.dimensionsIdentifier]
         ? new Date(cookieObject.consentDates[KD_GDPR_CC.dimensionsIdentifier])
         : new Date(cookieObject.consentDate);
+    var decisionExpiry = cookieConsentDate.getTime() + KD_GDPR_CC.decisionTtl;
 
     if (versionDate > cookieConsentDate && window.neos === undefined) {
         loadCookiebannerHtml();
     } else if (!Array.isArray(cookieObject.consents) && !cookieObject.consents[KD_GDPR_CC.dimensionsIdentifier]) {
         loadCookiebannerHtml();
-    }
-
-    //Re-Open Cookie-Consent, if TTL is expired
-    var decisionExpiry = cookieConsentDate.getTime() + KD_GDPR_CC.decisionTtl;
-    if (KD_GDPR_CC.decisionTtl > 0 && decisionExpiry < new Date()) {
+    } else if (KD_GDPR_CC.decisionTtl > 0 && decisionExpiry < new Date()) {
+        //Re-Open Cookie-Consent, if TTL is expired
         loadCookiebannerHtml(true);
     }
 
