@@ -10,6 +10,7 @@ use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Http\Component\SetHeaderComponent;
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Mvc\View\JsonView;
+use Neos\Neos\Controller\Exception\NodeNotFoundException;
 use Neos\Neos\View\FusionView;
 use Neos\Flow\Annotations as Flow;
 
@@ -47,12 +48,18 @@ class ApiController extends RestController
     }
 
     /**
-     * @param NodeInterface $siteNode
+     * @param NodeInterface|null $siteNode
+     * @return void
+     * @throws NodeNotFoundException
      * @throws \Neos\ContentRepository\Exception\NodeException
      * @throws \Neos\Eel\Exception
      */
-    public function renderCookieSettingsAction(NodeInterface $siteNode)
+    public function renderCookieSettingsAction(NodeInterface $siteNode = null)
     {
+        if (!$siteNode instanceof NodeInterface) {
+            throw new NodeNotFoundException('The given site was not found', 1644389565);
+        }
+
         $this->view->setVariablesToRender(['html', 'needsRenew']);
 
         $q = new FlowQuery([$siteNode]);
