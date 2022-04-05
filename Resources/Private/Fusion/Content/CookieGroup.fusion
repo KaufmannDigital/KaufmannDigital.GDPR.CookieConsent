@@ -26,18 +26,19 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Ne
 
     renderer = afx`
         <div class={Array.join(props.groupClasses, ' ')}>
-            <div class="gdpr-cookieconsent-setting-group__headline">
-                {props.editableHeadline}
-            </div>
             <div class="gdpr-cookieconsent-setting-group__switch">
-                <KaufmannDigital.GDPR.CookieConsent:Component.Switch value={props.identifier} />
+                <KaufmannDigital.GDPR.CookieConsent:Component.Switch
+                    value={props.identifier}
+                    label={props.editableHeadline}
+                    variant="group"
+                />
             </div>
             <div class="gdpr-cookieconsent-setting-group__description">
                 {props.editableDescription}
             </div>
             {props.cookieContentCollection}
-            <a class="gdpr-cookieconsent-setting-group__details-open" @if.available={props.detailsAvailable} >Details&nbsp;></a>
-            <a class="gdpr-cookieconsent-setting-group__details-close hidden" @if.available={props.detailsAvailable} >{props.labels.hideDetails}</a>
+            <a href='#' class="gdpr-cookieconsent-setting-group__details gdpr-cookieconsent-setting-group__details--open" @if.available={props.detailsAvailable} >Details&nbsp;></a>
+            <a href='#' class="gdpr-cookieconsent-setting-group__details gdpr-cookieconsent-setting-group__details--close hidden" @if.available={props.detailsAvailable} >{props.labels.hideDetails}</a>
         </div>
     `
 }

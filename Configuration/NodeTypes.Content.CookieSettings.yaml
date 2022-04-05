@@ -19,6 +19,15 @@
         cookieSettings:
           label: i18n
           icon: 'icon-cookie'
+        styling:
+          label: i18n
+          icon: 'icon-brush'
+          tab: styling
+      tabs:
+        styling:
+          label: i18n
+          icon: 'icon-brush'
+          position: before meta
   properties:
     headline:
       type: string
@@ -152,3 +161,39 @@
           group: cookieSettings
         label: i18n
         reloadIfChanged: true
+
+    themeColor: &colorsetting
+      type: string
+      ui:
+        reloadIfChanged: true
+        label: i18n
+        inspector:
+          group: styling
+          editor: 'Shel.Neos.ColorPicker/ColorPickerEditor'
+          editorOptions:
+            mode: 'rgba'
+            picker: true
+            fields: true
+            presetColors: false
+            allowEmpty: true
+
+    backgroundColor: *colorsetting
+
+    buttonTextColor:
+      type: string
+      defaultValue: "white"
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          group: styling
+          editorOptions:
+            values:
+              white:
+                label: i18n
+              black:
+                label: i18n
+
+
+

@@ -3,29 +3,42 @@
 A ready-to-run package, that integrates an advanced cookie consent banner into your Neos CMS site.  
 This is a further development of our previous [cookie consent package](https://github.com/KaufmannDigital/KaufmannDigital.CookieConsent). Through the individual configuration per service (cookie), this package is a perfect basis for creating GDPR compliant websites.
 
+
+
 ## Versions
+
 This package is available in multiple Version. Here you can check compatibility and maintenance-state.
 Composer-Version | Neos-Compatibility | Maintenance
------------------| -------------------|-------------|
+-----------------| -------------------|-------------
 `^1.0` | < 5.0  | ⛔
 `^2.0` | >= 5.0 | 🐛
 `^3.0` | >= 5.0 | 🐛
-`^4.0` | >= 5.0 | 🐛 ✨
+`^4.0` | >= 5.0 | 🐛 
+`^5.0` | >= 5.0 | 🐛 ✨ 
+
+
 
 ## Installation
+
 It's easier than you probably think!  
 Just run `composer require kaufmanndigital/gdpr-cookieconsent` (or require one of the versions from above)
 
 After the installation it's necessary to run doctrine migrations: `./flow doctrine:migrate`
 
+
+
 ## Configuration
+
 Since this package is ready-to-run, you can configure your cookie banner in just a few Steps.
 
 1. Create a new **Cookie-Settings Page** (shipped inside the Package) somewhere inside your Site-Tree.
 2. Switch to the newly created page and edit the cookie banner contents to your wishes.
 3. Add cookie-groups and cookies to the banner.  
 
+
+
 ### Consent per dimension
+
 If you've configured one or multiple dimensions in Neos and you need to save different consents per dimension(-combination), you can just configure it using Settings.yaml: 
 ```yaml
 KaufmannDigital:
@@ -34,7 +47,7 @@ KaufmannDigital:
       consentDimensions:
         - country
 ```
-This examples would save different consents per country for each user. This means, that the user will see the CookieConsent again the first time, he switches to another country.  
+This example would save different consents per country for each user. This means, the user will see the CookieConsent again the first time he switches to another country.  
 It also influences the [way the content is stored in the cookie](#read-cookie-identifiers-from-cookie). Instead of a key `"default" there are now multiple entries within `"consents"` for each dimension(-combination). A short example: 
 ```json
 {
@@ -56,7 +69,10 @@ It also influences the [way the content is stored in the cookie](#read-cookie-id
 ```
 If you configured multiple dimensions in `consentDimensions`, they get connected here using underscores. Example: `deu_de`
 
+
+
 ### Exclude special pages (like imprint)
+
 You have 2 options to exclude special pages from displaying the Cookie-Settings. If you have a special NodeType, you want to exclude, you can set it as general rule by Settings.yaml: 
 ```yaml
 
@@ -70,7 +86,9 @@ Alternatively, you can choose all kind of Document-Nodes in the Backend:
 ![excluded documents](Documentation/Images/exclude_documents.png)
 
 
+
 ### Show banner after first interaction
+
 For example in SEO-aspects it makes sense to show the banner after users first interaction. You can easily configure the Package to behave like this: 
 ```yaml
 KaufmannDigital:
@@ -79,7 +97,10 @@ KaufmannDigital:
       hideBeforeInteraction: true
 ```
 
+
+
 ### Auto-Accept necessary cookies
+
 In some cases, you may need to accept necessary cookies without an user-interaction.  For such a case you can easily add the following to your HTML: 
 ```html
 <script>var KD_GDPR_CC_ACCEPT_NECESSARY = true;</script>
@@ -89,13 +110,18 @@ This makes the Package to auto-accept necessary cookies without showing the cons
 ### React to the user's cookie decision
 You can use one of these Methods to react on the user's decision on which Cookies are accepted:
 
+
+
 #### Load JavaScript dynamically
+
 You can paste your JavaScript-Code while adding Cookies to the banner. The package will evaluate the user's decision and merge the required JavaScript dynamically for each user on the fly.
 You don't have to take care of anything. JavaScript gets loaded completely automatic. Cool, isn't it? 😎  
 *Ah! And don't worry about performance. All JS gets minified and cached for every single visitor individually.*
 
 
+
 #### Read cookie-identifiers from cookie
+
 If you are already using another way to include your JavaScript, you can depend on the value of the Choice-Cookie.  
 It's named `KD_GDPR_CC` and contains all identifiers of groups and cookies you defined in Backend while configuration. The payload of that cookie could look like this:
 ```json
@@ -116,18 +142,26 @@ It's named `KD_GDPR_CC` and contains all identifiers of groups and cookies you d
 So just check *consents* and load the needed JavaScript.  
 *Pro-Tip: If you are using Google Tag Manager to add your JS-Tags, you can define a custom datalayer-variable of type `First-Party-Cookie`, which can be used as condition inside triggers then.*
 
+
+
 #### React to datalayer event in Google Tag Manager
+
 In order to react to the user's decision in the Google Tag Manager, not much is needed. You can easily listen to an custom event. [We provided a full Guide here.](Documentation/GoogleTagManager.md)
 
 
+
 #### Add a Re-open link
+
 To create a link for reopening the banner, you only have to place a link with `#GDPR-CC-open-settings` as target:
 ```html
 <a href="#GDPR-CC-open-settings">Cookie-Settings</a>
 ```
 After clicking on such a link, the cookie-banner will be loaded via API. Old settings are used as presets.
 
+
+
 #### Custom cookie name
+
 In some usecases it's needed to change the name of the Configuration-Cookie. That can easily be archived by using the following Setting: 
 ```yaml
 KaufmannDigital:
@@ -136,22 +170,37 @@ KaufmannDigital:
       cookieName: 'CUSTOM_COOKIENAME'
 ```
 
+
+
 #### Versioning
-In some cases, it may be necessary to show the cookie-banner to people who have actually already accepted it. For example, if a new cookie has been added.  
+
+In some cases, it may be necessary to show the cookie-banner to people who have already gave their consent. For example, if a new cookie has been added.  
 To do this, you only need to edit the version date. You can find it in the inspector of the cookie-settings NodeType:   
 ![version-date setting](Documentation/Images/version-date.png)  
 
 After the date has been changed, the banner will be shown again to all visitors, who have submitted the cookie banner before this date. Old settings are used as presets.
 
 
+
 #### Invalidating user-decisions after time
+
 Sometimes it is necessary or advantageous to remind the user of his decision and ask him to confirm it again. For this purpose, a TTL for the decision can be set in the backend:  
 ![decision-time setting](Documentation/Images/Decision_TTL.png)  
 The unit is seconds. After the set time has expired, the banner appears again with the default settings of the last decision, so the user can easily accept the old decision with just one click.  
 The value `0` (default) disables the repeated display of the banner.
+
+
+
 ### Styling
+
 #### Custom Banner-Styles
-The banner comes with a few basic-styles for positioning, which are getting included inline. To add your custom styles, just put a CSS-Files somewhere in your Resources-Folder and include it using Settings.yaml:   
+The banner comes with default styling that aims to be GDPR compliant and accessible.  
+
+You can customise the banner by either:
+
+1. Set a theme color (for buttons), the background color and text color via the color pickers in the inspector.
+2. Create a CSS-File with your own styling and include it using Settings.yaml:
+
 ```yaml
 KaufmannDigital:
   GDPR:
@@ -160,38 +209,74 @@ KaufmannDigital:
 ```
 To get an idea of the CSS-styling and class-names, you can have a look [into our SCSS](Resources/Private/Styles/Main.scss).  
 
-#### Site-Styles on Cookie-Page
-If you rely on your Site-Package Styles inside of the banner, you can just include them into the (otherwise unstyled) Cookie-Page for configuring the banner inside the Backend. To do so, just add it to your Settings:
-```yaml
-KaufmannDigital:
-  GDPR:
-    CookieConsent:
-      siteCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/Site.css'
+Instead of writing out all the selectors in your custom file, it might be enough to just overwrite the relevant custom properties. This example file shows the custom properties that can be used:
+
+```css
+.gdpr-cookieconsent-container {
+    --cookieconsent-theme-color: rgb(0 137 203);
+    --cookieconsent-overlay-color: rgb(0 0 0 / .75);
+    --cookieconsent-bg-color: rgb(255 255 255 / 0.95);
+
+    --cookieconsent-group-bg-color: rgb(255 255 255);
+
+    --cookieconsent-button-text-color: rgb(255 255 255);
+    --cookieconsent-button-primary-color: var(--cookieconsent-theme-color);
+    --cookieconsent-button-secondary-color: rgb(255 255 255);
+    --cookieconsent-button-primary-text-color: var(--cookieconsent-button-text-color);
+    --cookieconsent-button-secondary-text-color: rgb(0 0 0);
+    --cookieconsent-button-borderradius: 4px;
+
+    --cookieconsent-spacing: 1rem;
+    --cookieconsent-width: 1200px;
+
+    --cookieconsent-focus-outline: black solid 2px;
+    --cookieconsent-focus-outline-offset: 2px;
+}
+
+/* Switches options */
+.gdpr-cookieconsent-switch {
+    --cookieconsent-switch-thumb-size: 1.5rem;
+    --cookieconsent-switch-thumb-color: rgb(255 255 255);
+    --cookieconsent-switch-thumb-highlight: rgba(0 0 0 / 0.25);
+    --cookieconsent-switch-length: calc(var(--cookieconsent-switch-thumb-size) * 2);
+    --cookieconsent-switch-padding: 4px;
+    --cookieconsent-switch-inactive: rgb(204 204 204);
+    --cookieconsent-switch-active: var(--cookieconsent-theme-color);
+    --cookieconsent-switch-thumb-size-small: 1rem;
+    --cookieconsent-switch-outline: var(--cookieconsent-focus-outline);
+    --cookieconsent-switch-outline-offset: var(--cookieconsent-focus-outline-offset);
+}
+
 ```
 
-#### Site specific Styling
-If you manage multiple sites in your Neos installation, you can specify cookie banner styles for each site.
-```yaml
-KaufmannDigital:
-  GDPR:
-    CookieConsent:
-      siteCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/Site.css'
-      customCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/CookieBanner.css'
-      siteStyles:
-        "siteNameOne": # the sites rootNode name
-          siteCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/SiteSpecific.css' # overwrites siteCSSFilepath for this site
-          customCSSFilepath: 'resource://Vendor.Package/Public/Stylesheets/SiteCookieBanner.css' # overwrites customCSSFilepath for this site
-```
-*Hint: We are working on advanced styling options. Different style- and positioning presets will be available in future. If you have any wishes or created a cool design for this banner yourself, please contact us.*
+⚠️ **Please note that colors set in the inspector will overwrite values set in your custom css file. You might need to unset the color values in the inspector first.**
 
-### Consent Logging
-The package provides the ability to track the users decisions by storing the chosen consent identifiers along with a random user id and the user agent in your database. This feature is disabled by default, you can enable it in your Settings.yaml:
-```yaml
-KaufmannDigital:
-  GDPR:
-    CookieConsent:
-      consentLogEnabled: true
+
+
+#### Use your own fusion components in the banner
+
+Sometimes adjusting CSS isn't enough and you just want to use your own button components in the banner. Good news: You can by overwriting the `renderer`of the following components:
+
+- `KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton`
+- `KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton`
+- `KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptNecessaryButton`
+- `KaufmannDigital.GDPR.CookieConsent:Component.Atom.OpenIndividualSettingsButton`
+- `KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseIndividualSettingsButton`
+
+Accessing the button labels is as easy as accessing `${props.label}`.
+
+Here's an example how to use your own button as the "Accept all" button:
+
+```fusion
+prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton) {
+    renderer = Vendor.Site:Component.PrimaryButton {
+        myLabel = ${props.label}
+    }
+}
 ```
+
+
+
 
 ## Roadmap / Planned Features
 
@@ -200,10 +285,7 @@ KaufmannDigital:
   * Matomo (Piwik)
   * Intercom Support-Chat
   * ...
-
-* Adjustable CI/Colors inside the Backend
-
-
+  
 
 ## Sponsors
 We would like to thank our sponsors, who supported us financially during the development:  
@@ -211,7 +293,7 @@ We would like to thank our sponsors, who supported us financially during the dev
 [![Mittwald Logo](Documentation/Sponsors/Mittwald/logo-mittwald.png)](https://www.mittwald.de/?utm_source=github&utm_medium=banner&utm_campaign=cookie-consent-manager-package)
 
 
-Are you missing a feature in our solution? You wan't to support the development of this Package? Please don't hesitate to contact us!  
+Are you missing a feature in our solution? You want to support the development of this Package? Please don't hesitate to contact us!  
 Email: [support@kaufmann.digital](mailto:support@kaufmann.digital)
 
 

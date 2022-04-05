@@ -2,6 +2,10 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseIndividualSetti
     label = ''
 
     renderer = afx`
-        <a id="gdpr-cc-btn-individual-settings-disable" class="hidden">{props.label}</a>
+        <button class="button button--secondary">{props.label}</button>
     `
+    @process.id = Neos.Fusion:Augmenter {
+        id = "gdpr-cc-btn-individual-settings-disable"
+        class = "hidden"
+    }
 }

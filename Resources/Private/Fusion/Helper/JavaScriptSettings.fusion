@@ -1,3 +1,4 @@
+// renders a <script> with cookie settings
 prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < prototype(Neos.Fusion:Tag) {
     tagName = 'script'
 

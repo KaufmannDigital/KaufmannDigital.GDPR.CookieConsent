@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "neos/neos": ">=5.0"
+        "neos/neos": ">=5.0",
+        "shel/neos-colorpicker": "*"
     },
     "autoload": {
         "psr-4": {

@@ -21,10 +21,9 @@
 function initializeCookieConsent(openSettings, openedManually) {
 
     var kd_gdpr_cc_userid;
-    var cookieSettingsContainer = document.querySelector('.gdpr-cookieconsent-settings');
-    var darkOverlay = document.querySelector('.gdpr-cookieconsent-overlay');
-    var txtMainDescription = document.querySelector('.gdpr-cookieconsent-settings__content__info__main-description');
-    var txtIndividualSettingsDescription = document.querySelector('.gdpr-cookieconsent-settings__content__info__settings-description');
+    var cookieSettingsContainer = document.querySelector('.gdpr-cookieconsent-container');
+    var txtMainDescription = document.querySelector('.gdpr-cookieconsent-settings__content__info__description--main');
+    var txtIndividualSettingsDescription = document.querySelector('.gdpr-cookieconsent-settings__content__info__description--settings');
     var individualSettingsContainer = document.querySelector('.gdpr-cookieconsent-settings__content__settings');
     var btnIndividualSettingsEnable = document.querySelector('#gdpr-cc-btn-individual-settings-enable');
     var btnIndividualSettingsDisable = document.querySelector('#gdpr-cc-btn-individual-settings-disable');
@@ -33,18 +32,6 @@ function initializeCookieConsent(openSettings, openedManually) {
     var btnAcceptNecessaryCookies = document.querySelector('#gdpr-cc-btn-accept-necessary');
     var btnCloseCookieSettings = document.querySelector('#kd_gdpr_cc-close');
 
-    //Create log in BE and store userID
-    if (consentLogEnabled) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', trackChoiceUrl);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState === 4) {
-                kd_gdpr_cc_userid = JSON.parse(xhr.response).userId;
-            }
-        };
-        xhr.send();
-    }
 
     btnIndividualSettingsEnable.addEventListener('click', function() {
         individualSettingsContainer.classList.remove('hidden');
@@ -79,7 +66,6 @@ function initializeCookieConsent(openSettings, openedManually) {
 
         //Remove CookieConsent from HTML
         cookieSettingsContainer.remove();
-        darkOverlay.remove();
         loadGeneratedJavaScript();
     });
 
@@ -94,17 +80,14 @@ function initializeCookieConsent(openSettings, openedManually) {
 
         //Remove CookieConsent from HTML
         cookieSettingsContainer.remove();
-        darkOverlay.remove();
         loadGeneratedJavaScript();
     });
-
 
     if (btnAcceptNecessaryCookies) {
         btnAcceptNecessaryCookies.addEventListener('click', function() {
             acceptNecessaryCookies(kd_gdpr_cc_userid);
             //Remove CookieConsent from HTML
             cookieSettingsContainer.remove();
-            darkOverlay.remove();
             loadGeneratedJavaScript();
         });
     }
@@ -113,23 +96,25 @@ function initializeCookieConsent(openSettings, openedManually) {
         btnCloseCookieSettings.addEventListener('click', function (e) {
             e.preventDefault();
             cookieSettingsContainer.remove();
-            darkOverlay.remove();
         });
     }
 
-    [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details-open')).forEach(function(detailsLink) {
-        detailsLink.addEventListener('click', function() {
+    [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details--open')).forEach(function(detailsLink) {
+        detailsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__switch input').focus()
             detailsLink.classList.add('hidden');
             detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__cookies').classList.remove('hidden');
-            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__details-close').classList.remove('hidden');
+            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__details--close').classList.remove('hidden');
         });
     });
 
-    [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details-close')).forEach(function(detailsLink) {
-        detailsLink.addEventListener('click', function() {
+    [].slice.call(document.querySelectorAll('.gdpr-cookieconsent-setting-group__details--close')).forEach(function(detailsLink) {
+        detailsLink.addEventListener('click', function(e) {
+            e.preventDefault();
             detailsLink.classList.add('hidden');
             detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__cookies').classList.add('hidden');
-            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__details-open').classList.remove('hidden');
+            detailsLink.parentElement.querySelector('.gdpr-cookieconsent-setting-group__details--open').classList.remove('hidden');
         });
     });
 
@@ -192,6 +177,9 @@ function initializeCookieConsent(openSettings, openedManually) {
     ) {
         btnAcceptNecessaryCookies.dispatchEvent(clickEvent);
     }
+
+    //focus first button when initialized
+    btnAcceptAll.focus();
 }
 
 
@@ -243,13 +231,6 @@ function saveConsentToCookie(inputs, userId) {
             consents: cookieData.consents
         }
     });
-
-    if (consentLogEnabled) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', trackChoiceUrl, false);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify({'choice': cookieData}));
-    }
 }
 
 

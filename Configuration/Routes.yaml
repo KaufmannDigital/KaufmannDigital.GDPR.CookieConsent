@@ -19,16 +19,6 @@
   appendExceedingArguments: true
 
 -
-  name: 'POST CookieConsentHTML'
-  uriPattern: 'api/kd-gdpr-cc'
-  httpMethods: ['POST']
-  defaults:
-    '@package':    'KaufmannDigital.GDPR.CookieConsent'
-    '@controller': 'Api'
-    '@action':     'trackChoice'
-  appendExceedingArguments: true
-
--
   name: 'Render JS'
   uriPattern: 'api/kd-gdpr-cc.{@format}'
   httpMethods: ['GET']

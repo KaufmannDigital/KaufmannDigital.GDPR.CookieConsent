@@ -1,3 +1,4 @@
+// The actual cookie banner
 prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype(Neos.Neos:ContentComponent) {
     editableHeadline = Neos.Neos:Editable {
         property = 'headline'
@@ -16,51 +17,79 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         @cache.mode = 'embed'
     }
 
-    hasNecessaryGroup = ${q(node).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.NecessarySettingGroup]').count() > 0}
     closeButtonEnabled = ${q(node).property('closeButtonEnabled')}
 
-    labels = Neos.Fusion:RawArray {
+    labels = Neos.Fusion:DataStructure {
         acceptAll = ${q(node).property('acceptAllButtonLabel')}
         save = ${q(node).property('saveButtonLabel')}
-        saveButtonLabel = ${q(node).property('saveButtonLabel')}
-        acceptNecessaryCookiesLabel = ${q(node).property('acceptNecessaryCookiesLabel')}
-        openIndividualSettingsLabel = ${q(node).property('openIndividualSettingsLabel')}
-        closeIndividualSettingsLabel = ${q(node).property('closeIndividualSettingsLabel')}
+        acceptNecessaryCookies = ${q(node).property('acceptNecessaryCookiesLabel')}
+        openIndividualSettings = ${q(node).property('openIndividualSettingsLabel')}
+        closeIndividualSettings = ${q(node).property('closeIndividualSettingsLabel')}
+    }
+
+    colors = Neos.Fusion:Join {
+        buttonText = Neos.Fusion:Case {
+            black {
+                condition = ${q(node).property('buttonTextColor') == 'black'}
+                renderer = '--cookieconsent-buttontext-color: rgb(0 0 0);'
+            }
+            white {
+                condition = true
+                renderer = '--cookieconsent-buttontext-color: rgb(255 255 255);'
+            }
+        }
+        background = ${q(node).property('backgroundColor')}
+        background.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-bg:'+value+';'}
+        theme = ${q(node).property('themeColor')}
+        theme.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-theme-color:'+value+';'}
     }
 
     renderer = afx`
         <div>
             <KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings />
-            <div class="gdpr-cookieconsent-overlay"></div>
-            <div class="gdpr-cookieconsent-settings">
-                <div class="gdpr-cookieconsent-settings__content">
-                    <div class="gdpr-cookieconsent-settings__content__info">
-                        <h2>{props.editableHeadline}</h2>
-                        <div class="gdpr-cookieconsent-settings__content__info__main-description">
-                            {props.editableMainDescription}
+
+            <div
+                class="gdpr-cookieconsent-container"
+                style={props.colors}
+                style.@if.set={props.colors}
+            >
+                <div class="gdpr-cookieconsent-settings">
+                    <div class="gdpr-cookieconsent-settings__content">
+                        <div class="gdpr-cookieconsent-settings__content__info">
+                            <h2>{props.editableHeadline}</h2>
+                            <div class="gdpr-cookieconsent-settings__content__info__description gdpr-cookieconsent-settings__content__info__description--main">
+                                {props.editableMainDescription}
+                            </div>
+                            <div class="gdpr-cookieconsent-settings__content__info__description gdpr-cookieconsent-settings__content__info__description--settings hidden">
+                                {props.editableIndividualSettingsDescription}
+                            </div>
                         </div>
-                        <div class="gdpr-cookieconsent-settings__content__info__settings-description hidden">
-                            {props.editableIndividualSettingsDescription}
+
+                        <div class="gdpr-cookieconsent-settings__content__cta">
+                            <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.CTAs
+                                    acceptAllLabel={props.labels.acceptAll}
+                                    saveLabel={props.labels.save}
+                                    acceptNecessaryLabel={props.labels.acceptNecessaryCookies}
+                                    openIndividualSettingsLabel={props.labels.openIndividualSettings}
+                                    closeIndividualSettingsLabel={props.labels.closeIndividualSettings}
+                            />
                         </div>
+
+
+                        <div class="gdpr-cookieconsent-settings__content__settings hidden">
+                            {props.individualSettings}
+                        </div>
+
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.FooterLinks settingsNode={node}/>
                     </div>
-                    <div class="gdpr-cookieconsent-settings__content__cta">
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton label={props.labels.acceptAll} />
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton label={props.labels.save} />
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptNecessaryButton label={props.labels.acceptNecessaryCookiesLabel} @if.necessaryGroup={props.hasNecessaryGroup} />
+
+                    <div class="gdpr-cookieconsent-settings__close">
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseButton
+                                @if.condition={props.closeButtonEnabled}/>
                     </div>
-                    <div class="gdpr-cookieconsent-settings__content__settings hidden">
-                        {props.individualSettings}
-                    </div>
-                    <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.FooterLinks settingsNode={node} />
-                    <div class="gdpr-cookieconsent-settings__content__individual-switch">
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.OpenIndividualSettingsButton label={props.labels.openIndividualSettingsLabel} />
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseIndividualSettingsButton label={props.labels.closeIndividualSettingsLabel} />
-                    </div>
-                </div>
-                <div class="gdpr-cookieconsent-settings__close">
-                    <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseButton @if.condition={props.closeButtonEnabled} />
                 </div>
             </div>
+
             <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedStyles/>
             <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript/>
         </div>

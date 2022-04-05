@@ -74,6 +74,22 @@
 			<trans-unit id="properties.excludedDocuments" xml:space="preserve">
 				<source>Exclude for Documents</source>
 			</trans-unit>
+
+			<trans-unit id="properties.buttonTextColor.selectBoxEditor.values.white" xml:space="preserve">
+				<source>White</source>
+			</trans-unit>
+			<trans-unit id="properties.buttonTextColor.selectBoxEditor.values.black" xml:space="preserve">
+				<source>Black</source>
+			</trans-unit>
+			<trans-unit id="properties.backgroundColor" xml:space="preserve">
+				<source>Background color</source>
+			</trans-unit>
+			<trans-unit id="properties.buttonTextColor" xml:space="preserve">
+				<source>Button text color</source>
+			</trans-unit>
+			<trans-unit id="properties.themeColor" xml:space="preserve">
+				<source>Theme color</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

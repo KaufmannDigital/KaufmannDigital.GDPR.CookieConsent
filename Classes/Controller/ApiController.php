@@ -46,7 +46,7 @@ class ApiController extends RestController
     public function initializeAction()
     {
         parent::initializeAction();
-        #TODO: Make configurable
+        #TODO: Make configurable, add if clause for neos versions (Min 5.3 LTS)
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
         $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
@@ -54,11 +54,13 @@ class ApiController extends RestController
     }
 
     /**
-     * @param NodeInterface|null $siteNode
+     * @param NodeInterface|null $siteNode The current SiteNode for multisite support
      * @return void
      * @throws NodeNotFoundException
      * @throws \Neos\ContentRepository\Exception\NodeException
      * @throws \Neos\Eel\Exception
+     *
+     * Search for CookieSettings node, render and output its HTML and if consent needs renewal
      */
     public function renderCookieSettingsAction(NodeInterface $siteNode = null)
     {
@@ -78,6 +80,7 @@ class ApiController extends RestController
             return;
         }
 
+        // Generate HTML out of CookieSettings node
         $view = new FusionView();
         $view->setControllerContext($this->controllerContext);
         $view->setFusionPath('cookieConsentSettings');
@@ -87,6 +90,7 @@ class ApiController extends RestController
         $this->view->assign('html', $view->render());
 
 
+        // Check if consents need renewal
         $needsRenew = true;
         if (isset($this->request->getHttpRequest()->getCookieParams()[$this->cookieName])) {
             $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName]);
@@ -107,41 +111,5 @@ class ApiController extends RestController
 
     public function renderCookieSettingsOptionsAction() {
 
-    }
-
-    /**
-     * @param array $choice
-     * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
-     */
-    public function trackChoiceAction(array $choice = [])
-    {
-        $userId = $choice['userId'] ?? '';
-        $userAgent = current($this->request->getHttpRequest()->getHeader('User-Agent'));
-        if (empty($userId)) {
-            $userId = uniqid();
-            $consentLogEntry = new ConsentLogEntry($userId, new \DateTime(), '#init#', $userAgent);
-            $this->consentLogRepository->add($consentLogEntry);
-        } else {
-            /** @var ConsentLogEntry $logEntry */
-            $logEntry = $this->consentLogRepository->findOneByUserId($userId);
-            if ($logEntry instanceof ConsentLogEntry) {
-                $this->consentLogRepository->remove($logEntry);
-            }
-            foreach ($choice['consents'] as $dimension => $consentIdentifier) {
-                if (is_array($consentIdentifier)) {
-                    foreach ($consentIdentifier as $singleConsentIdentifier) {
-                        $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $dimension . '#'  .$singleConsentIdentifier, $userAgent);
-                        $this->consentLogRepository->add($consentLogEntry);
-                    }
-                } else {
-                    $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $consentIdentifier, $userAgent);
-                    $this->consentLogRepository->add($consentLogEntry);
-                }
-            }
-        }
-
-        $this->view->assign('success', true);
-        $this->view->assign('userId', $userId);
-        $this->view->setVariablesToRender(['success', 'userId']);
     }
 }
