@@ -2,8 +2,6 @@
 
 namespace KaufmannDigital\GDPR\CookieConsent\Controller;
 
-use KaufmannDigital\GDPR\CookieConsent\Domain\Model\ConsentLogEntry;
-use KaufmannDigital\GDPR\CookieConsent\Domain\Repository\ConsentLogEntryRepository;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
