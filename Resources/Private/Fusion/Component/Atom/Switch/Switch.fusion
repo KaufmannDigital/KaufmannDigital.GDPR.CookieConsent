@@ -1,6 +1,6 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Component.Switch) < prototype(Neos.Fusion:Component) {
     checked = false
-    locked = false
+    locked = ${node.context.inBackend}
     value = ''
     label = ''
 
