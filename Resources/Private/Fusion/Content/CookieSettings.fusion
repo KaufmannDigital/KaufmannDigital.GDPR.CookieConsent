@@ -39,7 +39,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
             }
         }
         background = ${q(node).property('backgroundColor')}
-        background.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-bg:'+value+';'}
+        background.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-bg-color:'+value+';'}
         theme = ${q(node).property('themeColor')}
         theme.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-theme-color:'+value+';'}
     }
@@ -74,7 +74,6 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                                     closeIndividualSettingsLabel={props.labels.closeIndividualSettings}
                             />
                         </div>
-
 
                         <div class="gdpr-cookieconsent-settings__content__settings hidden">
                             {props.individualSettings}
