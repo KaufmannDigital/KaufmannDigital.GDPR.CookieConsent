@@ -29,12 +29,6 @@ class ApiController extends RestController
     protected $contextFactory;
 
     /**
-     * @Flow\Inject
-     * @var ConsentLogEntryRepository
-     */
-    protected $consentLogRepository;
-
-    /**
      * @Flow\InjectConfiguration(path="cookieName")
      * @var string
      */
