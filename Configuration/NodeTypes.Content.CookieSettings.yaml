@@ -189,6 +189,7 @@
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
           group: styling
           editorOptions:
+            allowEmpty: true
             values:
               white:
                 label: i18n

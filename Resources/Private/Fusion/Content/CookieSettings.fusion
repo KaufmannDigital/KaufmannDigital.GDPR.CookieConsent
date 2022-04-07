@@ -34,8 +34,12 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                 renderer = '--cookieconsent-buttontext-color: rgb(0 0 0);'
             }
             white {
-                condition = true
+                condition = ${q(node).property('buttonTextColor') == 'white'}
                 renderer = '--cookieconsent-buttontext-color: rgb(255 255 255);'
+            }
+            none {
+                condition = true
+                renderer = ''
             }
         }
         background = ${q(node).property('backgroundColor')}
