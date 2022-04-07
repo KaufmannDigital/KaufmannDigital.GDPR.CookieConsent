@@ -78,9 +78,10 @@
                 width: 100%;
                 margin: calc(var(--cookieconsent-spacing) * 2) 0 0;
             }
-
+            button {
+                all: unset; //reset site stlyes for button element and only use our styles
+            }
             .grpr-cc-button {
-                all: unset; //reset site stlyes and only use our styles
                 width: 100%;
                 text-align: center;
                 font-size: 1rem;

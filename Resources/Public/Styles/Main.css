@@ -70,8 +70,10 @@
     margin: calc(var(--cookieconsent-spacing) * 2) 0 0;
   }
 }
-.gdpr-cookieconsent-settings__content__cta .grpr-cc-button {
+.gdpr-cookieconsent-settings__content__cta button {
   all: unset;
+}
+.gdpr-cookieconsent-settings__content__cta .grpr-cc-button {
   width: 100%;
   text-align: center;
   font-size: 1rem;
