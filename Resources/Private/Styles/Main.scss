@@ -230,11 +230,11 @@
     -webkit-tap-highlight-color: transparent;
     --cookieconsent-switch-thumb-size: 1.5rem;
     --cookieconsent-switch-thumb-color: rgb(255 255 255);
-    --cookieconsent-switch-thumb-highlight: rgba(0 0 0 / 0.25);
+    --cookieconsent-switch-thumb-highlight-color: rgba(0 0 0 / 0.25);
     --cookieconsent-switch-length: calc(var(--cookieconsent-switch-thumb-size) * 2);
     --cookieconsent-switch-padding: 4px;
-    --cookieconsent-switch-inactive: rgb(204 204 204);
-    --cookieconsent-switch-active: var(--cookieconsent-theme-color);
+    --cookieconsent-switch-inactive-color: rgb(204 204 204);
+    --cookieconsent-switch-active-color: var(--cookieconsent-theme-color);
     --cookieconsent-switch-thumb-size-small: 1rem;
     --cookieconsent-switch-outline: var(--cookieconsent-focus-outline);
     --cookieconsent-switch-outline-offset: var(--cookieconsent-focus-outline-offset);
@@ -258,7 +258,7 @@
         inline-size: var(--cookieconsent-switch-length);
         block-size: var(--cookieconsent-switch-thumb-size);
         padding: var(--cookieconsent-switch-padding);
-        background: var(--cookieconsent-switch-inactive);
+        background: var(--cookieconsent-switch-inactive-color);
         transition: background-color .25s ease;
         border-radius: var(--cookieconsent-switch-length);
         border: none;
@@ -271,7 +271,7 @@
 
             content: "";
             border-radius: 50%;
-            box-shadow: 0 0 0 var(--_cookieconsent-switch-highlight-size) var(--cookieconsent-switch-thumb-highlight);
+            box-shadow: 0 0 0 var(--_cookieconsent-switch-highlight-size) var(--cookieconsent-switch-thumb-highlight-color);
             cursor: pointer;
             pointer-events: auto;
             position: absolute;
@@ -289,7 +289,7 @@
             --_cookieconsent-switch-highlight-size: .5rem;
         }
         &:checked {
-            background: var(--cookieconsent-switch-active);
+            background: var(--cookieconsent-switch-active-color);
             --_cookieconsent-switch-thumb-position: calc(var(--cookieconsent-switch-length) - 100%);
         }
         &:disabled {

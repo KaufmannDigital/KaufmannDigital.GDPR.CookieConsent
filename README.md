@@ -237,11 +237,11 @@ Instead of writing out all the selectors in your custom file, it might be enough
 .gdpr-cookieconsent-switch {
     --cookieconsent-switch-thumb-size: 1.5rem;
     --cookieconsent-switch-thumb-color: rgb(255 255 255);
-    --cookieconsent-switch-thumb-highlight: rgba(0 0 0 / 0.25);
+    --cookieconsent-switch-thumb-highlight-color: rgba(0 0 0 / 0.25);
     --cookieconsent-switch-length: calc(var(--cookieconsent-switch-thumb-size) * 2);
     --cookieconsent-switch-padding: 4px;
-    --cookieconsent-switch-inactive: rgb(204 204 204);
-    --cookieconsent-switch-active: var(--cookieconsent-theme-color);
+    --cookieconsent-switch-inactive-color: rgb(204 204 204);
+    --cookieconsent-switch-active-color: var(--cookieconsent-theme-color);
     --cookieconsent-switch-thumb-size-small: 1rem;
     --cookieconsent-switch-outline: var(--cookieconsent-focus-outline);
     --cookieconsent-switch-outline-offset: var(--cookieconsent-focus-outline-offset);
