@@ -38,11 +38,17 @@ class ApiController extends RestController
     public function initializeAction()
     {
         parent::initializeAction();
-        #TODO: Make configurable, add if clause for neos versions (Min 5.3 LTS)
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');
+        if (method_exists($this->response, 'setHttpHeader')) {
+            $this->response->setHttpHeader('Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
+            $this->response->setHttpHeader('Access-Control-Allow-Credentials', 'true');
+            $this->response->setHttpHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
+            $this->response->setHttpHeader('Vary', 'Origin');
+        } else {
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');
+        }
     }
 
     /**
