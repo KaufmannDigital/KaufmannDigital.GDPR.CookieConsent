@@ -102,7 +102,6 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
     `
 
     @cache {
-        #TODO: Check, if needed. Since we are doing the individual settings in JS now, we could cache it.
         mode = 'uncached'
 
         context {
