@@ -78,10 +78,10 @@
                 width: 100%;
                 margin: calc(var(--cookieconsent-spacing) * 2) 0 0;
             }
-            button {
+            :where(button.gdpr-cc-button) {
                 all: unset; //reset site stlyes for button element and only use our styles
             }
-            .grpr-cc-button {
+            .gdpr-cc-button {
                 width: 100%;
                 text-align: center;
                 font-size: 1rem;
@@ -103,7 +103,7 @@
                     border-width: 3px;
                 }
 
-                & + .grpr-cc-button {
+                & + .gdpr-cc-button {
                     margin-top: calc(var(--cookieconsent-spacing) / 2);
                     @media only screen and (max-width: 1224px) {
                         margin-top: var(--cookieconsent-spacing);
