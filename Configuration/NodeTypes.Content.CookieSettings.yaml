@@ -169,13 +169,10 @@
         label: i18n
         inspector:
           group: styling
-          editor: 'Shel.Neos.ColorPicker/ColorPickerEditor'
           editorOptions:
-            mode: 'rgba'
-            picker: true
-            fields: true
-            presetColors: false
-            allowEmpty: true
+            placeholder: '#ffffff'
+            maxlength: 9
+            required: false
 
     backgroundColor: *colorsetting
 

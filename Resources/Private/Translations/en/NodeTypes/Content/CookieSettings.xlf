@@ -82,13 +82,13 @@
 				<source>Black</source>
 			</trans-unit>
 			<trans-unit id="properties.backgroundColor" xml:space="preserve">
-				<source>Background color</source>
+				<source>Background color (HEX)</source>
 			</trans-unit>
 			<trans-unit id="properties.buttonTextColor" xml:space="preserve">
 				<source>Button text color</source>
 			</trans-unit>
 			<trans-unit id="properties.themeColor" xml:space="preserve">
-				<source>Theme color</source>
+				<source>Theme color (HEX)</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -43,8 +43,11 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
             }
         }
         background = ${q(node).property('backgroundColor')}
+        background.@process.testHex = ${String.pregMatch(value, "/^#(?:[0-9a-fA-F]{3,4}){1,2}$/") != null ? value : ""}
         background.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-bg-color:'+value+';'}
+
         theme = ${q(node).property('themeColor')}
+        theme.@process.testHex = ${String.pregMatch(value, "/^#(?:[0-9a-fA-F]{3,4}){1,2}$/") != null ? value : ""}
         theme.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-theme-color:'+value+';'}
     }
 
