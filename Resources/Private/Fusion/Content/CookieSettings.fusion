@@ -62,6 +62,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                 class="gdpr-cookieconsent-container"
                 style={props.styles}
                 style.@if.set={props.styles}
+                tabindex="0"
             >
                 <div class="gdpr-cookieconsent-settings">
                     <div class="gdpr-cookieconsent-settings__content">
