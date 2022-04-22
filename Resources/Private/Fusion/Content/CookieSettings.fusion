@@ -27,7 +27,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         closeIndividualSettings = ${q(node).property('closeIndividualSettingsLabel')}
     }
 
-    colors = Neos.Fusion:Join {
+    styles = Neos.Fusion:Join {
         buttonText = Neos.Fusion:Case {
             black {
                 condition = ${q(node).property('buttonTextColor') == 'black'}
@@ -49,6 +49,9 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         theme = ${q(node).property('themeColor')}
         theme.@process.testHex = ${String.pregMatch(value, "/^#(?:[0-9a-fA-F]{3,4}){1,2}$/") != null ? value : ""}
         theme.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-theme-color:'+value+';'}
+
+        width = ${q(node).property('maxWidth')}
+        width.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-width:'+value+'px;'}
     }
 
     renderer = afx`
@@ -57,8 +60,8 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
 
             <div
                 class="gdpr-cookieconsent-container"
-                style={props.colors}
-                style.@if.set={props.colors}
+                style={props.styles}
+                style.@if.set={props.styles}
             >
                 <div class="gdpr-cookieconsent-settings">
                     <div class="gdpr-cookieconsent-settings__content">

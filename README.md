@@ -198,7 +198,7 @@ The banner comes with default styling that aims to be GDPR compliant and accessi
 
 You can customise the banner by either:
 
-1. Set a theme color (for buttons), the background color and text color via the input fields in the inspector.
+1. Set a theme color (for buttons), the background color, text color and maximum width of the banner via the input fields in the inspector.
 2. Create a CSS-File with your own styling and include it using Settings.yaml:
 
 ```yaml

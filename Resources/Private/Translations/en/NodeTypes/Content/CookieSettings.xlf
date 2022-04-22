@@ -90,6 +90,9 @@
 			<trans-unit id="properties.themeColor" xml:space="preserve">
 				<source>Theme color (HEX)</source>
 			</trans-unit>
+			<trans-unit id="properties.maxWidth" xml:space="preserve">
+                <source>Maximum content width (px)</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

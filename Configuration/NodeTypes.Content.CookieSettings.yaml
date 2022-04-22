@@ -193,5 +193,17 @@
               black:
                 label: i18n
 
+    maxWidth:
+      type: string
+      ui:
+        reloadIfChanged: true
+        label: i18n
+        inspector:
+          group: styling
+          editorOptions:
+            placeholder: '1200'
+            required: false
+      validation:
+        Neos.Neos/Validation/IntegerValidator:
 
 
