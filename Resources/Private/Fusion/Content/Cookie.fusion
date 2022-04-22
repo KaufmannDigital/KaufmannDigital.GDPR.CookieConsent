@@ -15,7 +15,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.Cookie) < prototype(Neos.Ne
     renderer = afx`
         <div class="gdpr-cookieconsent-cookie" data-identifier={props.identifier}>
             <div class="gdpr-cookieconsent-cookie__switch">
-                <KaufmannDigital.GDPR.CookieConsent:Component.Switch
+                <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Switch
                         label={props.editableName}
                         value={props.identifier}
                         variant="cookie"

@@ -27,7 +27,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Ne
     renderer = afx`
         <div class={Array.join(props.groupClasses, ' ')}>
             <div class="gdpr-cookieconsent-setting-group__switch">
-                <KaufmannDigital.GDPR.CookieConsent:Component.Switch
+                <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Switch
                     value={props.identifier}
                     label={props.editableHeadline}
                     variant="group"
