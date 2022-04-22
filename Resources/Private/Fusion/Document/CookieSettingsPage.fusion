@@ -1,6 +1,6 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prototype(Neos.Fusion:Component) {
 
-    cookieSettings = KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings {
+    @context.cookieSettings = KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings {
         @context.node = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage]').find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').get(0)}
     }
 
@@ -9,7 +9,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prot
         type = ${site.nodeType.name}
         @context.node = ${site}
 
-        @process.addCookieSettings = ${String.pregReplace(value, '/(.*)<\/body>(.*)/s', '$1' + props.cookieSettings + "</body>$2")}
+        @process.addCookieSettings = ${String.pregReplace(value, '/(.*)<\/body>(.*)/s', '$1' + cookieSettings + "</body>$2")}
     }
 
     @cache {
@@ -19,7 +19,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prot
             1 = 'node'
             2 = 'documentNode'
             3 = 'site'
-            4 = 'addCookies'
+            4 = 'cookieSettings'
         }
     }
 }
