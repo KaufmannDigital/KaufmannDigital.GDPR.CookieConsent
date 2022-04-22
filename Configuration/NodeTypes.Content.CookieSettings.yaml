@@ -45,6 +45,7 @@
         inline:
           editorOptions:
             placeholder: i18n
+            autoparagraph: true
     individualSettingsDescription:
       type: string
       defaultValue: ''
@@ -53,6 +54,7 @@
         inline:
           editorOptions:
             placeholder: i18n
+            autoparagraph: true
     imprintLink:
       type: string
       ui:

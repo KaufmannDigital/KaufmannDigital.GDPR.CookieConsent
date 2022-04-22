@@ -255,13 +255,15 @@ Instead of writing out all the selectors in your custom file, it might be enough
 
 #### Use your own fusion components in the banner
 
-Sometimes adjusting CSS isn't enough and you just want to use your own button components in the banner. Good news: You can by overwriting the `renderer`of the following components:
+Sometimes adjusting CSS isn't enough, and you just want to use your own button or text components in the banner. Good news: You can by overwriting the `renderer`of the following components:
 
 - `KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton`
 - `KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton`
 - `KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptNecessaryButton`
 - `KaufmannDigital.GDPR.CookieConsent:Component.Atom.OpenIndividualSettingsButton`
 - `KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseIndividualSettingsButton`
+- `KaufmannDigital.GDPR.CookieConsent:Component.Atom.Headline`
+- `KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text`
 
 Accessing the button labels is as easy as accessing `${props.label}`.
 

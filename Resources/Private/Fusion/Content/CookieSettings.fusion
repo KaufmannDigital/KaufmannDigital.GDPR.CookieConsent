@@ -66,12 +66,18 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
                 <div class="gdpr-cookieconsent-settings">
                     <div class="gdpr-cookieconsent-settings__content">
                         <div class="gdpr-cookieconsent-settings__content__info">
-                            <h2>{props.editableHeadline}</h2>
+                            <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Headline>
+                                {props.editableHeadline}
+                            </KaufmannDigital.GDPR.CookieConsent:Component.Atom.Headline>
                             <div class="gdpr-cookieconsent-settings__content__info__description gdpr-cookieconsent-settings__content__info__description--main">
-                                {props.editableMainDescription}
+                                <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text>
+                                    {props.editableMainDescription}
+                                </KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text>
                             </div>
                             <div class="gdpr-cookieconsent-settings__content__info__description gdpr-cookieconsent-settings__content__info__description--settings hidden">
-                                {props.editableIndividualSettingsDescription}
+                                <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text>
+                                    {props.editableIndividualSettingsDescription}
+                                </KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text>
                             </div>
                         </div>
 
