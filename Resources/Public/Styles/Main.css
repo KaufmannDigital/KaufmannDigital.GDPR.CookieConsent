@@ -140,6 +140,9 @@
 .gdpr-cookieconsent-setting-group__switch, .gdpr-cookieconsent-setting-group__description, .gdpr-cookieconsent-setting-group__details {
   flex: 1 0 100%;
 }
+.gdpr-cookieconsent-setting-group__description, .gdpr-cookieconsent-setting-group__details {
+  margin-top: var(--cookieconsent-spacing);
+}
 .gdpr-cookieconsent-setting-group__cookies {
   flex: 1 0 100%;
   margin-top: calc(var(--cookieconsent-spacing) * 1);

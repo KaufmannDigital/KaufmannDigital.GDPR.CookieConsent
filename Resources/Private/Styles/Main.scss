@@ -161,6 +161,11 @@
         flex: 1 0 100%;
     }
 
+    &__description,
+    &__details{
+        margin-top: var(--cookieconsent-spacing);
+    }
+
     &__cookies {
         flex: 1 0 100%;
         margin-top: calc(var(--cookieconsent-spacing) * 1);
