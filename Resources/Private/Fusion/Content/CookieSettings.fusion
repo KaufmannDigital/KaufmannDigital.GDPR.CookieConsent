@@ -1,3 +1,4 @@
+// The actual cookie banner
 prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype(Neos.Neos:ContentComponent) {
     editableHeadline = Neos.Neos:Editable {
         property = 'headline'
@@ -16,58 +17,101 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         @cache.mode = 'embed'
     }
 
-    hasNecessaryGroup = ${q(node).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.NecessarySettingGroup]').count() > 0}
     closeButtonEnabled = ${q(node).property('closeButtonEnabled')}
 
-    labels = Neos.Fusion:RawArray {
+    labels = Neos.Fusion:DataStructure {
         acceptAll = ${q(node).property('acceptAllButtonLabel')}
         save = ${q(node).property('saveButtonLabel')}
-        saveButtonLabel = ${q(node).property('saveButtonLabel')}
-        acceptNecessaryCookiesLabel = ${q(node).property('acceptNecessaryCookiesLabel')}
-        openIndividualSettingsLabel = ${q(node).property('openIndividualSettingsLabel')}
-        closeIndividualSettingsLabel = ${q(node).property('closeIndividualSettingsLabel')}
+        acceptNecessaryCookies = ${q(node).property('acceptNecessaryCookiesLabel')}
+        openIndividualSettings = ${q(node).property('openIndividualSettingsLabel')}
+        closeIndividualSettings = ${q(node).property('closeIndividualSettingsLabel')}
+    }
+
+    styles = Neos.Fusion:Join {
+        buttonText = Neos.Fusion:Case {
+            black {
+                condition = ${q(node).property('buttonTextColor') == 'black'}
+                renderer = '--cookieconsent-buttontext-color: rgb(0 0 0);'
+            }
+            white {
+                condition = ${q(node).property('buttonTextColor') == 'white'}
+                renderer = '--cookieconsent-buttontext-color: rgb(255 255 255);'
+            }
+            none {
+                condition = true
+                renderer = ''
+            }
+        }
+        background = ${q(node).property('backgroundColor')}
+        background.@process.testHex = ${String.pregMatch(value, "/^#(?:[0-9a-fA-F]{3,4}){1,2}$/") != null ? value : ""}
+        background.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-bg-color:'+value+';'}
+
+        theme = ${q(node).property('themeColor')}
+        theme.@process.testHex = ${String.pregMatch(value, "/^#(?:[0-9a-fA-F]{3,4}){1,2}$/") != null ? value : ""}
+        theme.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-theme-color:'+value+';'}
+
+        width = ${q(node).property('maxWidth')}
+        width.@process.toVar = ${value && !String.isBlank(value) && '--cookieconsent-width:'+value+'px;'}
     }
 
     renderer = afx`
         <div>
             <KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings />
-            <div class="gdpr-cookieconsent-overlay"></div>
-            <div class="gdpr-cookieconsent-settings">
-                <div class="gdpr-cookieconsent-settings__content">
-                    <div class="gdpr-cookieconsent-settings__content__info">
-                        <h2>{props.editableHeadline}</h2>
-                        <div class="gdpr-cookieconsent-settings__content__info__main-description">
-                            {props.editableMainDescription}
+
+            <div
+                class="gdpr-cookieconsent-container"
+                style={props.styles}
+                style.@if.set={props.styles}
+                tabindex="0"
+            >
+                <div class="gdpr-cookieconsent-settings">
+                    <div class="gdpr-cookieconsent-settings__content">
+                        <div class="gdpr-cookieconsent-settings__content__info">
+                            <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Headline>
+                                {props.editableHeadline}
+                            </KaufmannDigital.GDPR.CookieConsent:Component.Atom.Headline>
+                            <div class="gdpr-cookieconsent-settings__content__info__description gdpr-cookieconsent-settings__content__info__description--main">
+                                <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text>
+                                    {props.editableMainDescription}
+                                </KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text>
+                            </div>
+                            <div class="gdpr-cookieconsent-settings__content__info__description gdpr-cookieconsent-settings__content__info__description--settings hidden">
+                                <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text>
+                                    {props.editableIndividualSettingsDescription}
+                                </KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text>
+                            </div>
                         </div>
-                        <div class="gdpr-cookieconsent-settings__content__info__settings-description hidden">
-                            {props.editableIndividualSettingsDescription}
+
+                        <div class="gdpr-cookieconsent-settings__content__cta">
+                            <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.CTAs
+                                    acceptAllLabel={props.labels.acceptAll}
+                                    saveLabel={props.labels.save}
+                                    acceptNecessaryLabel={props.labels.acceptNecessaryCookies}
+                                    openIndividualSettingsLabel={props.labels.openIndividualSettings}
+                                    closeIndividualSettingsLabel={props.labels.closeIndividualSettings}
+                            />
                         </div>
+
+                        <div class="gdpr-cookieconsent-settings__content__settings hidden">
+                            {props.individualSettings}
+                        </div>
+
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.FooterLinks settingsNode={node}/>
                     </div>
-                    <div class="gdpr-cookieconsent-settings__content__cta">
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton label={props.labels.acceptAll} />
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton label={props.labels.save} />
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptNecessaryButton label={props.labels.acceptNecessaryCookiesLabel} @if.necessaryGroup={props.hasNecessaryGroup} />
+
+                    <div class="gdpr-cookieconsent-settings__close">
+                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseButton
+                                @if.condition={props.closeButtonEnabled}/>
                     </div>
-                    <div class="gdpr-cookieconsent-settings__content__settings hidden">
-                        {props.individualSettings}
-                    </div>
-                    <KaufmannDigital.GDPR.CookieConsent:Component.Molecule.FooterLinks settingsNode={node} />
-                    <div class="gdpr-cookieconsent-settings__content__individual-switch">
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.OpenIndividualSettingsButton label={props.labels.openIndividualSettingsLabel} />
-                        <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseIndividualSettingsButton label={props.labels.closeIndividualSettingsLabel} />
-                    </div>
-                </div>
-                <div class="gdpr-cookieconsent-settings__close">
-                    <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseButton @if.condition={props.closeButtonEnabled} />
                 </div>
             </div>
+
             <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedStyles/>
             <KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript/>
         </div>
     `
 
     @cache {
-        #TODO: Check, if needed. Since we are doing the individual settings in JS now, we could cache it.
         mode = 'uncached'
 
         context {

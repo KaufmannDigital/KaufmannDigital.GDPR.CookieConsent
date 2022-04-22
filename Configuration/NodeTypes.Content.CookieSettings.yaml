@@ -19,6 +19,15 @@
         cookieSettings:
           label: i18n
           icon: 'icon-cookie'
+        styling:
+          label: i18n
+          icon: 'icon-brush'
+          tab: styling
+      tabs:
+        styling:
+          label: i18n
+          icon: 'icon-brush'
+          position: before meta
   properties:
     headline:
       type: string
@@ -36,6 +45,7 @@
         inline:
           editorOptions:
             placeholder: i18n
+            autoparagraph: true
     individualSettingsDescription:
       type: string
       defaultValue: ''
@@ -44,6 +54,7 @@
         inline:
           editorOptions:
             placeholder: i18n
+            autoparagraph: true
     imprintLink:
       type: string
       ui:
@@ -152,3 +163,49 @@
           group: cookieSettings
         label: i18n
         reloadIfChanged: true
+
+    themeColor: &colorsetting
+      type: string
+      ui:
+        reloadIfChanged: true
+        label: i18n
+        inspector:
+          group: styling
+          editorOptions:
+            placeholder: '#ffffff'
+            maxlength: 9
+            required: false
+
+    backgroundColor: *colorsetting
+
+    buttonTextColor:
+      type: string
+      defaultValue: "white"
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          group: styling
+          editorOptions:
+            allowEmpty: true
+            values:
+              white:
+                label: i18n
+              black:
+                label: i18n
+
+    maxWidth:
+      type: string
+      ui:
+        reloadIfChanged: true
+        label: i18n
+        inspector:
+          group: styling
+          editorOptions:
+            placeholder: '1200'
+            required: false
+      validation:
+        Neos.Neos/Validation/IntegerValidator:
+
+

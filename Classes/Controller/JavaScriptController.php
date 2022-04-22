@@ -59,9 +59,15 @@ class JavaScriptController extends RestController
     }
 
 
+    /**
+     * Concatinate scripts of cookies and write to cache
+     * @param array $dimensions
+     * @return void
+     */
     public function renderJavaScriptAction(array $dimensions = [])
     {
         try {
+            // dimensions that have configuration
             $filteredDimensions =
                 array_filter(
                     $dimensions,
@@ -71,20 +77,21 @@ class JavaScriptController extends RestController
                     ARRAY_FILTER_USE_KEY
                 );
 
+            // turn configured dimensions into a identifier like "deu_de"
             $dimensionIdentifier = implode(
                 '_',
                 array_map(function ($dimension) { return current($dimension);}, $filteredDimensions)
             );
 
             $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true);
-            $consents = isset($cookie['consents'][$dimensionIdentifier]) ? $cookie['consents'][$dimensionIdentifier] : $cookie['consents']['default'] ?? $cookie['consents'];
+            $consents = $cookie['consents'][$dimensionIdentifier] ?? $cookie['consents']['default'] ?? $cookie['consents'];
             $siteNode = $this->contextFactory->create(['dimensions' => $dimensions])->getCurrentSiteNode();
 
             $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents) . $dimensionIdentifier . $siteNode->getIdentifier());
 
             $q = new FlowQuery([$siteNode]);
 
-            $consentDate = new \DateTime(isset($cookie['consentDates'][$dimensionIdentifier]) ? $cookie['consentDates'][$dimensionIdentifier] : $cookie['consentDate']);
+            $consentDate = new \DateTime($cookie['consentDates'][$dimensionIdentifier] ?? $cookie['consentDate']);
             $cookieSettings = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
 
             if (!$cookieSettings instanceof NodeInterface) {
@@ -139,6 +146,7 @@ class JavaScriptController extends RestController
 
 
     /**
+     * Return rendered JS from cache
      * @param string $hash
      */
     public function downloadGeneratedJavaScriptAction(string $hash)

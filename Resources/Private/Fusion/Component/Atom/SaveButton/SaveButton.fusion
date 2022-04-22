@@ -2,6 +2,10 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton) < protot
     label = 'Save'
 
     renderer = afx`
-        <button id="gdpr-cc-btn-save" class="button hidden">{props.label}</button>
+        <button type="button" class="gdpr-cc-button">{props.label}</button>
     `
+    @process.id = Neos.Fusion:Augmenter {
+        id = "gdpr-cc-btn-save"
+        class = "hidden"
+    }
 }

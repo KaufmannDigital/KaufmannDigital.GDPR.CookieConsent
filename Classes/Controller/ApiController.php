@@ -2,8 +2,6 @@
 
 namespace KaufmannDigital\GDPR\CookieConsent\Controller;
 
-use KaufmannDigital\GDPR\CookieConsent\Domain\Model\ConsentLogEntry;
-use KaufmannDigital\GDPR\CookieConsent\Domain\Repository\ConsentLogEntryRepository;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
@@ -31,34 +29,41 @@ class ApiController extends RestController
     protected $contextFactory;
 
     /**
-     * @Flow\Inject
-     * @var ConsentLogEntryRepository
-     */
-    protected $consentLogRepository;
-
-    /**
      * @Flow\InjectConfiguration(path="cookieName")
      * @var string
      */
     protected $cookieName;
 
+    /**
+     * @Flow\InjectConfiguration(path="headerConsent")
+     * @var array
+     */
+    protected $headerConsent;
 
     public function initializeAction()
     {
         parent::initializeAction();
-        #TODO: Make configurable
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');
+        if (method_exists($this->response, 'setHttpHeader')) {
+            $this->response->setHttpHeader('Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
+            $this->response->setHttpHeader('Access-Control-Allow-Credentials', 'true');
+            $this->response->setHttpHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
+            $this->response->setHttpHeader('Vary', 'Origin');
+        } else {
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');
+        }
     }
 
     /**
-     * @param NodeInterface|null $siteNode
+     * @param NodeInterface|null $siteNode The current SiteNode for multisite support
      * @return void
      * @throws NodeNotFoundException
      * @throws \Neos\ContentRepository\Exception\NodeException
      * @throws \Neos\Eel\Exception
+     *
+     * Search for CookieSettings node, render and output its HTML and if consent needs renewal
      */
     public function renderCookieSettingsAction(NodeInterface $siteNode = null)
     {
@@ -78,6 +83,7 @@ class ApiController extends RestController
             return;
         }
 
+        // Generate HTML out of CookieSettings node
         $view = new FusionView();
         $view->setControllerContext($this->controllerContext);
         $view->setFusionPath('cookieConsentSettings');
@@ -87,6 +93,7 @@ class ApiController extends RestController
         $this->view->assign('html', $view->render());
 
 
+        // Check if consents need renewal
         $needsRenew = true;
         if (isset($this->request->getHttpRequest()->getCookieParams()[$this->cookieName])) {
             $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName]);
@@ -101,8 +108,15 @@ class ApiController extends RestController
 
         $this->view->assign('needsRenew', $needsRenew);
 
+        $this->view->assign('headerConsent',
+            [
+                'acceptAll' => $this->matchHeaders($this->headerConsent['acceptAll']),
+                'acceptNecessary' => $this->matchHeaders($this->headerConsent['acceptNecessary'])
+            ]
+        );
 
-        $this->view->setVariablesToRender(['html', 'needsRenew']);
+
+        $this->view->setVariablesToRender(['html', 'needsRenew', 'headerConsent']);
     }
 
     public function renderCookieSettingsOptionsAction() {
@@ -110,38 +124,18 @@ class ApiController extends RestController
     }
 
     /**
-     * @param array $choice
-     * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
+     * @param array $matchers
+     * @return bool
      */
-    public function trackChoiceAction(array $choice = [])
-    {
-        $userId = $choice['userId'] ?? '';
-        $userAgent = current($this->request->getHttpRequest()->getHeader('User-Agent'));
-        if (empty($userId)) {
-            $userId = uniqid();
-            $consentLogEntry = new ConsentLogEntry($userId, new \DateTime(), '#init#', $userAgent);
-            $this->consentLogRepository->add($consentLogEntry);
-        } else {
-            /** @var ConsentLogEntry $logEntry */
-            $logEntry = $this->consentLogRepository->findOneByUserId($userId);
-            if ($logEntry instanceof ConsentLogEntry) {
-                $this->consentLogRepository->remove($logEntry);
-            }
-            foreach ($choice['consents'] as $dimension => $consentIdentifier) {
-                if (is_array($consentIdentifier)) {
-                    foreach ($consentIdentifier as $singleConsentIdentifier) {
-                        $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $dimension . '#'  .$singleConsentIdentifier, $userAgent);
-                        $this->consentLogRepository->add($consentLogEntry);
-                    }
-                } else {
-                    $consentLogEntry = new ConsentLogEntry($userId, new \DateTime($choice['consentDate']), $consentIdentifier, $userAgent);
-                    $this->consentLogRepository->add($consentLogEntry);
-                }
+    protected function matchHeaders(array $matchers) {
+        foreach ($matchers as $headerName => $headerMatcher) {
+            if (fnmatch(
+                $headerMatcher,
+                current($this->request->getHttpRequest()->getHeader($headerName))
+            )) {
+                return true;
             }
         }
-
-        $this->view->assign('success', true);
-        $this->view->assign('userId', $userId);
-        $this->view->setVariablesToRender(['success', 'userId']);
+        return false;
     }
 }

@@ -1,0 +1,8 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.Text) < prototype(Neos.Fusion:Component) {
+
+    content = ""
+
+    renderer = afx`
+        <Neos.Fusion:Fragment>{props.content}</Neos.Fusion:Fragment>
+    `
+}

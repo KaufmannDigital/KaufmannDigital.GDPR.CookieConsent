@@ -1,0 +1,25 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prototype(Neos.Fusion:Component) {
+
+    @context.cookieSettings = KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings {
+        @context.node = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage]').find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').get(0)}
+    }
+
+    // Render the "Homepage" and insert cookiebanner before closing tag
+    renderer = Neos.Fusion:Renderer {
+        type = ${site.nodeType.name}
+        @context.node = ${site}
+
+        @process.addCookieSettings = ${String.pregReplace(value, '/(.*)<\/body>(.*)/s', '$1' + cookieSettings + "</body>$2")}
+    }
+
+    @cache {
+        mode = 'uncached'
+
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'site'
+            4 = 'cookieSettings'
+        }
+    }
+}

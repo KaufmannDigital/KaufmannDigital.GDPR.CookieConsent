@@ -1,14 +1,6 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript) < prototype(Neos.Fusion:Tag) {
     tagName = 'script'
 
-    @context.consentLogEnabled = ${Configuration.Setting('KaufmannDigital.GDPR.CookieConsent.consentLogEnabled') ? 'true' : 'false'}
-    @context.trackChoiceUrl = Neos.Fusion:UriBuilder {
-        package = 'KaufmannDigital.GDPR.CookieConsent'
-        controller = 'Api'
-        action = 'trackChoice'
-        absolute = true
-    }
-
     @context.generatedJsUrl = Neos.Fusion:UriBuilder {
         package = 'KaufmannDigital.GDPR.CookieConsent'
         controller = 'JavaScript'
@@ -18,8 +10,6 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript) < proto
     }
 
     content = Neos.Fusion:Join {
-        consentLog = ${"var consentLogEnabled =" + consentLogEnabled + ";"}
-        trackChoiceUrl = ${"var trackChoiceUrl = '" + trackChoiceUrl + "';"}
         generatedJsUrl = ${"var generatedJsUrl = '" + generatedJsUrl + "';"}
         mainScript = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/JavaScript/Main.js')}
     }

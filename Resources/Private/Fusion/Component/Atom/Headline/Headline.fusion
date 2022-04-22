@@ -1,0 +1,9 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.Headline) < prototype(Neos.Fusion:Component) {
+
+    content = ""
+    tagName = "h2"
+
+    renderer = afx`
+        <Neos.Fusion:Tag tagName={props.tagName}>{props.content}</Neos.Fusion:Tag>
+    `
+}

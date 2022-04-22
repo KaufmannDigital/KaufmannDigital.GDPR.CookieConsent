@@ -1,0 +1,23 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Component.Molecule.CTAs) < prototype(Neos.Fusion:Component) {
+    acceptAllLabel = "Accept All"
+    saveLabel= "Save"
+    acceptNecessaryLabel= "Accept Necessary Cookies"
+    openIndividualSettingsLabel = "Individual settings"
+    closeIndividualSettingsLabel = "Close individual settings"
+
+    renderer = afx`
+
+            <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton label={props.acceptAllLabel} />
+            <KaufmannDigital.GDPR.CookieConsent:Component.Atom.SaveButton label={props.saveLabel} />
+
+            <KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptNecessaryButton label={props.acceptNecessaryLabel} />
+
+            <KaufmannDigital.GDPR.CookieConsent:Component.Atom.OpenIndividualSettingsButton
+                    label={props.openIndividualSettingsLabel}
+            />
+            <KaufmannDigital.GDPR.CookieConsent:Component.Atom.CloseIndividualSettingsButton
+                label={props.closeIndividualSettingsLabel}
+            />
+    `
+
+}

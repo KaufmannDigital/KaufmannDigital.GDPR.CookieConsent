@@ -2,6 +2,9 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.OpenIndividualSettin
     label = ''
 
     renderer = afx`
-        <a id="gdpr-cc-btn-individual-settings-enable">{props.label}</a>
+        <button type="button" class="gdpr-cc-button gdpr-cc-button--secondary">{props.label}</button>
     `
+    @process.id = Neos.Fusion:Augmenter {
+        id = "gdpr-cc-btn-individual-settings-enable"
+    }
 }
