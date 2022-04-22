@@ -14,8 +14,7 @@ Composer-Version | Neos-Compatibility | Maintenance
 `^2.0` | >= 5.0 | 🐛
 `^3.0` | >= 5.0 | 🐛
 `^4.0` | >= 5.0 | 🐛 
-`^5.0` | >= 5.0 | 🐛 ✨ 
-
+`^5.0` | >= 5.0 | 🐛 ✨ (⚠️ [Note changed rendering and Styling](#styling))
 
 
 ## Installation
@@ -106,6 +105,20 @@ In some cases, you may need to accept necessary cookies without an user-interact
 <script>var KD_GDPR_CC_ACCEPT_NECESSARY = true;</script>
 ```
 This makes the Package to auto-accept necessary cookies without showing the consent-window. The user of course can open the window by hand anyways to adjust the decision.   
+
+### Accept by Headers
+If you are loading site-contents from other websites or in apps, you already have your needed consent. If so, you can configure Headers, which should accept your consents by default.
+```yaml
+KaufmannDigital:
+  GRDPR:
+    CookieConsent:
+      headerConsent:
+        acceptAll:
+          'User-Agent': 'Accepting-All-Agent*'
+        acceptNecessary:
+          'User-Agent': 'Accepting-needed-Agent*'
+```
+Here you can use the syntax of [fnmatch()](https://www.php.net/manual/de/function.fnmatch.php) for wildcards or similar.
 
 ### React to the user's cookie decision
 You can use one of these Methods to react on the user's decision on which Cookies are accepted:
