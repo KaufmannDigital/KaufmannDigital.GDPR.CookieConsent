@@ -38,7 +38,7 @@ function loadCookiebannerHtml(openSettings, showImmediately, openedManually)
     }
 }
 
-if (KD_GDPR_CC && KD_GDPR_CC.documentNodeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
+if (typeof KD_GDPR_CC !== 'undefined' && KD_GDPR_CC.documentNodeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
     /*Cookie set*/
     window.dataLayer = window.dataLayer || [];
     var cookieObject = JSON.parse(
@@ -73,7 +73,7 @@ if (KD_GDPR_CC && KD_GDPR_CC.documentNodeDisabled === false && document.cookie.i
             consents: cookieObject.consents,
         },
     });
-} else if (KD_GDPR_CC.documentNodeDisabled === false && document.getElementsByClassName('gdpr-cookieconsent-settings').length === 0 && window.neos === undefined) {
+} else if (typeof KD_GDPR_CC !== 'undefined' && KD_GDPR_CC.documentNodeDisabled === false && document.getElementsByClassName('gdpr-cookieconsent-settings').length === 0 && window.neos === undefined) {
     /*No Cookie set, not in backend & not on cookie page*/
     loadCookiebannerHtml();
 }
