@@ -19,3 +19,10 @@ KaufmannDigital:
       # See README.md
       # - 'Vendor.Package:Document.Imprint'
       hideBeforeInteraction: false
+      headerConsent:
+        acceptAll: []
+        #You can use fnmatch() syntax here
+        #  'User-Agent': 'Matching-User-Agent V*'
+        acceptNecessary: []
+        #You can use fnmatch() syntax here
+        #  'User-Agent': 'Matching-User-Agent V*'

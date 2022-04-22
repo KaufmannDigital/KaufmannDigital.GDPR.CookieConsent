@@ -18,7 +18,7 @@
     });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
-function initializeCookieConsent(openSettings, openedManually) {
+function initializeCookieConsent(openSettings, openedManually, autoAccept = 'none') {
 
     var kd_gdpr_cc_userid;
     var cookieSettingsContainer = document.querySelector('.gdpr-cookieconsent-container');
@@ -170,10 +170,14 @@ function initializeCookieConsent(openSettings, openedManually) {
         btnIndividualSettingsEnable.dispatchEvent(clickEvent);
     }
 
+    if (openedManually !== true && autoAccept === 'all') {
+        btnAcceptAll.dispatchEvent(clickEvent);
+    }
+
     if (
         openedManually !== true
-        && typeof KD_GDPR_CC_ACCEPT_NECESSARY !== 'undefined'
-        && KD_GDPR_CC_ACCEPT_NECESSARY === true
+        && (typeof KD_GDPR_CC_ACCEPT_NECESSARY !== 'undefined' && KD_GDPR_CC_ACCEPT_NECESSARY === true
+            || autoAccept === 'necessary')
     ) {
         btnAcceptNecessaryCookies.dispatchEvent(clickEvent);
     }

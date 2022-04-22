@@ -34,6 +34,11 @@ class ApiController extends RestController
      */
     protected $cookieName;
 
+    /**
+     * @Flow\InjectConfiguration(path="headerConsent")
+     * @var array
+     */
+    protected $headerConsent;
 
     public function initializeAction()
     {
@@ -103,11 +108,34 @@ class ApiController extends RestController
 
         $this->view->assign('needsRenew', $needsRenew);
 
+        $this->view->assign('headerConsent',
+            [
+                'acceptAll' => $this->matchHeaders($this->headerConsent['acceptAll']),
+                'acceptNecessary' => $this->matchHeaders($this->headerConsent['acceptNecessary'])
+            ]
+        );
 
-        $this->view->setVariablesToRender(['html', 'needsRenew']);
+
+        $this->view->setVariablesToRender(['html', 'needsRenew', 'headerConsent']);
     }
 
     public function renderCookieSettingsOptionsAction() {
 
+    }
+
+    /**
+     * @param array $matchers
+     * @return bool
+     */
+    protected function matchHeaders(array $matchers) {
+        foreach ($matchers as $headerName => $headerMatcher) {
+            if (fnmatch(
+                $headerMatcher,
+                current($this->request->getHttpRequest()->getHeader($headerName))
+            )) {
+                return true;
+            }
+        }
+        return false;
     }
 }
