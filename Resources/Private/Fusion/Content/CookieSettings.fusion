@@ -31,11 +31,11 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         buttonText = Neos.Fusion:Case {
             black {
                 condition = ${q(node).property('buttonTextColor') == 'black'}
-                renderer = '--cookieconsent-buttontext-color: rgb(0 0 0);'
+                renderer = '--cookieconsent-button-text-color: rgb(0 0 0);'
             }
             white {
                 condition = ${q(node).property('buttonTextColor') == 'white'}
-                renderer = '--cookieconsent-buttontext-color: rgb(255 255 255);'
+                renderer = '--cookieconsent-button-text-color: rgb(255 255 255);'
             }
             none {
                 condition = true
