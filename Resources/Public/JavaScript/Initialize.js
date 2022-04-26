@@ -15,7 +15,7 @@ function loadCookiebannerHtml(openSettings, showImmediately, openedManually)
             window.addEventListener(
                 'scroll',
                 function () {
-                    appendHtmlAndInitialize(cookieBar, autoAccept);
+                    appendHtmlAndInitialize(cookieBar.firstChild, autoAccept);
                     },
                 {
                     passive: true,
@@ -23,7 +23,7 @@ function loadCookiebannerHtml(openSettings, showImmediately, openedManually)
                 }
             );
         } else {
-            appendHtmlAndInitialize(cookieBar,  autoAccept);
+            appendHtmlAndInitialize(cookieBar.firstChild,  autoAccept);
         }
     });
 
