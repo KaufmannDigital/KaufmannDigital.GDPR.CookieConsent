@@ -105,7 +105,7 @@
 .gdpr-cookieconsent-settings__content__cta .gdpr-cc-button:hover {
   filter: brightness(0.9);
 }
-.gdpr-cookieconsent-settings__content__cta .gdpr-cc-button:focus {
+.gdpr-cookieconsent-settings__content__cta .gdpr-cc-button:focus-visible {
   outline: var(--cookieconsent-focus-outline);
   outline-offset: var(--cookieconsent-focus-outline-offset);
 }
@@ -264,7 +264,7 @@
 .gdpr-cookieconsent-switch > input:disabled::before {
   cursor: not-allowed;
 }
-.gdpr-cookieconsent-switch > input:focus {
+.gdpr-cookieconsent-switch > input:focus-visible {
   outline: var(--cookieconsent-switch-outline);
   outline-offset: var(--cookieconsent-switch-outline-offset);
 }
