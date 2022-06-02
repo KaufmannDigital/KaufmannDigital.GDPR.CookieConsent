@@ -26,3 +26,8 @@ KaufmannDigital:
         acceptNecessary: []
         #You can use fnmatch() syntax here
         #  'User-Agent': 'Matching-User-Agent V*'
+      parameterConsent:
+        acceptAll: []
+        #  'gdpr-cc': 'accept-all'
+        acceptNecessary: []
+        #  'gdpr-cc': 'accept-needed'

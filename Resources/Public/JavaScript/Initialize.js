@@ -11,6 +11,28 @@ function loadCookiebannerHtml(openSettings, showImmediately, openedManually)
         if (response.headerConsent.acceptNecessary === true) autoAccept = 'necessary';
         if (response.headerConsent.acceptAll === true) autoAccept = 'all';
 
+        const parameterAccept = KD_GDPR_CC.acceptConfiguration.parameterAccept;
+        const acceptNecessaryParams = Object.getOwnPropertyNames(parameterAccept.acceptNecessary);
+        if (acceptNecessaryParams.length > 0) {
+            [].slice.call(acceptNecessaryParams).forEach(function (parameterName) {
+                const acceptAllValue = parameterAccept.acceptNecessary[parameterName];
+                if (getUrlParameter(parameterName) === acceptAllValue) {
+                    autoAccept = 'necessary';
+                }
+            });
+        }
+
+        const acceptAllParams = Object.getOwnPropertyNames(parameterAccept.acceptAll);
+        if (acceptAllParams.length > 0) {
+            [].slice.call(acceptAllParams).forEach(function (parameterName) {
+                const acceptAllValue = parameterAccept.acceptAll[parameterName];
+                if (getUrlParameter(parameterName) === acceptAllValue) {
+                    autoAccept = 'all';
+                }
+            });
+        }
+        console.log(autoAccept);
+
         if (showImmediately === false && KD_GDPR_CC.hideBeforeInteraction) {
             window.addEventListener(
                 'scroll',
@@ -41,6 +63,15 @@ function loadCookiebannerHtml(openSettings, showImmediately, openedManually)
         }
     }
 }
+
+function getUrlParameter(parameterName) {
+        parameterName = parameterName.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+parameterName+"=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.href);
+        return results == null ? null : results[1];
+}
+
 
 if (typeof KD_GDPR_CC !== 'undefined' && KD_GDPR_CC.documentNodeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
     /*Cookie set*/

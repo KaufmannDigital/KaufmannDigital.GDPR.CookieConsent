@@ -120,6 +120,22 @@ KaufmannDigital:
 ```
 Here you can use the syntax of [fnmatch()](https://www.php.net/manual/de/function.fnmatch.php) for wildcards or similar.
 
+
+### Accept by URL-Params
+You can also accept all cookies or necessary ones by URL-parameters. See, how to configure:
+```yaml
+KaufmannDigital:
+  GRDPR:
+    CookieConsent:
+      parameterConsent:
+        acceptAll:
+          'gdpr': 'accept-all'
+        acceptNecessary:
+          'gdpr': 'accept-needed'
+```
+In this example, you can accept all cookies by calling every page you want with param `?gdpr=accept-all` and accept necessary with param `?gdpr=accept-needed`.  
+You can also define multiple param/value combinations for each case. 
+
 ### React to the user's cookie decision
 You can use one of these Methods to react on the user's decision on which Cookies are accepted:
 
