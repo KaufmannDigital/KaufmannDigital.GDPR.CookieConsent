@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext" target-language="fr">
+		<body>
+			<trans-unit id="details" xml:space="preserve">
+				<source>Details</source>
+				<target state="final">Détails</target>
+			</trans-unit>
+            <trans-unit id="hideDetails" xml:space="preserve">
+				<source>Hide details</source>
+				<target state="final">Cacher les details</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
