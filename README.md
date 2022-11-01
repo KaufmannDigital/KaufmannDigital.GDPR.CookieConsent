@@ -11,8 +11,8 @@ This package is available in multiple Version. Here you can check compatibility 
 Composer-Version | Neos-Compatibility | Maintenance
 -----------------| -------------------|-------------
 `^1.0` | < 5.0  | ⛔
-`^2.0` | >= 5.0 | 🐛
-`^3.0` | >= 5.0 | 🐛
+`^2.0` | >= 5.0 | ⛔
+`^3.0` | >= 5.0 | ⛔
 `^4.0` | >= 5.0 | 🐛 
 `^5.0` | >= 5.0 | 🐛 ✨ (⚠️ [Note changed rendering and Styling](#styling))
 
