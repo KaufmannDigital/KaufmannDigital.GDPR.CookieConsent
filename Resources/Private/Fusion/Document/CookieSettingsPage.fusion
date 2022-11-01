@@ -8,6 +8,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prot
     renderer = Neos.Fusion:Renderer {
         type = ${site.nodeType.name}
         @context.node = ${site}
+        @context.documentNode = ${site}
 
         @process.addCookieSettings = ${String.pregReplace(value, '/(.*)<\/body>(.*)/s', '$1' + cookieSettings + "</body>$2")}
     }
