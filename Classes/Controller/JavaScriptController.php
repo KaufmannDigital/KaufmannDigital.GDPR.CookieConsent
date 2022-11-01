@@ -84,7 +84,7 @@ class JavaScriptController extends RestController
             );
 
             $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true);
-            $consents = $cookie['consents'][$dimensionIdentifier] ?? $cookie['consents']['default'] ?? $cookie['consents'];
+            $consents = $cookie['consents'][$dimensionIdentifier] ?? $cookie['consents']['default'] ?? $cookie['consents'] ?? [];
             $siteNode = $this->contextFactory->create(['dimensions' => $dimensions])->getCurrentSiteNode();
 
             $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents) . $dimensionIdentifier . $siteNode->getIdentifier());
