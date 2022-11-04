@@ -76,8 +76,8 @@ class JavaScriptController extends RestController
                 array_map(function ($dimension) { return current($dimension);}, $filteredDimensions)
             );
 
-            $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true);
-            $consents = isset($cookie['consents'][$dimensionIdentifier]) ? $cookie['consents'][$dimensionIdentifier] : $cookie['consents']['default'] ?? $cookie['consents'];
+            $cookie = isset($this->request->getHttpRequest()->getCookieParams()[$this->cookieName]) ? json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true) : null;
+            $consents = $cookie['consents'][$dimensionIdentifier] ?? $cookie['consents']['default'] ?? $cookie['consents'] ?? [];
             $siteNode = $this->contextFactory->create(['dimensions' => $dimensions])->getCurrentSiteNode();
 
             $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents) . $dimensionIdentifier . $siteNode->getIdentifier());
