@@ -84,7 +84,14 @@ class JavaScriptController extends RestController
 
             $q = new FlowQuery([$siteNode]);
 
-            $consentDate = new \DateTime(isset($cookie['consentDates'][$dimensionIdentifier]) ? $cookie['consentDates'][$dimensionIdentifier] : $cookie['consentDate']);
+            if (isset($cookie['consentDates'][$dimensionIdentifier])) {
+                $consentDate = new \DateTime($cookie['consentDates'][$dimensionIdentifier]);
+            } elseif (isset($cookie['consentDate'])) {
+                $consentDate = new \DateTime($cookie['consentDate']);
+            } else {
+                $consentDate = new \DateTime('now');
+            }
+
             $cookieSettings = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
 
             if (!$cookieSettings instanceof NodeInterface) {
