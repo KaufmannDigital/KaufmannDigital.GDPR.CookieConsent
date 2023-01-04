@@ -83,7 +83,7 @@ class JavaScriptController extends RestController
                 array_map(function ($dimension) { return current($dimension);}, $filteredDimensions)
             );
 
-            $cookie = json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true);
+            $cookie = !empty($this->request->getHttpRequest()->getCookieParams()) && isset($this->request->getHttpRequest()->getCookieParams()[$this->cookieName]) ? json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true) : null;
             $consents = $cookie['consents'][$dimensionIdentifier] ?? $cookie['consents']['default'] ?? $cookie['consents'] ?? [];
             $siteNode = $this->contextFactory->create(['dimensions' => $dimensions])->getCurrentSiteNode();
 
@@ -91,7 +91,14 @@ class JavaScriptController extends RestController
 
             $q = new FlowQuery([$siteNode]);
 
-            $consentDate = new \DateTime($cookie['consentDates'][$dimensionIdentifier] ?? $cookie['consentDate']);
+            if (isset($cookie['consentDates'][$dimensionIdentifier])) {
+                $consentDate = new \DateTime($cookie['consentDates'][$dimensionIdentifier]);
+            } elseif (isset($cookie['consentDate'])) {
+                $consentDate = new \DateTime($cookie['consentDate']);
+            } else {
+                $consentDate = new \DateTime('now');
+            }
+
             $cookieSettings = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
 
             if (!$cookieSettings instanceof NodeInterface) {
