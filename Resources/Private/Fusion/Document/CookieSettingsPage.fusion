@@ -1,5 +1,7 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prototype(Neos.Fusion:Component) {
 
+    @context.cookieSettingsPage = ${node}
+
     @context.cookieSettings = KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings {
         @context.node = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage]').find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').get(0)}
     }
@@ -9,6 +11,11 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prot
         type = ${site.nodeType.name}
         @context.node = ${site}
         @context.documentNode = ${site}
+
+        element.head.javascriptBackendInformation {
+            # for backend purposes we still consider the cookiesettingspage to be the documentNode
+            @context.documentNode = ${cookieSettingsPage}
+        }
 
         @process.addCookieSettings = ${String.pregReplace(value, '/(.*)<\/body>(.*)/s', '$1' + cookieSettings + "</body>$2")}
     }
