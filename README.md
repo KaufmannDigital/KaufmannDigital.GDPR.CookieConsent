@@ -307,6 +307,19 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Component.Atom.AcceptAllButton) {
 ```
 
 
+### Restrict CORS headers to specific domains
+
+If you are using the cookie banner on multiple domains, you can restrict the CORS headers to specific domains. This is useful if you want to use the same cookie banner on multiple domains, but don't want to allow all domains to access the cookie banner API.
+To allow access to the cookie banner API only from specific domains, you can configure the allowed domains in the settings:
+
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      allowedOrigins:
+        - 'subdomain.example.com'
+        - 'example.org'
+```
 
 
 ## Roadmap / Planned Features
