@@ -31,7 +31,6 @@ function loadCookiebannerHtml(openSettings, showImmediately, openedManually)
                 }
             });
         }
-        console.log(autoAccept);
 
         if (showImmediately === false && KD_GDPR_CC.hideBeforeInteraction) {
             window.addEventListener(

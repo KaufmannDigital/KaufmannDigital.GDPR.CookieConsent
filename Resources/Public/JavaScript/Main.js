@@ -168,13 +168,9 @@ function initializeCookieConsent(openSettings, openedManually, autoAccept = 'non
 
     if (openSettings === true) {
         btnIndividualSettingsEnable.dispatchEvent(clickEvent);
-    }
-
-    if (openedManually !== true && autoAccept === 'all') {
+    } else if (openedManually !== true && autoAccept === 'all') {
         btnAcceptAll.dispatchEvent(clickEvent);
-    }
-
-    if (
+    } else if (
         openedManually !== true
         && (typeof KD_GDPR_CC_ACCEPT_NECESSARY !== 'undefined' && KD_GDPR_CC_ACCEPT_NECESSARY === true
             || autoAccept === 'necessary')
