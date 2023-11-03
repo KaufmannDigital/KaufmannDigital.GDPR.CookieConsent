@@ -40,16 +40,43 @@ class ApiController extends RestController
      */
     protected $headerConsent;
 
+    /**
+     * @var string
+     * @Flow\InjectConfiguration(path="allowedOrigins")
+     */
+    protected $allowedOrigins;
+
     public function initializeAction()
     {
         parent::initializeAction();
+        $this->handleCorsHeaders();
+    }
+
+    /**
+     * @return void
+     */
+    private function handleCorsHeaders(): void
+    {
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? null;
+        // Check if request is from an allowed origin
+        if ( $origin && in_array(parse_url($origin, PHP_URL_HOST), (array)$this->allowedOrigins)) {
+            $this->setCORSHeaders($origin);
+        }
+    }
+
+    /**
+     * @param string $origin
+     * @return void
+     */
+    private function setCORSHeaders(string $origin): void
+    {
         if (method_exists($this->response, 'setHttpHeader')) {
-            $this->response->setHttpHeader('Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
+            $this->response->setHttpHeader('Access-Control-Allow-Origin', $origin);
             $this->response->setHttpHeader('Access-Control-Allow-Credentials', 'true');
             $this->response->setHttpHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
             $this->response->setHttpHeader('Vary', 'Origin');
         } else {
-            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', current($this->request->getHttpRequest()->getHeader('Origin')));
+            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', $origin);
             $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
             $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
             $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');

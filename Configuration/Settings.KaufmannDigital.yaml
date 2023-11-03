@@ -31,3 +31,6 @@ KaufmannDigital:
         #  'gdpr-cc': 'accept-all'
         acceptNecessary: []
         #  'gdpr-cc': 'accept-needed'
+      allowedOrigins: []
+      # - domain.de
+      # - subdomain.domain.de
