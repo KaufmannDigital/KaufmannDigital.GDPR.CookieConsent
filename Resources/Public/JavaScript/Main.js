@@ -213,6 +213,8 @@ function saveConsentToCookie(inputs, userId) {
     consentDates[KD_GDPR_CC.dimensionsIdentifier] = currentDate.toUTCString();
 
 
+    var cookieLifetime = parseInt(KD_GDPR_CC.cookieLifetime) ? parseInt(KD_GDPR_CC.cookieLifetime) * 24 * 60 * 60 * 1000: 315360000000;
+
     var cookieData = {
         userId: userId,
         consents: consents,
@@ -221,7 +223,7 @@ function saveConsentToCookie(inputs, userId) {
         expireDate: expireDate.toUTCString()
     };
 
-    var cookieParams = encodeURI(JSON.stringify(cookieData)) + "; expires=" + new Date(currentDate.getTime() + 315360000000).toUTCString() + "; path=/; " + (KD_GDPR_CC.cookieDomainName ? ('domain=' + KD_GDPR_CC.cookieDomainName + ';') : '') + (location.protocol.substring(0, 5) === 'https' ? " Secure;" : '');
+    var cookieParams = encodeURI(JSON.stringify(cookieData)) + "; expires=" + new Date(currentDate.getTime() + cookieLifetime).toUTCString() + "; path=/; " + (KD_GDPR_CC.cookieDomainName ? ('domain=' + KD_GDPR_CC.cookieDomainName + ';') : '') + (location.protocol.substring(0, 5) === 'https' ? " Secure;" : '');
     document.cookie = KD_GDPR_CC.cookieName + "=" + cookieParams;
 
     window.dataLayer = window.dataLayer || [];

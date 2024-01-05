@@ -34,3 +34,5 @@ KaufmannDigital:
       allowedOrigins: []
       # - domain.de
       # - subdomain.domain.de
+      # lifetime in days
+      cookieLifetime: 365
