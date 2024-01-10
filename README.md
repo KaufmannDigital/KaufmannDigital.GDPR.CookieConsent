@@ -199,6 +199,15 @@ KaufmannDigital:
       cookieName: 'CUSTOM_COOKIENAME'
 ```
 
+#### Cookie lifetime
+
+For GDPR(DSGVO) - Reasons it could be required, to have the Settings-Cookie (which holds the CookieConsent-Settings) expired after a shorter time-period. This is configurable by days via Settings.yaml:  
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      cookieLifetime: 365 #365 days
+```
 
 
 #### Versioning
