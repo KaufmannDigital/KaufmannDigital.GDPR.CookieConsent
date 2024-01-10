@@ -33,11 +33,13 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
         parameterAccept = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.parameterConsent')}
     }
 
+    @context.cookieLifetime = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieLifetime')}
 
     content = ${"
             var KD_GDPR_CC = {
                 apiUrl: '" + apiUrl + "',
                 cookieName: '" + cookieName +"',
+                cookieLifetime: '" + cookieLifetime +"',
                 cookieDomainName: '" + cookieDomainName +"',
                 versionTimestamp: " + versionDate.timestamp * 1000 + ",
                 decisionTtl: " + (decisionTtl ? (decisionTtl * 1000) : 0) + ",
