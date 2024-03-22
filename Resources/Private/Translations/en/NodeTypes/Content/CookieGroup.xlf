@@ -14,7 +14,10 @@
 			<trans-unit id="properties.description.ui.inline.editorOptions.placeholder" xml:space="preserve">
 				<source>Insert group description...</source>
 			</trans-unit>
-			<trans-unit id="hideDetails" xml:space="preserve">
+			<trans-unit id="details" xml:space="preserve">
+				<source><![CDATA[Details&nbsp;>]]></source>
+			</trans-unit>
+      <trans-unit id="hideDetails" xml:space="preserve">
 				<source>Hide details</source>
 			</trans-unit>
 

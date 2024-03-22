@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext"
+        target-language="es">
+    <body>
+      <trans-unit id="ui.label">
+				<source>Cookie Attribute</source>
+        <target state="final">Función de cookies</target>
+			</trans-unit>
+      <trans-unit id="properties.label.ui.inline.editorOptions.placeholder">
+				<source>Insert label...</source>
+        <target state="final">Introducir etiqueta...</target>
+			</trans-unit>
+      <trans-unit id="properties.value.ui.inline.editorOptions.placeholder">
+				<source>Insert value...</source>
+        <target state="final">Introducir valor...</target>
+			</trans-unit>
+    </body>
+  </file>
+</xliff>

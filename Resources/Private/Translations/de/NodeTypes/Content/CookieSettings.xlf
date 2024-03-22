@@ -1,116 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext" target-language="de">
-		<body>
-			<trans-unit id="ui.label" xml:space="preserve">
-				<source>Cookie Settings</source>
-				<target state="final">Cookie Einstellungen</target>
-			</trans-unit>
-			<trans-unit id="ui.inspector.groups.cookieSettings.label" xml:space="preserve">
-				<source>Cookie Settings</source>
-				<target state="final">Cookie Einstellungen</target>
-			</trans-unit>
-			<trans-unit id="properties.headline.ui.inline.editorOptions.placeholder" xml:space="preserve">
-				<source>Insert title...</source>
-				<target state="final">Überschrift eintragen...</target>
-			</trans-unit>
-			<trans-unit id="properties.mainDescription.ui.inline.editorOptions.placeholder" xml:space="preserve">
-				<source>Insert description...</source>
-				<target state="final">Beschreibung eintragen...</target>
-			</trans-unit>
-			<trans-unit id="properties.individualSettingsDescription.ui.inline.editorOptions.placeholder" xml:space="preserve">
-				<source>Insert description...</source>
-				<target state="final">Beschreibung eintragen...</target>
-			</trans-unit>
-			<trans-unit id="properties.imprintLink" xml:space="preserve">
-				<source>Link to imprint</source>
-				<target state="final">Link zum Impressum</target>
-			</trans-unit>
-			<trans-unit id="properties.dataProtectionPolicyLink" xml:space="preserve">
-				<source>Link to data protection policy</source>
-				<target state="final">Link zur Datenschutzerklärung</target>
-			</trans-unit>
-			<trans-unit id="properties.acceptAllButtonLabel" xml:space="preserve">
-				<source>"Accept all" label</source>
-				<target state="final">Label "Alle akzeptieren"</target>
-			</trans-unit>
-
-			<trans-unit id="properties.saveButtonLabel" xml:space="preserve">
-				<source>"Save" label</source>
-				<target state="final">Label "Speichern"</target>
-			</trans-unit>
-
-			<trans-unit id="properties.acceptNecessaryCookiesLabel" xml:space="preserve">
-				<source>"Accept necessary cookies" label</source>
-				<target state="final">Label "Notwendige Cookies akzeptieren"</target>
-			</trans-unit>
-
-			<trans-unit id="properties.imprintLabel" xml:space="preserve">
-				<source>"Imprint" label</source>
-				<target state="final">Label "Impressum"</target>
-			</trans-unit>
-
-			<trans-unit id="properties.dataProtectionPolicyLabel" xml:space="preserve">
-				<source>"Data protection policy" label</source>
-				<target state="final">Label "Datenschutzerklärung"</target>
-			</trans-unit>
-
-			<trans-unit id="properties.openIndividualSettingsLabel" xml:space="preserve">
-				<source>"Individual settings" label</source>
-				<target state="final">Label "Individuelle Einstellungen"</target>
-			</trans-unit>
-
-			<trans-unit id="properties.closeIndividualSettingsLabel" xml:space="preserve">
-				<source>"Close settings" label</source>
-				<target state="final">Label "Einstellungen schließen"</target>
-			</trans-unit>
-
-			<trans-unit id="properties.versionDate" xml:space="preserve">
-				<source>Version date</source>
-				<target state="final">Versions-Datum</target>
-			</trans-unit>
-
-            <trans-unit id="properties.decisionTtl" xml:space="preserve">
-				<source>TTL (Decision time in seconds)</source>
-                <target state="final">TTL (Speicherdauer der Entscheidung in Sekunden)</target>
-			</trans-unit>
-
-            <trans-unit id="properties.decisionTtl.ui.help.message" xml:space="preserve">
-				<source>Number of seconds until cookie settings are displayed and confirmed again. Example values are: 86400 (1 day), 604800 (1 week), 2592000 (30 days), 31536000 (1 year)</source>
-                <target state="final">Anzahl der Sekunden, bis die Cookie-Einstellungen erneut angezeigt und bestätigt werden. Beispielwerte sind: 86400 (1 Tag), 604800 (1 Woche), 2592000 (30 Tage), 31536000 (1 Jahr)</target>
-			</trans-unit>
-
-            <trans-unit id="properties.closeButtonEnabled" xml:space="preserve">
-				<source>Show close-button</source>
-                <target state="final">Zeige X (zum schließen)</target>
-			</trans-unit>
-
-            <trans-unit id="properties.closeButtonEnabled.ui.help.message" xml:space="preserve">
-				<source>Zeigt ein "X" in der oberen rechten Ecke, falls aktiviert. Ein klick auf dieses X schließt den Banner ohne Entscheidung. Er erscheint beim nächsten Seitenaufruf erneut.</source>
-			</trans-unit>
-
-			<trans-unit id="properties.excludedDocuments" xml:space="preserve">
-				<source>Exkludierte Dokumente</source>
-			</trans-unit>
-
-			<trans-unit id="properties.buttonTextColor.selectBoxEditor.values.white" xml:space="preserve">
-				<source>Weiß</source>
-			</trans-unit>
-			<trans-unit id="properties.buttonTextColor.selectBoxEditor.values.black" xml:space="preserve">
-				<source>Schwarz</source>
-			</trans-unit>
-			<trans-unit id="properties.backgroundColor" xml:space="preserve">
-				<source>Hintergrundfarbe (HEX)</source>
-			</trans-unit>
-			<trans-unit id="properties.buttonTextColor" xml:space="preserve">
-				<source>Button Textfarbe</source>
-			</trans-unit>
-			<trans-unit id="properties.themeColor" xml:space="preserve">
-				<source>Theme-Farbe (HEX)</source>
-			</trans-unit>
-			<trans-unit id="properties.maxWidth" xml:space="preserve">
-				<source>Maximale Breite für Inhalte (px)</source>
-			</trans-unit>
-		</body>
-	</file>
+  <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext"
+        target-language="de">
+    <body>
+      <trans-unit id="ui.label">
+        <source>Cookie Settings</source>
+        <target state="final">Cookie Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="ui.inspector.groups.cookieSettings.label">
+        <source>Cookie Settings</source>
+        <target state="final">Cookie Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="properties.headline.ui.inline.editorOptions.placeholder">
+        <source>Insert title...</source>
+        <target state="final">Überschrift eintragen...</target>
+      </trans-unit>
+      <trans-unit id="properties.mainDescription.ui.inline.editorOptions.placeholder">
+        <source>Insert description...</source>
+        <target state="final">Beschreibung eintragen...</target>
+      </trans-unit>
+      <trans-unit id="properties.individualSettingsDescription.ui.inline.editorOptions.placeholder">
+        <source>Insert description...</source>
+        <target state="final">Beschreibung eintragen...</target>
+      </trans-unit>
+      <trans-unit id="properties.imprintLink">
+        <source>Link to imprint</source>
+        <target state="final">Link zum Impressum</target>
+      </trans-unit>
+      <trans-unit id="properties.dataProtectionPolicyLink">
+        <source>Link to data protection policy</source>
+        <target state="final">Link zur Datenschutzerklärung</target>
+      </trans-unit>
+      <trans-unit id="properties.acceptAllButtonLabel">
+        <source>"Accept all" label</source>
+        <target state="final">Label "Alle akzeptieren"</target>
+      </trans-unit>
+      <trans-unit id="properties.saveButtonLabel">
+        <source>"Save" label</source>
+        <target state="final">Label "Speichern"</target>
+      </trans-unit>
+      <trans-unit id="properties.acceptNecessaryCookiesLabel">
+        <source>"Accept necessary cookies" label</source>
+        <target state="final">Label "Notwendige Cookies akzeptieren"</target>
+      </trans-unit>
+      <trans-unit id="properties.imprintLabel">
+        <source>"Imprint" label</source>
+        <target state="final">Label "Impressum"</target>
+      </trans-unit>
+      <trans-unit id="properties.dataProtectionPolicyLabel">
+        <source>"Data protection policy" label</source>
+        <target state="final">Label "Datenschutzerklärung"</target>
+      </trans-unit>
+      <trans-unit id="properties.openIndividualSettingsLabel">
+        <source>"Individual settings" label</source>
+        <target state="final">Label "Individuelle Einstellungen"</target>
+      </trans-unit>
+      <trans-unit id="properties.closeIndividualSettingsLabel">
+        <source>"Close settings" label</source>
+        <target state="final">Label "Einstellungen schließen"</target>
+      </trans-unit>
+      <trans-unit id="properties.versionDate">
+        <source>Version date</source>
+        <target state="final">Versions-Datum</target>
+      </trans-unit>
+      <trans-unit id="properties.decisionTtl">
+        <source>TTL (Decision time in seconds)</source>
+        <target state="final">TTL (Speicherdauer der Entscheidung in Sekunden)</target>
+      </trans-unit>
+      <trans-unit id="properties.decisionTtl.ui.help.message">
+        <source>Number of seconds until cookie settings are displayed and confirmed again. Example values are: 86400 (1 day), 604800 (1 week), 2592000 (30 days), 31536000 (1 year)</source>
+        <target state="final">Anzahl der Sekunden, bis die Cookie-Einstellungen erneut angezeigt und bestätigt werden. Beispielwerte sind: 86400 (1 Tag), 604800 (1 Woche), 2592000 (30 Tage), 31536000 (1 Jahr)</target>
+      </trans-unit>
+      <trans-unit id="properties.closeButtonEnabled">
+        <source>Show close-button</source>
+        <target state="final">Zeige X (zum schließen)</target>
+      </trans-unit>
+      <trans-unit id="properties.closeButtonEnabled.ui.help.message">
+        <source>Zeigt ein "X" in der oberen rechten Ecke, falls aktiviert. Ein klick auf dieses X schließt den Banner ohne Entscheidung. Er erscheint beim nächsten Seitenaufruf erneut.</source>
+      </trans-unit>
+      <trans-unit id="properties.excludedDocuments">
+        <source>Exclude for Documents</source>
+        <target state="final">Exkludierte Dokumente</target>
+      </trans-unit>
+      <trans-unit id="properties.buttonTextColor.selectBoxEditor.values.white">
+        <source>White</source>
+        <target state="final">Weiß</target>
+      </trans-unit>
+      <trans-unit id="properties.buttonTextColor.selectBoxEditor.values.black">
+        <source>Black</source>
+        <target state="final">Schwarz</target>
+      </trans-unit>
+      <trans-unit id="properties.backgroundColor">
+        <source>Background color (HEX)</source>
+        <target state="final">Hintergrundfarbe (HEX)</target>
+      </trans-unit>
+      <trans-unit id="properties.buttonTextColor">
+        <source>Button text color</source>
+        <target state="final">Button Textfarbe</target>
+      </trans-unit>
+      <trans-unit id="properties.themeColor">
+        <source>Theme color (HEX)</source>
+        <target state="final">Theme-Farbe (HEX)</target>
+      </trans-unit>
+      <trans-unit id="properties.maxWidth">
+        <source>Maximum content width (px)</source>
+        <target state="final">Maximale Breite für Inhalte (px)</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

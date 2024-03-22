@@ -1,98 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext">
-		<body>
-			<trans-unit id="ui.label" xml:space="preserve">
+  <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="ui.label" xml:space="preserve">
 				<source>Cookie Settings</source>
 			</trans-unit>
-			<trans-unit id="ui.inspector.groups.cookieSettings.label" xml:space="preserve">
+      <trans-unit id="ui.inspector.groups.cookieSettings.label" xml:space="preserve">
 				<source>Cookie Settings</source>
 			</trans-unit>
-			<trans-unit id="properties.headline.ui.inline.editorOptions.placeholder" xml:space="preserve">
+      <trans-unit id="properties.headline.ui.inline.editorOptions.placeholder" xml:space="preserve">
 				<source>Insert title...</source>
 			</trans-unit>
-			<trans-unit id="properties.mainDescription.ui.inline.editorOptions.placeholder" xml:space="preserve">
+      <trans-unit id="properties.mainDescription.ui.inline.editorOptions.placeholder" xml:space="preserve">
 				<source>Insert description...</source>
 			</trans-unit>
-			<trans-unit id="properties.individualSettingsDescription.ui.inline.editorOptions.placeholder" xml:space="preserve">
+      <trans-unit id="properties.individualSettingsDescription.ui.inline.editorOptions.placeholder"
+                  xml:space="preserve">
 				<source>Insert description...</source>
 			</trans-unit>
-			<trans-unit id="properties.imprintLink" xml:space="preserve">
+      <trans-unit id="properties.imprintLink" xml:space="preserve">
 				<source>Link to imprint</source>
 			</trans-unit>
-			<trans-unit id="properties.dataProtectionPolicyLink" xml:space="preserve">
+      <trans-unit id="properties.dataProtectionPolicyLink" xml:space="preserve">
 				<source>Link to data protection policy</source>
 			</trans-unit>
-			<trans-unit id="properties.acceptAllButtonLabel" xml:space="preserve">
+      <trans-unit id="properties.acceptAllButtonLabel" xml:space="preserve">
 				<source>"Accept all" label</source>
 			</trans-unit>
 
-			<trans-unit id="properties.saveButtonLabel" xml:space="preserve">
+      <trans-unit id="properties.saveButtonLabel" xml:space="preserve">
 				<source>"Save" label</source>
 			</trans-unit>
 
-			<trans-unit id="properties.acceptNecessaryCookiesLabel" xml:space="preserve">
+      <trans-unit id="properties.acceptNecessaryCookiesLabel" xml:space="preserve">
 				<source>"Accept necessary cookies" label</source>
 			</trans-unit>
 
-			<trans-unit id="properties.imprintLabel" xml:space="preserve">
+      <trans-unit id="properties.imprintLabel" xml:space="preserve">
 				<source>"Imprint" label</source>
 			</trans-unit>
 
-			<trans-unit id="properties.dataProtectionPolicyLabel" xml:space="preserve">
+      <trans-unit id="properties.dataProtectionPolicyLabel" xml:space="preserve">
 				<source>"Data protection policy" label</source>
 			</trans-unit>
 
-			<trans-unit id="properties.openIndividualSettingsLabel" xml:space="preserve">
+      <trans-unit id="properties.openIndividualSettingsLabel" xml:space="preserve">
 				<source>"Individual settings" label</source>
 			</trans-unit>
 
-			<trans-unit id="properties.closeIndividualSettingsLabel" xml:space="preserve">
+      <trans-unit id="properties.closeIndividualSettingsLabel" xml:space="preserve">
 				<source>"Close settings" label</source>
 			</trans-unit>
 
-			<trans-unit id="properties.versionDate" xml:space="preserve">
+      <trans-unit id="properties.versionDate" xml:space="preserve">
 				<source>Version date</source>
 			</trans-unit>
 
-            <trans-unit id="properties.decisionTtl" xml:space="preserve">
+      <trans-unit id="properties.decisionTtl" xml:space="preserve">
 				<source>TTL (Decision time in seconds)</source>
 			</trans-unit>
 
-            <trans-unit id="properties.decisionTtl.ui.help.message" xml:space="preserve">
+      <trans-unit id="properties.decisionTtl.ui.help.message" xml:space="preserve">
 				<source>Number of seconds until cookie settings are displayed and confirmed again. Example values are: 86400 (1 day), 604800 (1 week), 2592000 (30 days), 31536000 (1 year)</source>
 			</trans-unit>
 
-            <trans-unit id="properties.closeButtonEnabled" xml:space="preserve">
+      <trans-unit id="properties.closeButtonEnabled" xml:space="preserve">
 				<source>Show close-button</source>
 			</trans-unit>
 
-            <trans-unit id="properties.closeButtonEnabled.ui.help.message" xml:space="preserve">
+      <trans-unit id="properties.closeButtonEnabled.ui.help.message" xml:space="preserve">
 				<source>Shows an "X" on the right top of the banner, if enabled. A click on the X hides the banner, but without making a decision. It re-appears on the next pageload.</source>
 			</trans-unit>
 
-			<trans-unit id="properties.excludedDocuments" xml:space="preserve">
+      <trans-unit id="properties.excludedDocuments" xml:space="preserve">
 				<source>Exclude for Documents</source>
 			</trans-unit>
 
-			<trans-unit id="properties.buttonTextColor.selectBoxEditor.values.white" xml:space="preserve">
+      <trans-unit id="properties.buttonTextColor.selectBoxEditor.values.white" xml:space="preserve">
 				<source>White</source>
 			</trans-unit>
-			<trans-unit id="properties.buttonTextColor.selectBoxEditor.values.black" xml:space="preserve">
+      <trans-unit id="properties.buttonTextColor.selectBoxEditor.values.black" xml:space="preserve">
 				<source>Black</source>
 			</trans-unit>
-			<trans-unit id="properties.backgroundColor" xml:space="preserve">
+      <trans-unit id="properties.backgroundColor" xml:space="preserve">
 				<source>Background color (HEX)</source>
 			</trans-unit>
-			<trans-unit id="properties.buttonTextColor" xml:space="preserve">
+      <trans-unit id="properties.buttonTextColor" xml:space="preserve">
 				<source>Button text color</source>
 			</trans-unit>
-			<trans-unit id="properties.themeColor" xml:space="preserve">
+      <trans-unit id="properties.themeColor" xml:space="preserve">
 				<source>Theme color (HEX)</source>
 			</trans-unit>
-			<trans-unit id="properties.maxWidth" xml:space="preserve">
-                <source>Maximum content width (px)</source>
-            </trans-unit>
-		</body>
-	</file>
+      <trans-unit id="properties.maxWidth" xml:space="preserve">
+        <source>Maximum content width (px)</source>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

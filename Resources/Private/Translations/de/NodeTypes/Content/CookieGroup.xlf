@@ -18,7 +18,11 @@
 				<source>Insert group description...</source>
 				<target state="final">Gruppenbeschreibung eintragen...</target>
 			</trans-unit>
-            <trans-unit id="hideDetails" xml:space="preserve">
+      <trans-unit id="details" xml:space="preserve">
+				<source><![CDATA[Details&nbsp;>]]></source>
+        <target state="final"><![CDATA[Details&nbsp;>]]></target>
+			</trans-unit>
+      <trans-unit id="hideDetails" xml:space="preserve">
 				<source>Hide details</source>
 				<target state="final">Details ausblenden</target>
 			</trans-unit>
