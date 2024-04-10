@@ -37,9 +37,12 @@ if (KD_GDPR_CC && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
         : new Date(cookieObject.consentDate);
 
     if (versionDate > cookieConsentDate && window.neos === undefined) {
-        loadCookiebannerHtml();
+        loadCookiebannerHtml(false, false, false);
     } else if (!Array.isArray(cookieObject.consents) && !cookieObject.consents[KD_GDPR_CC.dimensionsIdentifier]) {
-        loadCookiebannerHtml();
+        loadCookiebannerHtml(false, false, false);
+    } else if (KD_GDPR_CC.decisionTtl > 0 && decisionExpiry < new Date()) {
+        //Re-Open Cookie-Consent, if TTL is expired
+        loadCookiebannerHtml(true, false, false);
     }
 
     window.dataLayer.push({
@@ -50,7 +53,7 @@ if (KD_GDPR_CC && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
     });
 } else if (document.getElementsByClassName('gdpr-cookieconsent-settings').length === 0 && window.neos === undefined) {
     /*No Cookie set, not in backend & not on cookie page*/
-    loadCookiebannerHtml();
+    loadCookiebannerHtml(false, false, false);
 }
 
 var links = document.querySelectorAll('a[href*=\"#GDPR-CC-open-settings\"]');
