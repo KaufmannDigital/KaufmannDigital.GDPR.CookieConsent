@@ -3,6 +3,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
     tagName = 'script'
 
     cookieSettingsNode = ${q(site).find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]').get(0)}
+    @context.cookieSettingsNode = ${this.cookieSettingsNode}
     @context.versionDate = ${q(this.cookieSettingsNode).property('versionDate')}
     @context.decisionTtl = ${q(this.cookieSettingsNode).property('decisionTtl')}
     @context.excludedDocuments = ${q(this.cookieSettingsNode).property('excludedDocuments')}
@@ -46,10 +47,22 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
                 dimensionsIdentifier: '" + (dimensionsIdentifier != '' ? dimensionsIdentifier : 'default') + "',
                 hideBeforeInteraction: " + (hideBeforeInteraction ? 'true' : 'false') +",
                 documentNodeDisabled: " + (documentNodeDisabled ? 'true' : 'false') +",
-                acceptConfiguration: " + Json.stringify(acceptConfiguration) + "
+                acceptConfiguration: " + Json.stringify(acceptConfiguration) + ",
+                gtmConsentKeys: " + Json.stringify(GTMConsents.getAllConfiguredConsents(site)) + "
             };
         "}
 
     @if.condition = ${node.context.inBackend == false}
 
+    @cache {
+        mode = 'cached'
+        entryIdentifier {
+            name = 'KD_GDPR_JS_SETTINGS'
+            documentNode = ${node}
+        }
+        entryTags {
+            1 = ${Neos.Caching.nodeTypeTag('KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings', site)}
+            2 = ${Neos.Caching.descendantOfTag(cookieSettingsNode)}
+        }
+    }
 }

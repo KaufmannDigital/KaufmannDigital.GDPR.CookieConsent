@@ -12,10 +12,13 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.Cookie) < prototype(Neos.Ne
         attributes.class = 'gdpr-cookieconsent-cookie__attributes'
     }
 
+    gtmConsents = ${Json.stringify(GTMConsents.getConsentsForNode(node))}
+
     renderer = afx`
         <div class="gdpr-cookieconsent-cookie" data-identifier={props.identifier}>
-            <div class="gdpr-cookieconsent-cookie__switch">
-                <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Switch
+            <!-- Augment the Switch-Component with data, to keep the api compatible to older versions -->
+            <div class="gdpr-cookieconsent-cookie__switch" data-gtm-consents={props.gtmConsents}>
+                 <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Switch
                         label={props.editableName}
                         value={props.identifier}
                         variant="cookie"

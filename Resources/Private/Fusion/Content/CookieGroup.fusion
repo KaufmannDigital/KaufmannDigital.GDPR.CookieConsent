@@ -24,9 +24,12 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Ne
         main = 'gdpr-cookieconsent-setting-group'
     }
 
+    gtmConsents = ${Json.stringify(GTMConsents.getConsentsForNode(node))}
+
     renderer = afx`
         <div class={Array.join(props.groupClasses, ' ')}>
-            <div class="gdpr-cookieconsent-setting-group__switch">
+            <!-- Augment the Switch-Component with data, to keep the api compatible to older versions -->
+            <div class="gdpr-cookieconsent-setting-group__switch" data-gtm-consents={props.gtmConsents}>
                 <KaufmannDigital.GDPR.CookieConsent:Component.Atom.Switch
                     value={props.identifier}
                     label={props.editableHeadline}
