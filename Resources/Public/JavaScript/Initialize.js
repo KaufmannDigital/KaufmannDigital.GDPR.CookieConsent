@@ -71,18 +71,6 @@ function getUrlParameter(parameterName) {
         return results == null ? null : results[1];
 }
 
-window.dataLayer = window.dataLayer || [];
-if (typeof gtag != 'function') {
-    function gtag() { dataLayer.push(arguments); }
-}
-
-let gtmConsentDefaults = {};
-[].slice.call(KD_GDPR_CC.gtmConsentKeys).forEach(function(gtmConsent) {
-    gtmConsentDefaults[gtmConsent] = 'denied';
-});
-gtag('consent', 'default', gtmConsentDefaults);
-gtag('js', new Date());
-
 if (typeof KD_GDPR_CC !== 'undefined' && KD_GDPR_CC.documentNodeDisabled === false && document.cookie.indexOf(KD_GDPR_CC.cookieName) >= 0) {
     /*Cookie set*/
     var cookieObject = JSON.parse(

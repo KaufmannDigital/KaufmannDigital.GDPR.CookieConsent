@@ -1,0 +1,17 @@
+prototype(KaufmannDigital.GDPR.CookieConsent:Helper.GTMConsentDefaults) < prototype(Neos.Fusion:Tag) {
+    tagName = 'script'
+
+    content = "
+        window.dataLayer = window.dataLayer || [];
+        if (typeof gtag != 'function') {
+            function gtag() { dataLayer.push(arguments); }
+        }
+
+        let gtmConsentDefaults = {};
+        [].slice.call(KD_GDPR_CC.gtmConsentKeys).forEach(function(gtmConsent) {
+            gtmConsentDefaults[gtmConsent] = 'denied';
+        });
+        gtag('consent', 'default', gtmConsentDefaults);
+        gtag('js', new Date());
+    "
+}
