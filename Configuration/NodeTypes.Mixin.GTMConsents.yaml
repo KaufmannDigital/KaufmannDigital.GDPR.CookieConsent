@@ -25,6 +25,12 @@
                 label: 'ad_personalization'
               analytics_storage:
                 label: 'analytics_storage'
+              functionality_storage:
+                label: 'functionality_storage'
+              personalization_storage:
+                label: 'personalization_storage'
+              security_storage:
+                label: 'security_storage'
     additionalGTMConsents:
       type: string
       ui:
