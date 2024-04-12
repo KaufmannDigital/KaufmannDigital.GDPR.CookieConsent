@@ -253,6 +253,7 @@ function saveConsentToCookie(inputs, userId) {
 
     if (cookieData.gtmConsents) {
         gtag('consent', 'update', cookieData.gtmConsents);
+        window.dataLayer.push({"event": "gtm.init_consent"});
     }
 }
 
