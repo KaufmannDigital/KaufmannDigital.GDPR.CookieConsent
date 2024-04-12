@@ -4,21 +4,25 @@
         target-language="nl">
     <body>
       <trans-unit id="properties.name.ui.inline.editorOptions.placeholder">
-				<source>Insert cookie name...</source>
+        <source>Insert cookie name...</source>
         <target state="final">Naam cookie invoeren ...</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.description.ui.inline.editorOptions.placeholder">
-				<source>Insert cookie description...</source>
+        <source>Insert cookie description...</source>
         <target state="final">Cookie beschrijving invoeren...</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.priority">
-				<source>Priority</source>
+        <source>Priority</source>
         <target state="final">Prioriteit</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.priority.ui.help.message">
-				<source>The priority determines the loading order of the different cookies. Higher numbers guarantee earlier loading times.</source>
-        <target>De prioriteit bepaalt de laadvolgorde van de verschillende cookies. Hogere nummers garanderen snellere laadtijden.</target>
-			</trans-unit>
+        <source>The priority determines the loading order of the different cookies. Higher numbers guarantee earlier
+          loading times.
+        </source>
+        <target>De prioriteit bepaalt de laadvolgorde van de verschillende cookies. Hogere nummers garanderen snellere
+          laadtijden.
+        </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

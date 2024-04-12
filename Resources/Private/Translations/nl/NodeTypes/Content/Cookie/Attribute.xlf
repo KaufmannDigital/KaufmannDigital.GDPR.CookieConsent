@@ -4,17 +4,17 @@
         target-language="nl">
     <body>
       <trans-unit id="ui.label">
-				<source>Cookie Attribute</source>
+        <source>Cookie Attribute</source>
         <target state="final">Cookie kenmerk</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.label.ui.inline.editorOptions.placeholder">
-				<source>Insert label...</source>
+        <source>Insert label...</source>
         <target state="final">Label invoeren...</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.value.ui.inline.editorOptions.placeholder">
-				<source>Insert value...</source>
+        <source>Insert value...</source>
         <target state="final">Waarde invoeren...</target>
-			</trans-unit>
+      </trans-unit>
     </body>
   </file>
 </xliff>

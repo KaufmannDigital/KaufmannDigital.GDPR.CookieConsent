@@ -4,9 +4,9 @@
         target-language="es">
     <body>
       <trans-unit id="ui.label">
-				<source>Necessary Cookies Group</source>
+        <source>Necessary Cookies Group</source>
         <target state="final">Grupo de cookies necesarias</target>
-			</trans-unit>
+      </trans-unit>
     </body>
   </file>
 </xliff>

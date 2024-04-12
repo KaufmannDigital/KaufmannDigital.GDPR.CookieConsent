@@ -3,22 +3,26 @@
   <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext"
         target-language="de">
     <body>
-      <trans-unit id="properties.name.ui.inline.editorOptions.placeholder" xml:space="preserve">
-				<source>Insert cookie name...</source>
+      <trans-unit id="properties.name.ui.inline.editorOptions.placeholder">
+        <source>Insert cookie name...</source>
         <target state="final">Cookie Name eintragen ...</target>
-			</trans-unit>
-      <trans-unit id="properties.description.ui.inline.editorOptions.placeholder" xml:space="preserve">
-				<source>Insert cookie description...</source>
+      </trans-unit>
+      <trans-unit id="properties.description.ui.inline.editorOptions.placeholder">
+        <source>Insert cookie description...</source>
         <target state="final">Cookie Beschreibung eintragen...</target>
-			</trans-unit>
-      <trans-unit id="properties.priority" xml:space="preserve">
-				<source>Priority</source>
+      </trans-unit>
+      <trans-unit id="properties.priority">
+        <source>Priority</source>
         <target state="final">Priorität</target>
-			</trans-unit>
-      <trans-unit id="properties.priority.ui.help.message" xml:space="preserve">
-        <source>The priority determines the loading order of the different cookies. Higher numbers guarantee earlier loading times.</source>
-        <target state="final">Die Priorität bestimmt die Ladereihenfolge der unterschiedlichen Cookies. Höhere Zahlen garantieren frühere Ladezeiten.</target>
-			</trans-unit>
+      </trans-unit>
+      <trans-unit id="properties.priority.ui.help.message">
+        <source>The priority determines the loading order of the different cookies. Higher numbers guarantee earlier
+          loading times.
+        </source>
+        <target state="final">Die Priorität bestimmt die Ladereihenfolge der unterschiedlichen Cookies. Höhere Zahlen
+          garantieren frühere Ladezeiten.
+        </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

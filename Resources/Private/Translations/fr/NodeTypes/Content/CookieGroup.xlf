@@ -4,29 +4,29 @@
         target-language="fr">
     <body>
       <trans-unit id="ui.label">
-				<source>Cookie Group</source>
+        <source>Cookie Group</source>
         <target state="final">Groupe de cookies</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="ui.inspector.groups.cookie.label">
-				<source>Cookie Group</source>
+        <source>Cookie Group</source>
         <target state="final">Groupe de cookies</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.headline.ui.inline.editorOptions.placeholder">
-				<source>Insert group title...</source>
+        <source>Insert group title...</source>
         <target state="final">Insérer le titre du groupe...</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.description.ui.inline.editorOptions.placeholder">
-				<source>Insert group description...</source>
+        <source>Insert group description...</source>
         <target state="final">Entrez la description du groupe...</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="details">
-				<source><![CDATA[Details&nbsp;>]]></source>
+        <source><![CDATA[Details&nbsp;>]]></source>
         <target state="final"><![CDATA[Détails&nbsp;>]]></target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="hideDetails">
-				<source>Hide details</source>
+        <source>Hide details</source>
         <target state="final">Cacher les détails</target>
-			</trans-unit>
+      </trans-unit>
     </body>
   </file>
 </xliff>

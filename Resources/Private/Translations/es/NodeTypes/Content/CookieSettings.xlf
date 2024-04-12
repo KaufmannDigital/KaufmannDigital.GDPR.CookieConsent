@@ -4,105 +4,114 @@
         target-language="es">
     <body>
       <trans-unit id="ui.label">
-				<source>Cookie Settings</source>
+        <source>Cookie Settings</source>
         <target state="final">Configuración de cookies</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="ui.inspector.groups.cookieSettings.label">
-				<source>Cookie Settings</source>
+        <source>Cookie Settings</source>
         <target state="final">Configuración de cookies</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.headline.ui.inline.editorOptions.placeholder">
-				<source>Insert title...</source>
+        <source>Insert title...</source>
         <target state="final">Entra en la cabeza...</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.mainDescription.ui.inline.editorOptions.placeholder">
-				<source>Insert description...</source>
+        <source>Insert description...</source>
         <target state="final">Introduzca la descripción...</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.individualSettingsDescription.ui.inline.editorOptions.placeholder">
-				<source>Insert description...</source>
+        <source>Insert description...</source>
         <target state="final">Introduzca la descripción...</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.imprintLink">
-				<source>Link to imprint</source>
+        <source>Link to imprint</source>
         <target state="final">Enlace al pie de imprenta</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.dataProtectionPolicyLink">
-				<source>Link to data protection policy</source>
+        <source>Link to data protection policy</source>
         <target state="final">Enlace a la política de privacidad</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.acceptAllButtonLabel">
-				<source>"Accept all" label</source>
+        <source>"Accept all" label</source>
         <target state="final">Etiqueta "Aceptar todo"</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.saveButtonLabel">
-				<source>"Save" label</source>
+        <source>"Save" label</source>
         <target state="final">Etiqueta "Guardar"</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.acceptNecessaryCookiesLabel">
-				<source>"Accept necessary cookies" label</source>
+        <source>"Accept necessary cookies" label</source>
         <target state="final">Etiqueta "Aceptar cookies necesarias"</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.imprintLabel">
-				<source>"Imprint" label</source>
+        <source>"Imprint" label</source>
         <target state="final">Etiqueta "Impressum"</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.dataProtectionPolicyLabel">
-				<source>"Data protection policy" label</source>
+        <source>"Data protection policy" label</source>
         <target state="final">Etiqueta "Política de privacidad"</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.openIndividualSettingsLabel">
-				<source>"Individual settings" label</source>
+        <source>"Individual settings" label</source>
         <target state="final">Etiqueta "Ajustes individuales"</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.closeIndividualSettingsLabel">
-				<source>"Close settings" label</source>
+        <source>"Close settings" label</source>
         <target state="final">Etiqueta "Cerrar ajustes"</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.versionDate">
-				<source>Version date</source>
+        <source>Version date</source>
         <target state="final">Fecha de la versión</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.decisionTtl">
-				<source>TTL (Decision time in seconds)</source>
+        <source>TTL (Decision time in seconds)</source>
         <target state="final">TTL (tiempo de almacenamiento de la decisión en segundos)</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.decisionTtl.ui.help.message">
-				<source>Number of seconds until cookie settings are displayed and confirmed again. Example values are: 86400 (1 day), 604800 (1 week), 2592000 (30 days), 31536000 (1 year)</source>
-        <target state="final">Número de segundos hasta que se vuelve a mostrar y confirmar la configuración de las cookies. Algunos valores de ejemplo son: 86400 (1 día), 604800 (1 semana), 2592000 (30 días), 31536000 (1 año).</target>
-			</trans-unit>
+        <source>Number of seconds until cookie settings are displayed and confirmed again. Example values are: 86400 (1
+          day), 604800 (1 week), 2592000 (30 days), 31536000 (1 year)
+        </source>
+        <target state="final">Número de segundos hasta que se vuelve a mostrar y confirmar la configuración de las
+          cookies. Algunos valores de ejemplo son: 86400 (1 día), 604800 (1 semana), 2592000 (30 días), 31536000 (1
+          año).
+        </target>
+      </trans-unit>
       <trans-unit id="properties.closeButtonEnabled">
-				<source>Show close-button</source>
+        <source>Show close-button</source>
         <target state="final">Mostrar botón de cierre</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.closeButtonEnabled.ui.help.message">
-				<source>Shows an "X" on the right top of the banner, if enabled. A click on the X hides the banner, but without making a decision. It re-appears on the next pageload.</source>
-        <target state="final">Muestra una "X" en la esquina superior derecha, si está activada. Al hacer clic en esta X, el banner se cierra sin decisión. Volverá a aparecer la próxima vez que se acceda a la página.</target>
-			</trans-unit>
+        <source>Shows an "X" on the right top of the banner, if enabled. A click on the X hides the banner, but without
+          making a decision. It re-appears on the next pageload.
+        </source>
+        <target state="final">Muestra una "X" en la esquina superior derecha, si está activada. Al hacer clic en esta X,
+          el banner se cierra sin decisión. Volverá a aparecer la próxima vez que se acceda a la página.
+        </target>
+      </trans-unit>
       <trans-unit id="properties.excludedDocuments">
-				<source>Exclude for Documents</source>
+        <source>Exclude for Documents</source>
         <target state="final">Excluir para documentos</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.buttonTextColor.selectBoxEditor.values.white">
-				<source>White</source>
+        <source>White</source>
         <target state="final">Blanco</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.buttonTextColor.selectBoxEditor.values.black">
-				<source>Black</source>
+        <source>Black</source>
         <target state="final">Negro</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.backgroundColor">
-				<source>Background color (HEX)</source>
+        <source>Background color (HEX)</source>
         <target state="final">Color de fondo (HEX)</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.buttonTextColor">
-				<source>Button text color</source>
+        <source>Button text color</source>
         <target state="final">Color del texto del botón</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.themeColor">
-				<source>Theme color (HEX)</source>
+        <source>Theme color (HEX)</source>
         <target state="final">Color del tema (HEX)</target>
-			</trans-unit>
+      </trans-unit>
       <trans-unit id="properties.maxWidth">
         <source>Maximum content width (px)</source>
         <target state="final">Anchura máxima del contenido (px)</target>

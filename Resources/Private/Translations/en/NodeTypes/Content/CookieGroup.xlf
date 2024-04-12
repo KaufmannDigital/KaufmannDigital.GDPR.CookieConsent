@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext">
-		<body>
-			<trans-unit id="ui.label" xml:space="preserve">
-				<source>Cookie Group</source>
-			</trans-unit>
-			<trans-unit id="ui.inspector.groups.cookie.label" xml:space="preserve">
-				<source>Cookie Group</source>
-			</trans-unit>
-			<trans-unit id="properties.headline.ui.inline.editorOptions.placeholder" xml:space="preserve">
-				<source>Insert group title...</source>
-			</trans-unit>
-			<trans-unit id="properties.description.ui.inline.editorOptions.placeholder" xml:space="preserve">
-				<source>Insert group description...</source>
-			</trans-unit>
-			<trans-unit id="details" xml:space="preserve">
-				<source><![CDATA[Details&nbsp;>]]></source>
-			</trans-unit>
-      <trans-unit id="hideDetails" xml:space="preserve">
-				<source>Hide details</source>
-			</trans-unit>
-
-		</body>
-	</file>
+  <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="ui.label">
+        <source>Cookie Group</source>
+      </trans-unit>
+      <trans-unit id="ui.inspector.groups.cookie.label">
+        <source>Cookie Group</source>
+      </trans-unit>
+      <trans-unit id="properties.headline.ui.inline.editorOptions.placeholder">
+        <source>Insert group title...</source>
+      </trans-unit>
+      <trans-unit id="properties.description.ui.inline.editorOptions.placeholder">
+        <source>Insert group description...</source>
+      </trans-unit>
+      <trans-unit id="details">
+        <source><![CDATA[Details&nbsp;>]]></source>
+      </trans-unit>
+      <trans-unit id="hideDetails">
+        <source>Hide details</source>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

@@ -4,9 +4,9 @@
         target-language="es">
     <body>
       <trans-unit id="ui.label">
-				<source>Cookie Settings Page</source>
+        <source>Cookie Settings Page</source>
         <target state="final">Configuración de cookies</target>
-			</trans-unit>
+      </trans-unit>
     </body>
   </file>
 </xliff>
