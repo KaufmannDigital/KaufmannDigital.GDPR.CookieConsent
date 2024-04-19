@@ -173,9 +173,9 @@ So just check *consents* and load the needed JavaScript.
 
 
 
-#### React to datalayer event in Google Tag Manager
-
-In order to react to the user's decision in the Google Tag Manager, not much is needed. You can easily listen to an custom event. [We provided a full Guide here.](Documentation/GoogleTagManager.md)
+#### Google Tag Manager Integration
+There are two ways to interact between CookieConsent and Google's Tag-Manager. Also the new "Consent Mode" is supported. [We provided a full Guide here.](Documentation/GoogleTagManager.md)
+You can use the "old" way (also described in the link above) in alternative Tag-Managers, too. 
 
 
 
