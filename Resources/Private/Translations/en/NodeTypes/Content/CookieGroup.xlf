@@ -5,6 +5,9 @@
       <trans-unit id="ui.label">
         <source>Cookie Group</source>
       </trans-unit>
+      <trans-unit id="groups.cookie">
+        <target state="final">Cookie group</target>
+      </trans-unit>
       <trans-unit id="ui.inspector.groups.cookie.label">
         <source>Cookie Group</source>
       </trans-unit>

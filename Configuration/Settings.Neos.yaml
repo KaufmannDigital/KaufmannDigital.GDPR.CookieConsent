@@ -14,6 +14,10 @@ Neos:
         autoInclude:
           'KaufmannDigital.GDPR.CookieConsent':
             - 'NodeTypes/*'
+  Fusion:
+    defaultContext:
+      GTMConsents: 'KaufmannDigital\GDPR\CookieConsent\Eel\Helper\GTMConsentsHelper'
+
   Flow:
     mvc:
       routes:

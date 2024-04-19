@@ -1,0 +1,48 @@
+'KaufmannDigital.GDPR.CookieConsent:Mixin.GTMConsents':
+  abstract: true
+  ui:
+    inspector:
+      groups:
+        gtm-consent:
+          label: i18n
+          icon: 'fas fa-google'
+          position: 'after cookies'
+  properties:
+    generalGTMConsents:
+      type: array<string>
+      ui:
+        label: i18n
+        help:
+          message: i18n
+        inspector:
+          group: gtm-consent
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            multiple: true
+            values:
+              ad_storage:
+                label: 'ad_storage'
+              ad_user_data:
+                label: 'ad_user_data'
+              ad_personalization:
+                label: 'ad_personalization'
+              analytics_storage:
+                label: 'analytics_storage'
+              functionality_storage:
+                label: 'functionality_storage'
+              personalization_storage:
+                label: 'personalization_storage'
+              security_storage:
+                label: 'security_storage'
+    additionalGTMConsents:
+      type: string
+      ui:
+        label: i18n
+        help:
+          message: i18n
+        inspector:
+          group: gtm-consent
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+          editorOptions:
+            placeholder: i18n
+

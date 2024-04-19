@@ -212,12 +212,29 @@ function saveConsentToCookie(inputs, userId) {
     var consentDates = cookie && cookie.consentDates ? cookie.consentDates : {};
     consentDates[KD_GDPR_CC.dimensionsIdentifier] = currentDate.toUTCString();
 
+    let gtmConsents = {};
+    [].slice.call(KD_GDPR_CC.gtmConsentKeys).forEach(function(gtmConsent) {
+        gtmConsents[gtmConsent] = 'denied';
+    });
+
+    [].slice.call(inputs).forEach(function (input) {
+        const gtmConsentsElement = input.closest('[data-gtm-consents]');
+        if (gtmConsentsElement) {
+            let itemConsents = JSON.parse(gtmConsentsElement.dataset.gtmConsents);
+            [].slice.call(itemConsents).forEach(function(gtmConsent) {
+                if (gtmConsent) {
+                    gtmConsents[gtmConsent] = 'granted';
+                }
+            });
+        }
+    });
 
     var cookieLifetime = parseInt(KD_GDPR_CC.cookieLifetime) ? parseInt(KD_GDPR_CC.cookieLifetime) * 24 * 60 * 60 * 1000: 315360000000;
 
     var cookieData = {
         userId: userId,
         consents: consents,
+        gtmConsents: gtmConsents,
         consentDates: consentDates,
         consentDate: currentDate.toUTCString(),
         expireDate: expireDate.toUTCString()
@@ -233,6 +250,11 @@ function saveConsentToCookie(inputs, userId) {
             consents: cookieData.consents
         }
     });
+
+    if (cookieData.gtmConsents) {
+        gtag('consent', 'update', cookieData.gtmConsents);
+        window.dataLayer.push({"event": "gtm.init_consent"});
+    }
 }
 
 

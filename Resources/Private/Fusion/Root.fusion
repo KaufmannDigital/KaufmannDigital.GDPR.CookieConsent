@@ -3,9 +3,12 @@ include: **/*.fusion
 
 prototype(Neos.Neos:Page) {
 
+    head.jsVariablesTag = KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings {
+        @position = 'before characterSetMetaTag'
+    }
 
-    jsVariablesTag = KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings {
-        @position = 'before closingBodyTag'
+    head.gtmConsentDefaults = KaufmannDigital.GDPR.CookieConsent:Helper.GTMConsentDefaults {
+        @position = 'after jsVariablesTag'
     }
 
     initializeJs = Neos.Fusion:Tag {

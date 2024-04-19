@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext" target-language="de">
+        <body>
+            <trans-unit id="groups.gtm-consent">
+                <target state="final">Einwilligungen für Google Tag-Manager</target>
+            </trans-unit>
+            <trans-unit id="properties.generalGTMConsents">
+                <target state="final">Vordefinierte Einwilligungen</target>
+            </trans-unit>
+            <trans-unit id="properties.generalGTMConsents.ui.help.message">
+                <target state="final">Wählen Sie eine oder mehrere von Googles vordefinierten Einwilligungen aus. Alle ausgewählten werden standardmäßig abgelehnt und genehmigt, wenn der Nutzer diesen Eintrag akzeptiert.</target>
+            </trans-unit>
+            <trans-unit id="properties.additionalGTMConsents">
+                <target state="final">Zusätzliche benutzerdefinierte Einwilligungen</target>
+            </trans-unit>
+            <trans-unit id="properties.additionalGTMConsents.textAreaEditor.placeholder">
+                <target state="final">Fügen Sie eine oder mehrere benutzerdefinierte Einwilligungen hinzu (eine pro Zeile)</target>
+            </trans-unit>
+            <trans-unit id="properties.additionalGTMConsents.ui.help.message">
+                <target state="final">Fügen Sie eine oder mehrere (eine pro Zeile) benutzerdefinierte Einwilligungen für GTM hinzu. Alle hinzugefügten Zeilen werden standardmäßig abgelehnt und genehmigt, wenn der Nutzer diese Einwilligung akzeptiert. Sie müssen Ihre benutzerdefinierten Einwilligungen mit dem exakt gleichen Namen in den Einstellungen Ihrer Tags im Google Tag-Manager definieren.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

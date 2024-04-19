@@ -7,6 +7,9 @@
         <source>Cookie Group</source>
         <target state="final">Cookie-Gruppe</target>
       </trans-unit>
+      <trans-unit id="groups.cookie">
+        <target state="final">Cookie-Gruppe</target>
+      </trans-unit>
       <trans-unit id="ui.inspector.groups.cookie.label">
         <source>Cookie Group</source>
         <target state="final">Cookie-Gruppe</target>
