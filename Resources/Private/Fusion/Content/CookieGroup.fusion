@@ -17,6 +17,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Ne
     detailsAvailable = ${q(node).children('cookies').children().count() > 0 || node.context.inBackend}
 
     labels = Neos.Fusion:DataStructure {
+        details = ${I18n.translate('KaufmannDigital.GDPR.CookieConsent:NodeTypes.Content.CookieGroup:details')}
         hideDetails = ${I18n.translate('KaufmannDigital.GDPR.CookieConsent:NodeTypes.Content.CookieGroup:hideDetails')}
     }
 
@@ -40,7 +41,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Ne
                 {props.editableDescription}
             </div>
             {props.cookieContentCollection}
-            <a href='#' class="gdpr-cookieconsent-setting-group__details gdpr-cookieconsent-setting-group__details--open" @if.available={props.detailsAvailable} >Details&nbsp;></a>
+            <a href='#' class="gdpr-cookieconsent-setting-group__details gdpr-cookieconsent-setting-group__details--open" @if.available={props.detailsAvailable} >{props.labels.details}</a>
             <a href='#' class="gdpr-cookieconsent-setting-group__details gdpr-cookieconsent-setting-group__details--close hidden" @if.available={props.detailsAvailable} >{props.labels.hideDetails}</a>
         </div>
     `

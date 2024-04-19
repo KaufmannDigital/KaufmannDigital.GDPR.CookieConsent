@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext">
+  <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext"
+        target-language="fr">
     <body>
       <trans-unit id="properties.name.ui.inline.editorOptions.placeholder">
         <source>Insert cookie name...</source>
+        <target state="final">Entrez le nom du cookie ...</target>
       </trans-unit>
       <trans-unit id="properties.description.ui.inline.editorOptions.placeholder">
         <source>Insert cookie description...</source>
+        <target state="final">Entrez la description du cookie...</target>
       </trans-unit>
       <trans-unit id="properties.priority">
         <source>Priority</source>
+        <target state="final">Priorité</target>
       </trans-unit>
       <trans-unit id="properties.priority.ui.help.message">
         <source>The priority determines the loading order of the different cookies. Higher numbers guarantee earlier
           loading times.
         </source>
+        <target>La priorité détermine l'ordre de chargement des différents cookies. Les nombres les plus élevés
+          garantissent des temps de chargement plus rapides.
+        </target>
       </trans-unit>
     </body>
   </file>
