@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="KaufmannDigital.GDPR.CookieConsent" source-language="en" datatype="plaintext" target-language="en">
+        <body>
+            <trans-unit id="groups.gtm-consent">
+                <target state="final">Google Tag-Manager consents</target>
+            </trans-unit>
+            <trans-unit id="properties.generalGTMConsents">
+                <target state="final">Predefined consents</target>
+            </trans-unit>
+            <trans-unit id="properties.generalGTMConsents.ui.help.message">
+                <target state="final">Select one or multiple of Google's predefined consents. All selected will be denied per default and granted, if this consent-entry is accepted by user.</target>
+            </trans-unit>
+            <trans-unit id="properties.additionalGTMConsents">
+                <target state="final">Additional custom consents</target>
+            </trans-unit>
+            <trans-unit id="properties.additionalGTMConsents.textAreaEditor.placeholder">
+                <target state="final">Add one or multiple custom consents (one per line)</target>
+            </trans-unit>
+            <trans-unit id="properties.additionalGTMConsents.ui.help.message">
+                <target state="final">Add one or multiple (one per line) custom defined consents for GTM. All added lines will be denied per default and granted, if this consent-entry is accepted by user. You have to define your custom consents with the exact same string in your Tag's settings in Google Tag-Manager.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -4,13 +4,16 @@
     inspector:
       groups:
         gtm-consent:
-          label: 'Tag-Manager Consents'
+          label: i18n
           icon: 'fas fa-google'
+          position: 'after cookies'
   properties:
     generalGTMConsents:
       type: array<string>
       ui:
-        label: 'Generelle Consent-Einwilligungen'
+        label: i18n
+        help:
+          message: i18n
         inspector:
           group: gtm-consent
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
@@ -34,10 +37,12 @@
     additionalGTMConsents:
       type: string
       ui:
-        label: 'Eigene Consent-Einwilligungen'
+        label: i18n
+        help:
+          message: i18n
         inspector:
           group: gtm-consent
           editor: Neos.Neos/Inspector/Editors/TextAreaEditor
           editorOptions:
-            placeholder: 'One custom consent per line'
+            placeholder: i18n
 
