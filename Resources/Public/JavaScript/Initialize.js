@@ -107,7 +107,7 @@ if (typeof KD_GDPR_CC !== 'undefined' && KD_GDPR_CC.documentNodeDisabled === fal
     });
 
     if (cookieObject.gtmConsents) {
-        gtag('consent', 'update', cookieObject.gtmConsents);
+        gtag('consent', 'update', cookieObject.gtmConsents[KD_GDPR_CC.dimensionsIdentifier] ?? cookieObject.gtmConsents);
         window.dataLayer.push({"event": "gtm.init_consent"});
     }
 } else if (typeof KD_GDPR_CC !== 'undefined' && KD_GDPR_CC.documentNodeDisabled === false && document.getElementsByClassName('gdpr-cookieconsent-settings').length === 0 && window.neos === undefined) {

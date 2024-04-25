@@ -212,9 +212,11 @@ function saveConsentToCookie(inputs, userId) {
     var consentDates = cookie && cookie.consentDates ? cookie.consentDates : {};
     consentDates[KD_GDPR_CC.dimensionsIdentifier] = currentDate.toUTCString();
 
-    let gtmConsents = {};
+    let gtmConsents = cookie && cookie.gtmConsents && cookie.gtmConsents[KD_GDPR_CC.dimensionsIdentifier] !== undefined ? cookie.gtmConsents : {};
+		gtmConsents[KD_GDPR_CC.dimensionsIdentifier] = {};
+
     [].slice.call(KD_GDPR_CC.gtmConsentKeys).forEach(function(gtmConsent) {
-        gtmConsents[gtmConsent] = 'denied';
+        gtmConsents[KD_GDPR_CC.dimensionsIdentifier][gtmConsent] = 'denied';
     });
 
     [].slice.call(inputs).forEach(function (input) {
@@ -223,7 +225,7 @@ function saveConsentToCookie(inputs, userId) {
             let itemConsents = JSON.parse(gtmConsentsElement.dataset.gtmConsents);
             [].slice.call(itemConsents).forEach(function(gtmConsent) {
                 if (gtmConsent) {
-                    gtmConsents[gtmConsent] = 'granted';
+                    gtmConsents[KD_GDPR_CC.dimensionsIdentifier][gtmConsent] = 'granted';
                 }
             });
         }
@@ -251,8 +253,8 @@ function saveConsentToCookie(inputs, userId) {
         }
     });
 
-    if (cookieData.gtmConsents) {
-        gtag('consent', 'update', cookieData.gtmConsents);
+    if (cookieData.gtmConsents[KD_GDPR_CC.dimensionsIdentifier]) {
+        gtag('consent', 'update', cookieData.gtmConsents[KD_GDPR_CC.dimensionsIdentifier]);
         window.dataLayer.push({"event": "gtm.init_consent"});
     }
 }
