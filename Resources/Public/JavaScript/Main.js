@@ -179,7 +179,9 @@ function initializeCookieConsent(openSettings, openedManually, autoAccept = 'non
     }
 
     //focus banner so the nex tab keypress will focus a button
-    cookieSettingsContainer.focus();
+    cookieSettingsContainer.focus({
+        preventScroll: true
+    });
 }
 
 
