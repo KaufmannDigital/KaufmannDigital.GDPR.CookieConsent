@@ -22,6 +22,11 @@ function initializeCookieConsent(openSettings, openedManually, autoAccept = 'non
 
     var kd_gdpr_cc_userid;
     var cookieSettingsContainer = document.querySelector('.gdpr-cookieconsent-container');
+
+    if (cookieSettingsContainer && cookieSettingsContainer.dataset.initialized === '1') {
+        return;
+    }
+
     var txtMainDescription = document.querySelector('.gdpr-cookieconsent-settings__content__info__description--main');
     var txtIndividualSettingsDescription = document.querySelector('.gdpr-cookieconsent-settings__content__info__description--settings');
     var individualSettingsContainer = document.querySelector('.gdpr-cookieconsent-settings__content__settings');
@@ -182,6 +187,8 @@ function initializeCookieConsent(openSettings, openedManually, autoAccept = 'non
     cookieSettingsContainer.focus({
         preventScroll: true
     });
+
+    cookieSettingsContainer.dataset.initialized = '1';
 }
 
 
