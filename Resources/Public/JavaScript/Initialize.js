@@ -122,3 +122,12 @@ var links = document.querySelectorAll('a[href*=\"#GDPR-CC-open-settings\"]');
         loadCookiebannerHtml(true, true, true);
     });
 });
+
+if (window.neos) {
+    document.addEventListener("DOMContentLoaded", function () {
+        if (typeof initializeCookieConsent === 'function') {
+            console.log("now");
+            initializeCookieConsent(false, false);
+        }
+    });
+}
