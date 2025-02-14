@@ -294,7 +294,3 @@ function decodeCookie() {
         return JSON.parse(decodeURI(cookieValue));
     }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    initializeCookieConsent();
-});
