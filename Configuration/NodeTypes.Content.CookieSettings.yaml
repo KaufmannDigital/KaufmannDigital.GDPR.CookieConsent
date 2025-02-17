@@ -138,6 +138,8 @@
         label: i18n
         inspector:
           group: cookieSettings
+          editorOptions:
+            format: 'd.m.Y H:i'
     decisionTtl:
       type: integer
       defaultValue: 0
