@@ -25,7 +25,8 @@
             "package-key": "KaufmannDigital.GDPR.CookieConsent"
         },
         "applied-flow-migrations": [
-            "Neos.Party-20161124225257"
+            "Neos.Party-20161124225257",
+            "Neos.Kickstart-20161124230102"
         ]
     }
 }
