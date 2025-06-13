@@ -5,7 +5,7 @@ namespace KaufmannDigital\GDPR\CookieConsent\Controller;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
-use Neos\Flow\Http\Component\SetHeaderComponent;
+
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Mvc\View\JsonView;
 use Neos\Neos\Controller\Exception\NodeNotFoundException;
@@ -76,10 +76,10 @@ class ApiController extends RestController
             $this->response->setHttpHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
             $this->response->setHttpHeader('Vary', 'Origin');
         } else {
-            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Origin', $origin);
-            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Credentials', 'true');
-            $this->response->setComponentParameter(SetHeaderComponent::class, 'Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
-            $this->response->setComponentParameter(SetHeaderComponent::class, 'Vary', 'Origin');
+            $this->response->setHttpHeader('Access-Control-Allow-Origin', $origin);
+            $this->response->setHttpHeader('Access-Control-Allow-Credentials', 'true');
+            $this->response->setHttpHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
+            $this->response->setHttpHeader('Vary', 'Origin');
         }
     }
 

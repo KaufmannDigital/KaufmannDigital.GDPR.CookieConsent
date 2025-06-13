@@ -7,7 +7,7 @@ use Neos\Cache\Frontend\StringFrontend;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
-use Neos\Flow\Http\Component\SetHeaderComponent;
+
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Fusion\Helper\CachingHelper;
@@ -55,7 +55,7 @@ class JavaScriptController extends RestController
 
     public function initializeRenderJavaScriptAction()
     {
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Cache-Control', 'max-age=0, private, must-revalidate');
+        $this->response->setHttpHeader('Cache-Control', 'max-age=0, private, must-revalidate');
     }
 
 
