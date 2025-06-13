@@ -14,7 +14,7 @@ Composer-Version | Neos-Compatibility | Maintenance
 `^2.0` | >= 5.0 | ⛔
 `^3.0` | >= 5.0 | ⛔
 `^4.0` | >= 5.0 | ⛔ 
-`^5.0` | >= 5.0 | 🐛 ✨ (⚠️ [Note changed rendering and Styling](#styling))
+`^5.0` | >= 5.0 <= 9.0 | 🐛 ✨ (⚠️ [Note changed rendering and Styling](#styling))
 
 
 ## Installation
