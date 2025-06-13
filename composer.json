@@ -23,6 +23,9 @@
     "extra": {
         "neos": {
             "package-key": "KaufmannDigital.GDPR.CookieConsent"
-        }
+        },
+        "applied-flow-migrations": [
+            "Neos.Party-20161124225257"
+        ]
     }
 }
