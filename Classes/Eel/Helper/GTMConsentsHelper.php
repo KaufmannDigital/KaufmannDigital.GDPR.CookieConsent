@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace KaufmannDigital\GDPR\CookieConsent\Eel\Helper;
 
-use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Eel\ProtectedContextAwareInterface;
 use Neos\Flow\Annotations as Flow;
 
 class GTMConsentsHelper implements ProtectedContextAwareInterface {
 
-    public function getAllConfiguredConsents(NodeInterface $contextNode)
+    public function getAllConfiguredConsents(Node $contextNode)
     {
         $q = new FlowQuery([$contextNode]);
         $nodesWithGtmConsents = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Mixin.GTMConsents]')->get();
@@ -27,7 +27,7 @@ class GTMConsentsHelper implements ProtectedContextAwareInterface {
         return array_values(array_unique(array_filter($configuredConsents)));
     }
 
-    public function getConsentsForNode(NodeInterface $node)
+    public function getConsentsForNode(Node $node)
     {
         $generalGtmConsents = $node->getProperty('generalGTMConsents') ?? [];
         $additionalGtmConsents = preg_split('/\n/', $node->getProperty('additionalGTMConsents') ?? '');

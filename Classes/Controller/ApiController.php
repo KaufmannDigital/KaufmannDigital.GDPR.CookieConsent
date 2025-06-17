@@ -2,13 +2,11 @@
 
 namespace KaufmannDigital\GDPR\CookieConsent\Controller;
 
-use Neos\ContentRepository\Domain\Model\NodeInterface;
-use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
+use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
 use Neos\Eel\FlowQuery\FlowQuery;
-
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Mvc\View\JsonView;
-use Neos\Neos\Controller\Exception\NodeNotFoundException;
+use Neos\Neos\FrontendRouting\Exception\NodeNotFoundException;
 use Neos\Neos\View\FusionView;
 use Neos\Flow\Annotations as Flow;
 
@@ -22,11 +20,6 @@ class ApiController extends RestController
 
     protected $defaultViewObjectName = JsonView::class;
 
-    /**
-     * @Flow\Inject
-     * @var ContextFactoryInterface
-     */
-    protected $contextFactory;
 
     /**
      * @Flow\InjectConfiguration(path="cookieName")
@@ -70,31 +63,22 @@ class ApiController extends RestController
      */
     private function setCORSHeaders(string $origin): void
     {
-        if (method_exists($this->response, 'setHttpHeader')) {
             $this->response->setHttpHeader('Access-Control-Allow-Origin', $origin);
             $this->response->setHttpHeader('Access-Control-Allow-Credentials', 'true');
             $this->response->setHttpHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
             $this->response->setHttpHeader('Vary', 'Origin');
-        } else {
-            $this->response->setHttpHeader('Access-Control-Allow-Origin', $origin);
-            $this->response->setHttpHeader('Access-Control-Allow-Credentials', 'true');
-            $this->response->setHttpHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
-            $this->response->setHttpHeader('Vary', 'Origin');
-        }
     }
 
     /**
-     * @param NodeInterface|null $siteNode The current SiteNode for multisite support
+     * @param Node|null $siteNode
      * @return void
      * @throws NodeNotFoundException
-     * @throws \Neos\ContentRepository\Exception\NodeException
+     * @throws \DateMalformedStringException
      * @throws \Neos\Eel\Exception
-     *
-     * Search for CookieSettings node, render and output its HTML and if consent needs renewal
      */
-    public function renderCookieSettingsAction(NodeInterface $siteNode = null)
+    public function renderCookieSettingsAction(Node $siteNode = null)
     {
-        if (!$siteNode instanceof NodeInterface) {
+        if (!$siteNode instanceof Node) {
             throw new NodeNotFoundException('The given site was not found', 1644389565);
         }
 
@@ -104,7 +88,7 @@ class ApiController extends RestController
         $node = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
 
         //Reply with empty string, if there is no configured CookieConsent
-        if (!$node instanceof NodeInterface || !$node->getParent() instanceof NodeInterface) {
+        if (!$node instanceof Node) {
             $this->view->assign('html', '');
             $this->view->assign('needsRenew', false);
             return;
@@ -117,7 +101,7 @@ class ApiController extends RestController
         $view->assign('value', $node);
         $view->assign('node', $node);
         $view->assign('site', $siteNode);
-        $this->view->assign('html', $view->render());
+        $this->view->assign('html', $view->render()->getContents());
 
 
         // Check if consents need renewal
