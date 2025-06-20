@@ -26,8 +26,8 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
     @context.hideBeforeInteraction = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.hideBeforeInteraction')}
 
     @context.documentNodeDisabled = ${
-        Array.indexOf(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.excludeDocumentNodeTypes'), documentNode.nodeType.name) >= 0 ||
-        (q(this.cookieSettingsNode).property('excludedDocuments') && Array.length(Array.filter(q(this.cookieSettingsNode).property('excludedDocuments'), (value,key) => value.identifier == documentNode.identifier)) > 0)
+        Array.indexOf(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.excludeDocumentNodeTypes'), documentNode.nodeTypeName) >= 0 ||
+        (q(this.cookieSettingsNode).property('excludedDocuments') && Array.length(Array.filter(q(this.cookieSettingsNode).property('excludedDocuments'), (value,key) => value.identifier == documentNode.aggregateId)) > 0)
     }
 
     @context.acceptConfiguration = Neos.Fusion:DataStructure {
