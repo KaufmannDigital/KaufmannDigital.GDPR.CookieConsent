@@ -12,13 +12,13 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
         package = 'KaufmannDigital.GDPR.CookieConsent'
         controller = 'Api'
         action = 'renderCookieSettings'
-        arguments.siteNode = ${site.contextPath}
+        arguments.siteNode = ${site}
         absolute = true
     }
 
     @context.dimensionsIdentifier = Neos.Fusion:Value {
         consentDimensions = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.consentDimensions')}
-        dimensionValues = ${Array.filter(site.context.targetDimensions, (value,key) => Array.indexOf(this.consentDimensions, key) >= 0)}
+        dimensionValues = ${Array.filter(site.dimensionSpacePoint.coordinates, (value,key) => Array.indexOf(this.consentDimensions, key) >= 0)}
         value = ${Array.join(this.dimensionValues, '_')}
     }
     @context.cookieName = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieName')}
@@ -26,8 +26,8 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
     @context.hideBeforeInteraction = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.hideBeforeInteraction')}
 
     @context.documentNodeDisabled = ${
-        Array.indexOf(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.excludeDocumentNodeTypes'), documentNode.nodeType.name) >= 0 ||
-        (q(this.cookieSettingsNode).property('excludedDocuments') && Array.length(Array.filter(q(this.cookieSettingsNode).property('excludedDocuments'), (value,key) => value.identifier == documentNode.identifier)) > 0)
+        Array.indexOf(Configuration.setting('KaufmannDigital.GDPR.CookieConsent.excludeDocumentNodeTypes'), documentNode.nodeTypeName) >= 0 ||
+        (q(this.cookieSettingsNode).property('excludedDocuments') && Array.length(Array.filter(q(this.cookieSettingsNode).property('excludedDocuments'), (value,key) => value.identifier == documentNode.aggregateId)) > 0)
     }
 
     @context.acceptConfiguration = Neos.Fusion:DataStructure {
@@ -36,9 +36,18 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
 
     @context.cookieLifetime = ${Configuration.setting('KaufmannDigital.GDPR.CookieConsent.cookieLifetime')}
 
+    @context.generatedJsUrl = Neos.Fusion:UriBuilder {
+        package = 'KaufmannDigital.GDPR.CookieConsent'
+        controller = 'JavaScript'
+        action = 'renderJavaScript'
+        arguments.site = ${site}
+        absolute = true
+    }
+
     content = ${"
             var KD_GDPR_CC = {
                 apiUrl: '" + apiUrl + "',
+                generatedJsUrl: '" + generatedJsUrl + "',
                 cookieName: '" + cookieName +"',
                 cookieLifetime: '" + cookieLifetime +"',
                 cookieDomainName: '" + cookieDomainName +"',
@@ -52,13 +61,13 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
             };
         "}
 
-    @if.condition = ${node.context.inBackend == false}
+    @if.condition = ${renderingMode.isEdit == false}
 
     @cache {
         mode = 'cached'
         entryIdentifier {
             name = 'KD_GDPR_JS_SETTINGS'
-            documentNode = ${node}
+            cookieSettingsNode = ${Neos.Caching.entryIdentifierForNode(cookieSettingsNode)}
         }
         entryTags {
             1 = ${Neos.Caching.nodeTypeTag('KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings', site)}

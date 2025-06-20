@@ -8,13 +8,13 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings) < prototype
         property = 'mainDescription'
     }
     editableMainDescription.@process.adNoopener = ${String.replace(value,'<a', '<a rel="nofollow"')}
-    editableMainDescription.@process.adNoopener.@if.frontEnd = ${!node.context.inBackend}
+    editableMainDescription.@process.adNoopener.@if.frontEnd = ${!renderingMode.isEdit}
 
     editableIndividualSettingsDescription = Neos.Neos:Editable {
         property = 'individualSettingsDescription'
     }
     editableMainDescription.@process.adNoopener = ${String.replace(value,'<a', '<a rel="nofollow"')}
-    editableMainDescription.@process.adNoopener.@if.frontEnd = ${!node.context.inBackend}
+    editableMainDescription.@process.adNoopener.@if.frontEnd = ${!renderingMode.isEdit}
 
     individualSettings = Neos.Neos:ContentCollection {
         nodePath = 'settingElements'

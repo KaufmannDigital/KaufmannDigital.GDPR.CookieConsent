@@ -8,9 +8,11 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Document.CookieSettingsPage) < prot
 
     // Render the "Homepage" and insert cookiebanner before closing tag
     renderer = Neos.Fusion:Renderer {
-        type = ${site.nodeType.name}
-        @context.node = ${site}
-        @context.documentNode = ${site}
+        type = ${site.nodeTypeName}
+        @context {
+            node = ${site}
+            documentNode = ${site}
+        }
 
         element.head.javascriptBackendInformation {
             # for backend purposes we still consider the cookiesettingspage to be the documentNode

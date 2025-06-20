@@ -282,7 +282,7 @@ function acceptNecessaryCookies(userId) {
 
 function loadGeneratedJavaScript() {
     var tag = document.createElement('script');
-    tag.src = generatedJsUrl;
+    tag.src = KD_GDPR_CC.generatedJsUrl;
     document.getElementsByTagName('head')[0].appendChild(tag);
 }
 

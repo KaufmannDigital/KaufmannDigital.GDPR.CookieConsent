@@ -1,16 +1,7 @@
 prototype(KaufmannDigital.GDPR.CookieConsent:Helper.GeneratedJavaScript) < prototype(Neos.Fusion:Tag) {
     tagName = 'script'
 
-    @context.generatedJsUrl = Neos.Fusion:UriBuilder {
-        package = 'KaufmannDigital.GDPR.CookieConsent'
-        controller = 'JavaScript'
-        action = 'renderJavaScript'
-        arguments.dimensions = ${site.context.dimensions}
-        absolute = true
-    }
-
     content = Neos.Fusion:Join {
-        generatedJsUrl = ${"var generatedJsUrl = '" + generatedJsUrl + "';"}
         mainScript = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/JavaScript/Main.js')}
     }
 }

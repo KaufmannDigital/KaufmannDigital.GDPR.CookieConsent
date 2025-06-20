@@ -14,7 +14,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.CookieGroup) < prototype(Ne
     }
 
     identifier = ${q(node).property('identifier')}
-    detailsAvailable = ${q(node).children('cookies').children().count() > 0 || node.context.inBackend}
+    detailsAvailable = ${q(node).children('cookies').children().count() > 0 || renderingMode.isEdit}
 
     labels = Neos.Fusion:DataStructure {
         details = ${I18n.translate('KaufmannDigital.GDPR.CookieConsent:NodeTypes.Content.CookieGroup:details')}

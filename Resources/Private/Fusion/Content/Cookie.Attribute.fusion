@@ -8,7 +8,7 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Content.Cookie.Attribute) < prototy
         property = 'value'
     }
     editableValue.@process.adNoopener = ${String.replace(value,'<a', '<a rel="nofollow"')}
-    editableValue.@process.adNoopener.@if.frontEnd = ${!node.context.inBackend}
+    editableValue.@process.adNoopener.@if.frontEnd = ${!renderingMode.isEdit}
 
     renderer = afx`
     <div class="gdpr-cookieconsent-cookie-attribute">

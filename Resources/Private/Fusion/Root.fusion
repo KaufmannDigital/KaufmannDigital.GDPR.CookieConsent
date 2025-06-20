@@ -1,4 +1,3 @@
-
 include: **/*.fusion
 
 prototype(Neos.Neos:Page) {
@@ -28,10 +27,10 @@ prototype(Neos.Neos:Page) {
             controller = 'JavaScript'
             action = 'renderJavaScript'
             format = 'js'
-            arguments.dimensions = ${site.context.dimensions}
+            arguments.site = ${site}
         }
 
-        @if.condition = ${node.context.inBackend == false || Configuration.setting('KaufmannDigital.GDPR.CookieConsent.backend.includeGeneratedJs') == true}
+        @if.condition = ${renderingMode.isEdit == false || Configuration.setting('KaufmannDigital.GDPR.CookieConsent.backend.includeGeneratedJs') == true}
         @position = 'before closingBodyTag'
     }
 }

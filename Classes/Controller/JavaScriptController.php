@@ -2,14 +2,16 @@
 
 namespace KaufmannDigital\GDPR\CookieConsent\Controller;
 
+use GuzzleHttp\Psr7\Response;
 use KaufmannDigital\GDPR\CookieConsent\Mvc\View\CustomTemplateView;
 use Neos\Cache\Frontend\StringFrontend;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
-use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
+use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
+use Neos\ContentRepositoryRegistry\ContentRepositoryRegistry;
 use Neos\Eel\FlowQuery\FlowQuery;
-use Neos\Flow\Http\Component\SetHeaderComponent;
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Exception\StopActionException;
+use Neos\Neos\Fusion\Cache\CacheTag;
 use Neos\Neos\Fusion\Helper\CachingHelper;
 
 
@@ -23,11 +25,8 @@ class JavaScriptController extends RestController
 
     protected $defaultViewObjectName = CustomTemplateView::class;
 
-    /**
-     * @Flow\Inject
-     * @var ContextFactoryInterface
-     */
-    protected $contextFactory;
+    #[Flow\Inject]
+    protected ContentRepositoryRegistry $contentRepositoryRegistry;
 
     /**
      * @var StringFrontend
@@ -55,22 +54,21 @@ class JavaScriptController extends RestController
 
     public function initializeRenderJavaScriptAction()
     {
-        $this->response->setComponentParameter(SetHeaderComponent::class, 'Cache-Control', 'max-age=0, private, must-revalidate');
+        $this->response->setHttpHeader('Cache-Control', 'max-age=0, private, must-revalidate');
     }
 
 
     /**
-     * Concatinate scripts of cookies and write to cache
-     * @param array $dimensions
+     * @param Node $site
      * @return void
      */
-    public function renderJavaScriptAction(array $dimensions = [])
+    public function renderJavaScriptAction(Node $site)
     {
         try {
             // dimensions that have configuration
             $filteredDimensions =
                 array_filter(
-                    $dimensions,
+                    $site->dimensionSpacePoint->coordinates,
                     function ($key) {
                         return in_array($key, $this->consentDimensions);
                     },
@@ -85,11 +83,14 @@ class JavaScriptController extends RestController
 
             $cookie = !empty($this->request->getHttpRequest()->getCookieParams()) && isset($this->request->getHttpRequest()->getCookieParams()[$this->cookieName]) ? json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true) : null;
             $consents = $cookie['consents'][$dimensionIdentifier] ?? $cookie['consents']['default'] ?? $cookie['consents'] ?? [];
-            $siteNode = $this->contextFactory->create(['dimensions' => $dimensions])->getCurrentSiteNode();
 
-            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(json_encode($consents) . $dimensionIdentifier . $siteNode->getIdentifier());
+            $cacheIdentifier = 'kd_gdpr_cc_' . sha1(implode('_', [
+                    CacheTag::forNodeAggregateFromNode($site)->value,
+                    json_encode($consents),
+                    $dimensionIdentifier,
+                ]));
 
-            $q = new FlowQuery([$siteNode]);
+            $q = new FlowQuery([$site]);
 
             if (isset($cookie['consentDates'][$dimensionIdentifier])) {
                 $consentDate = new \DateTime($cookie['consentDates'][$dimensionIdentifier]);
@@ -101,16 +102,18 @@ class JavaScriptController extends RestController
 
             $cookieSettings = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
 
-            if (!$cookieSettings instanceof NodeInterface) {
+            if (!$cookieSettings instanceof Node) {
                 throw new \Exception('No cookie settings could be found', 1634843525);
             }
 
+            //Do not load anything, if decisionTtl (configured in Neos) is over
+            //Neos should now render the CookieConsent again.
             $decisionTtl = $cookieSettings->getProperty('decisionTtl') ?? 0;
             $expireDate = clone $consentDate;
             $expireDate->add(\DateInterval::createFromDateString($decisionTtl . ' seconds'));
             if ($decisionTtl > 0 && $expireDate < new \DateTime('now')) {
-                $this->response->setContentType('text/javascript');
-                $this->response->setContent('');
+                $this->response->addHttpHeader('Content-Type', 'text/javascript;charset=UTF8');
+                $this->response->replaceHttpResponse(new Response());
                 return;
             }
 
@@ -122,6 +125,7 @@ class JavaScriptController extends RestController
             $cookieNodes = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.Cookie][javaScriptCode != ""]')->sort('priority', 'DESC')->get();
 
             $javaScript = '';
+            /** @var Node $cookieNode */
             foreach ($cookieNodes as $cookieNode) {
                 $cookieJs = '';
                 if (strlen($cookieNode->getProperty('identifier')) > 0 && in_array($cookieNode->getProperty('identifier'), $consents)) {
@@ -138,16 +142,18 @@ class JavaScriptController extends RestController
                 array_merge(
                     $this->cachingHelper->nodeTag($cookieNodes),
                     $this->cachingHelper->descendantOfTag($cookieNodes),
-                    $this->cachingHelper->nodeTypeTag($cookieNodes)
+                    $this->cachingHelper->nodeTypeTag($cookieNode->nodeTypeName->value, $cookieNode)
                 )
             );
             $this->redirect('downloadGeneratedJavaScript', null, null, ['hash' => $cacheIdentifier]);
             return;
 
 
+        } catch (StopActionException $stopActionException) {
+            throw $stopActionException;
         } catch (\Exception $e) {
-            $this->response->setContentType('text/javascript');
-            $this->response->setContent('');
+            $this->response->addHttpHeader('Content-Type', 'text/javascript;charset=UTF8');
+            $this->response->replaceHttpResponse(new Response());
         }
     }
 
@@ -158,8 +164,7 @@ class JavaScriptController extends RestController
      */
     public function downloadGeneratedJavaScriptAction(string $hash)
     {
-        $this->response->setContentType('text/javascript');
-
+        $this->response->addHttpHeader('Content-Type', 'text/javascript;charset=UTF8');
 
         if ($this->cache->has($hash) !== false) {
             $this->view->setOption('templateSource', $this->cache->get($hash));
