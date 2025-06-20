@@ -18,7 +18,6 @@ Composer-Version | Neos-Compatibility | Maintenance
 `^6.0` | 9.0 | 🐛 ✨
 
 
-
 ## Installation
 
 It's easier than you probably think!  
