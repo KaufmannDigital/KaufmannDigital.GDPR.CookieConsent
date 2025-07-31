@@ -130,6 +130,7 @@ class JavaScriptController extends RestController
                 $cookieJs = '';
                 if (strlen($cookieNode->getProperty('identifier')) > 0 && in_array($cookieNode->getProperty('identifier'), $consents)) {
                     $cookieJs = preg_replace('/<script.*src=.*><\/script>/', 'document.head.appendChild(document.createRange().createContextualFragment(\'$0\'));', $cookieNode->getProperty('javaScriptCode'));
+                    $cookieJs = preg_replace('/(<noscript>.*?<\/noscript>)/s', '', $cookieJs);
                     $cookieJs = preg_replace('/<script>((.*\s.*)*)<\/script>/', '$1', $cookieJs);
                 }
                 $javaScript .= $cookieJs;
