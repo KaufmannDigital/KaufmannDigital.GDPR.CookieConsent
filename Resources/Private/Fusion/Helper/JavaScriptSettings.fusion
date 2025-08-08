@@ -68,10 +68,12 @@ prototype(KaufmannDigital.GDPR.CookieConsent:Helper.JavaScriptSettings) < protot
         entryIdentifier {
             name = 'KD_GDPR_JS_SETTINGS'
             cookieSettingsNode = ${Neos.Caching.entryIdentifierForNode(cookieSettingsNode)}
-        }
+            cookieSettingsNode.@if.isSet = ${cookieSettingsNode}
+  }
         entryTags {
             1 = ${Neos.Caching.nodeTypeTag('KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings', site)}
             2 = ${Neos.Caching.descendantOfTag(cookieSettingsNode)}
+            2.@if.isSet = ${cookieSettingsNode}
         }
     }
 }
