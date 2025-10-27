@@ -129,9 +129,12 @@ class JavaScriptController extends RestController
             foreach ($cookieNodes as $cookieNode) {
                 $cookieJs = '';
                 if (strlen($cookieNode->getProperty('identifier')) > 0 && in_array($cookieNode->getProperty('identifier'), $consents)) {
-                    $cookieJs = preg_replace('/<script.*src=.*><\/script>/', 'document.head.appendChild(document.createRange().createContextualFragment(\'$0\'));', $cookieNode->getProperty('javaScriptCode'));
-                    $cookieJs = preg_replace('/(<noscript>.*?<\/noscript>)/s', '', $cookieJs);
-                    $cookieJs = preg_replace('/<script>((.*\s.*)*)<\/script>/', '$1', $cookieJs);
+                    //Remove noscript tags
+                    $cookieJs = preg_replace('/(<noscript>.*?<\/noscript>)/s', '', $cookieNode->getProperty('javaScriptCode'));
+                    //Extract inline script content (but keep scripts with src attribute)
+                    $cookieJs = preg_replace('/<script(?![^>]*\bsrc\s*=)[^>]*>(.*?)<\/script>/is', '$1', $cookieJs);
+                    //Wrap external scripts with src attribute
+                    $cookieJs = preg_replace('/<script\b[^>]*\bsrc\s*=\s*[^>]*><\/script>/is', 'document.head.appendChild(document.createRange().createContextualFragment(\'$0\'));', $cookieJs);
                 }
                 $javaScript .= $cookieJs;
             }
