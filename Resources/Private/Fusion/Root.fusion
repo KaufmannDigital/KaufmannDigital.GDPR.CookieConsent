@@ -13,8 +13,7 @@ prototype(Neos.Neos:Page) {
     initializeJs = Neos.Fusion:Tag {
         tagName = 'script'
         content = ${File.readFile('resource://KaufmannDigital.GDPR.CookieConsent/Public/JavaScript/Initialize.js')}
-
-        @position = 'before closingBodyTag'
+        @position = 'before closingHeadTag'
     }
 
     generatedJS = Neos.Fusion:Tag {
