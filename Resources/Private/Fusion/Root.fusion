@@ -30,7 +30,7 @@ prototype(Neos.Neos:Page) {
             arguments.site = ${site}
         }
 
-        @if.condition = ${renderingMode.isEdit == false || Configuration.setting('KaufmannDigital.GDPR.CookieConsent.backend.includeGeneratedJs') == true}
+        @if.condition = ${(renderingMode.isEdit == false && renderingMode.isPreview == false) || Configuration.setting('KaufmannDigital.GDPR.CookieConsent.backend.includeGeneratedJs') == true}
         @position = 'before closingBodyTag'
     }
 }
