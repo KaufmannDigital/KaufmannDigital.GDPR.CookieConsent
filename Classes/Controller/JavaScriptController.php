@@ -78,7 +78,7 @@ class JavaScriptController extends RestController
             // turn configured dimensions into a identifier like "deu_de"
             $dimensionIdentifier = implode(
                 '_',
-                array_map(function ($dimension) { return current($dimension);}, $filteredDimensions)
+                array_map(function ($dimension) { return $dimension;}, $filteredDimensions)
             );
 
             $cookie = !empty($this->request->getHttpRequest()->getCookieParams()) && isset($this->request->getHttpRequest()->getCookieParams()[$this->cookieName]) ? json_decode($this->request->getHttpRequest()->getCookieParams()[$this->cookieName], true) : null;
