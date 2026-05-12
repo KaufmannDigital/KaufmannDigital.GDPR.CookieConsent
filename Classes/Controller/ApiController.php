@@ -2,25 +2,16 @@
 
 namespace KaufmannDigital\GDPR\CookieConsent\Controller;
 
+use GuzzleHttp\Psr7\Response;
 use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Mvc\Controller\RestController;
-use Neos\Flow\Mvc\View\JsonView;
 use Neos\Neos\FrontendRouting\Exception\NodeNotFoundException;
 use Neos\Neos\View\FusionView;
 use Neos\Flow\Annotations as Flow;
 
 class ApiController extends RestController
 {
-
-    /**
-     * @var JsonView
-     */
-    protected $view;
-
-    protected $defaultViewObjectName = JsonView::class;
-
-
     /**
      * @Flow\InjectConfiguration(path="cookieName")
      * @var string
@@ -39,34 +30,23 @@ class ApiController extends RestController
      */
     protected $allowedOrigins;
 
-    public function initializeAction()
-    {
-        parent::initializeAction();
-        $this->handleCorsHeaders();
-    }
-
     /**
-     * @return void
+     * @return array|string[]
      */
-    private function handleCorsHeaders(): void
+    public function getCORSHeaders(): array
     {
         $origin = $_SERVER['HTTP_ORIGIN'] ?? null;
         // Check if request is from an allowed origin
-        if ( $origin && in_array(parse_url($origin, PHP_URL_HOST), (array)$this->allowedOrigins)) {
-            $this->setCORSHeaders($origin);
+        if ($origin && in_array(parse_url($origin, PHP_URL_HOST), (array)$this->allowedOrigins)) {
+            return [
+                'Access-Control-Allow-Origin' => $origin,
+                'Access-Control-Allow-Credentials' => 'true',
+                'Access-Control-Allow-Headers' => 'Content-Type, Cookie, Credentials',
+                'Vary' => 'Origin'
+            ];
         }
-    }
 
-    /**
-     * @param string $origin
-     * @return void
-     */
-    private function setCORSHeaders(string $origin): void
-    {
-            $this->response->setHttpHeader('Access-Control-Allow-Origin', $origin);
-            $this->response->setHttpHeader('Access-Control-Allow-Credentials', 'true');
-            $this->response->setHttpHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie, Credentials');
-            $this->response->setHttpHeader('Vary', 'Origin');
+        return [];
     }
 
     /**
@@ -74,24 +54,27 @@ class ApiController extends RestController
      * @return void
      * @throws NodeNotFoundException
      * @throws \DateMalformedStringException
-     * @throws \Neos\Eel\Exception
+     * @throws \Neos\Eel\Exception|\JsonException
      */
-    public function renderCookieSettingsAction(Node $siteNode = null)
+    public function renderCookieSettingsAction(Node $siteNode = null): Response
     {
         if (!$siteNode instanceof Node) {
             throw new NodeNotFoundException('The given site was not found', 1644389565);
         }
 
-        $this->view->setVariablesToRender(['html', 'needsRenew']);
+        $responseBody = [];
 
         $q = new FlowQuery([$siteNode]);
         $node = $q->find('[instanceof KaufmannDigital.GDPR.CookieConsent:Content.CookieSettings]')->get(0);
 
         //Reply with empty string, if there is no configured CookieConsent
         if (!$node instanceof Node) {
-            $this->view->assign('html', '');
-            $this->view->assign('needsRenew', false);
-            return;
+            $responseBody['html'] = '';
+            $responseBody['needsRenew'] = false;
+            return new Response(
+                headers: array_merge($this->getCORSHeaders(), ['Content-Type' => 'application/json']),
+                body: json_encode($responseBody, JSON_THROW_ON_ERROR)
+            );
         }
 
         // Generate HTML out of CookieSettings node
@@ -101,7 +84,7 @@ class ApiController extends RestController
         $view->assign('value', $node);
         $view->assign('node', $node);
         $view->assign('site', $siteNode);
-        $this->view->assign('html', $view->render()->getContents());
+        $responseBody['html'] = $view->render()->getContents();
 
 
         // Check if consents need renewal
@@ -117,28 +100,33 @@ class ApiController extends RestController
             }
         }
 
-        $this->view->assign('needsRenew', $needsRenew);
+        $responseBody['needsRenew'] = $needsRenew;
+        $responseBody['headerConsent'] = [
+            'acceptAll' => $this->matchHeaders($this->headerConsent['acceptAll']),
+            'acceptNecessary' => $this->matchHeaders($this->headerConsent['acceptNecessary'])
+        ];
 
-        $this->view->assign('headerConsent',
-            [
-                'acceptAll' => $this->matchHeaders($this->headerConsent['acceptAll']),
-                'acceptNecessary' => $this->matchHeaders($this->headerConsent['acceptNecessary'])
-            ]
+        return new Response(
+            headers: array_merge($this->getCORSHeaders(), ['Content-Type' => 'application/json']),
+            body: json_encode($responseBody, JSON_THROW_ON_ERROR)
         );
-
-
-        $this->view->setVariablesToRender(['html', 'needsRenew', 'headerConsent']);
     }
 
-    public function renderCookieSettingsOptionsAction() {
-
+    /**
+     * @return Response
+     * @throws \JsonException
+     */
+    public function renderCookieSettingsOptionsAction(): Response
+    {
+        return new Response(headers: $this->getCORSHeaders(), body: json_encode([], JSON_THROW_ON_ERROR));
     }
 
     /**
      * @param array $matchers
      * @return bool
      */
-    protected function matchHeaders(array $matchers) {
+    protected function matchHeaders(array $matchers): bool
+    {
         foreach ($matchers as $headerName => $headerMatcher) {
             if (fnmatch(
                 $headerMatcher,
