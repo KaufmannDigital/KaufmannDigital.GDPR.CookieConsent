@@ -8,6 +8,8 @@ prototype(Neos.Neos:Page) {
 
     head.gtmConsentDefaults = KaufmannDigital.GDPR.CookieConsent:Helper.GTMConsentDefaults {
         @position = 'after jsVariablesTag'
+        // Same condition as Helper.JavaScriptSettings, which defines KD_GDPR_CC used by this script
+        @if.notInEditMode = ${renderingMode.isEdit == false}
     }
 
     initializeJs = Neos.Fusion:Tag {
