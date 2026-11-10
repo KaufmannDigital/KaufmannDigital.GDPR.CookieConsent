@@ -14,7 +14,9 @@ KaufmannDigital:
       #        "rootNode name 2":
       #          customCSSFilepath: <link to custom css>
       backend:
-        includeGeneratedJs: true
+        # Load the generated cookie JavaScript in the Neos backend (edit/preview mode).
+        # Disabled by default: see README.md ("Generated JavaScript in the Neos backend")
+        includeGeneratedJs: false
       excludeDocumentNodeTypes: []
       # See README.md
       # - 'Vendor.Package:Document.Imprint'
