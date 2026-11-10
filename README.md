@@ -148,6 +148,20 @@ You can paste your JavaScript-Code while adding Cookies to the banner. The packa
 You don't have to take care of anything. JavaScript gets loaded completely automatic. Cool, isn't it? 😎  
 *Ah! And don't worry about performance. All JS gets minified and cached for every single visitor individually.*
 
+#### Generated JavaScript in the Neos backend
+
+By default, the generated JavaScript is not loaded in the Neos backend (edit and preview mode):
+
+```yaml
+KaufmannDigital:
+  GDPR:
+    CookieConsent:
+      backend:
+        includeGeneratedJs: false
+```
+
+In the backend, the script URL contains the editor's personal workspace. With Neos 9, the request to `/api/kd-gdpr-cc.js` is not authenticated as a backend user, so it may not read that workspace and fails with HTTP 500 (see #68 and #72). Only set `includeGeneratedJs: true` if you have made sure that the request may access the editor's workspace.
+
 
 
 #### Read cookie-identifiers from cookie
