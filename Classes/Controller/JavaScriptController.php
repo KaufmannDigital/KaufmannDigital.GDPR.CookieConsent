@@ -146,7 +146,9 @@ class JavaScriptController extends RestController
                 array_merge(
                     $this->cachingHelper->nodeTag($cookieNodes),
                     $this->cachingHelper->descendantOfTag($cookieNodes),
-                    $this->cachingHelper->nodeTypeTag($cookieNode->nodeTypeName->value, $cookieNode)
+                    // Do not use the loop variable $cookieNode here: it is undefined if there are no cookie nodes.
+                    // Tagging the base node type also invalidates the cache when the first cookie node is added.
+                    $this->cachingHelper->nodeTypeTag('KaufmannDigital.GDPR.CookieConsent:Content.Cookie', $site)
                 )
             );
             $this->redirect('downloadGeneratedJavaScript', null, null, ['hash' => $cacheIdentifier]);
